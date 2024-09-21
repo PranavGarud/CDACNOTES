@@ -1,0 +1,23 @@
+Logical and or operators
+
+Select*
+From Emp
+Where job = 'CLERK' And sal < 1000;
+
+Select*
+From Emp
+Where job = 'CLERK' Or sal < 1000;
+
+Select*
+From Emp
+Where job = 'CLERK' Or sal > 2300;
+
+Select*
+From Emp
+Where job = 'CLERK' And sal > 2300;
+
+Combination of And OR
+
+Select*
+From Emp
+Where job = 'MANAGER' Or JOB = 'CLERK' And sal<1000;

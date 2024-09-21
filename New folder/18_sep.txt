@@ -1,0 +1,61 @@
+Q. Create your own image which can run a basic Node.js web server as following:
+
+- Use Image: mhart/alpine-node:4.4
+
+- Use your favourite text editor to add app.js:
+
+````Code Snippet Start````
+
+var http = require('http');
+http.createServer(function (req, res) {  
+  console.log(new Date().toUTCString() + " - " + req.url);
+
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello, Docker.\n');
+}).listen(3000);
+
+console.log('Server running at http://0.0.0.0:3000/');
+
+````Code Snippet End````
+
+- Create an entrypoint with the command:
+
+ /usr/bin/node app.js
+
+
+
+
+
+
+
+
+
+
+Q. Deploy an app using python Flask server & create Dockerfile to build image as follwing: 
+
+- Install all required dependencies
+
+- Install Flask
+
+pip install flask
+
+- The code "app.py":
+
+import os
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def main():
+    return "Welcome!"
+
+@app.route('/hackers')
+def hello():
+    return 'Hey buddy, how are you?'
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
+
+- Entrypoint to Start Web Server:
+
+python3 app.py

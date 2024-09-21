@@ -1,0 +1,144 @@
+$ ls
+
+$ ls -l [ List of dir content with property ]
+
+drwxrwxr-x 3 kiosk kiosk       52 Sep  3 21:56 demo
+|
+|
+\_> File type
+
+Regular files	[-]
+Dir		[d]
+block		[b]
+char		[c]
+pipe OR socket	[p OR s]
+links		[l]
+
+
+Find data in linux:
+```````````````````
+syntax:
+````````
+find <where_to_find> -<attrib> <what_to_find>
+
+1) NAME:
+`````````
+$ find /home/user -name dheeraj
+$ find /home/user -iname dheeraj
+
+2) Size:
+````````
+$ find /home/user -size 2k
+			2M
+			2G
+			+2M
+			-2M
+$ find /home/user -size +2M -size -5M
+$ find /home/user -size 5M -iname dheeraj
+
+3) Type:
+``````````
+$ find /home/user -type d
+$ find /home/user -type d -iname dheeraj
+
+4) inum:
+````````
+$ find /home/user -inum 37226204
+
+5) User owner:
+``````````````
+$ find /home -user kiosk
+_______________________________________________
+BACKUP & RESTORE:
+`````````````````
+
+tarball:
+`````````````.tar
+create:
+```````
+$ tar -cvf backup.tar /home
+
+-c : create 
+-v : verbose 
+-f : forcefully
+
+2) View:
+````````
+$ tar -tvf backup.tar
+
+-t : Tree view
+
+3) Extract:
+```````````
+$ tar -xvf backup.tar
+
+-x : extarct
+
+$ mkdir data
+$ tar -xvf backup.tar -C data/
+
+-C : create/extract on specific location 
+
+
+
+
+
+
+
+
+
+GUNZIP:
+```````
+$ gzip backup.tar
+$ ls 
+backup.tar.gz
+
+$ gunzip backup.tar.gz
+$ ls 
+backup.tar
+TARBALL + GUNZIP:
+`````````````````````[.tgz]
+
+1) Create 
+``````````
+$ tar -czvf backup.tgz /home
+
+2) View:
+`````````
+$ tar -tzvf backup.tgz
+
+3) Extarct:
+```````````
+$ tar -xzvf backup.tgz
+$ tar -xzvf backup.tgz -C data/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

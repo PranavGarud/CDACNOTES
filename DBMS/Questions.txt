@@ -1,0 +1,5 @@
+Display records from job type clerk of depthno 20 who earn salary less than 1000
+
+Select*
+From emp
+Where job = 'CLERK' And deptno = 20 And sal < 1000;

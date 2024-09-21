@@ -1,0 +1,24 @@
+Q. Create the following users, groups, and group memberships:
+
+-A group named admin
+
+# groupadd admin
+
+-A user harry who belongs to admin as a secondary group
+
+# useradd -m -s /bin/bash -G admin harry
+
+-A user natasha who also belongs to admin as a secondary group
+
+# useradd -m -s /bin/bash -G admin natasha
+
+-A user sarah who does not have access to an interactive shell on the system, and who is not a member of admin
+
+# useradd -m -s /bin/nologin sarah
+
+- harry, natasha, and sarah should all have the password as "password@123"
+
+# passwd users
+
+
+NOTE: make sure you have home dirs for all the users and all the users must have the shell /bin/bash.

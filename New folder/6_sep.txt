@@ -1,0 +1,111 @@
+Assignment: https://tmpfiles.org/dl/12280017/carbon20.png
+`````````````````
+
+
+
+
+
+l
+
+
+
+Ownerships:
+-----------
+# ls -l
+-rw-r--r-- 1 root root    1985 Jul  6 22:48 health.txt
+
+a) user owner
+``````````````
+# chown username file/dir
+
+b) group owner
+```````````````
+# chgrp groupname file/dir
+
+
+
+
+
+
+
+
+
+
+cd
+
+
+Q. Create a dir and creates 10000 files under it, assign permissions to all files as user owner can read, edit and execute, group owner can read & execute, and read permission to others.
+
+Q. Set a permission in a way that a normal user create files with default permission
+   644 and directory with default permission 755.
+
+Q. Write a command that displays permission of a file in numeric format
+
+
+
+
+
+
+
+____________________
+
+
+
+
+ACL:
+----
+Set ACL:
+-------
+# setfacl -m u:harry:rw- file/dir
+# setfacl -m g:dbda:rwx file/dir
+
+-m [modify]
+
+View ACL:
+---------
+# getfacl file/dir
+
+
+Q. Create the file "/tmp/acl_file".
+	- Allow "larry" and "curly" to rwx the file.
+	- Don’t allow "moe" to access the file (rwx).
+	- All members of group "stooges" should be able to access the file (rw).
+
+# setfacl -m u:larry:7 /tmp/acl_file
+# setfacl -m u:curly:7 /tmp/acl_file
+# setfacl -m u:moe:0 /tmp/acl_file
+# setfacl -m g:stooges:6 /tmp/acl_file
+___________________
+
+
+
+_____________________________________________________
+
+Basic of I/O system with mount and unmount
+Commands like telnet, ftp, ssh, and sftp
+________________________________________________________________________
+
+VIM editor:
+-----------
+1) Command Line Mode
+2) Insert mode
+3) Last Line Mode (search, save, exit, replace ...)
+
+i: insert mode
+Esc: go back to command mode
+yy (Yanked) : Copy the current line.
+p: paste
+nyy (n=1,2,3,4...n) 
+dd: cut or delete the current line.
+ndd (n=1,2,3,4...n) 
+
+:w [write the file (save)]
+:q [quit]
+:wq [save & quit]
+:wq! [save & quite forcefully]
+:set nu [show number of lines]
+:set nonu
+:line-number
+
+/word : to search
+:%s/old-word/new-word [replace]
