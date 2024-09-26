@@ -1,0 +1,181 @@
+1.Display the records of job clerk and manager for deptno 20.
+
+Select * From Emp
+	 Where (Job = 'Clerk' 
+	 Or
+	 Job = 'Manager')
+	 And
+	 Deptno = 20;
+
+2.Display the records for the employees, which have the last character as R or H in their name
+
+Select * From Emp
+	 Where Ename like '%R' 
+	 Or
+	 Ename like '%H';
+
+3.Display the records of the employees earning sal less than 1000 and there is no comm provided.
+
+Select * From Emp
+	 Where Sal < 1000
+	 And
+	 Comm is null;
+
+4.Produce the following output:
+
+Details
+-----------------------------------------------------------------------
+SMITH is from the deptno 20, earns salary 800
+ALLEN is from the deptno 30, earns salary 1600
+WARD is from the deptno 30, earns salary 1250
+JONES is from the deptno 20, earns salary 2975
+MARTIN is from the deptno 30, earns salary 1250
+BLAKE is from the deptno 30, earns salary 2850
+CLARK is from the deptno 10, earns salary 2450
+SCOTT is from the deptno 20, earns salary 3000
+KING is from the deptno 10, earns salary 5000
+TURNER is from the deptno 30, earns salary 1500
+ADAMS is from the deptno 20, earns salary 1100
+JAMES is from the deptno 30, earns salary 950
+FORD is from the deptno 20, earns salary 3000
+MILLER is from the deptno 10, earns salary 1300
+
+Ename is from the deptno Deptno, earns salary sal
+
+Select Concat(
+	Ename , "  is from the deptno " , Deptno , ", earns salary" , Sal ) as "Details" 
+From
+       Emp; 
+
+5.Display the ename, sal, comm,  sal+comm. For the null value of commission 10% of sal should be used.
+
+Select Ename,
+       Sal,
+       Comm,
+       Sal+Coalesce(Comm,Sal*0.1) as "Total"
+From   
+       Emp;
+
+
+6.Display the names, sal, job, deptno and raise in the salary.
+
+The raise is to be given under following scenarios –
+a)Employees from deptno 20 from job Clerk should get 30% raise in their salary.
+b)Employees from deptno 20 from job Analyst should get 50% raise in their salary.
+c)Employees from deptno 30 from job Manager should get 60% raise in their salary.
+d)Employees from deptno 30 from job Salesman should get 70% raise in their salary.
+e)Employees from deptno 10 from job Clerk should get 10% raise in their salary.
+f)The remaining employees should get the raise of 500.
+
+Select Ename,
+       Sal,
+       Job,
+       Deptno,
+Case  
+	When Deptno=20 And Job='Clerk' Then Sal*0.3
+	When Deptno=20 And Job='Analyst' Then Sal*0.5
+	When Deptno=30 And Job='Manager' Then Sal*0.6
+	When Deptno=30 And Job='Salesman' Then Sal*0.7
+	When Deptno=10 And Job='Clerk' Then Sal*0.1
+	Else
+		500
+End as "Hike"
+From Emp;
+
+
+7. Display the records of employees from the job Clerk earning salary above 1000 as well as all Managers earning salary above 2900.
+
+Select *
+From Emp
+Where   (Job = 'CLERK' And Sal >1000) 
+	Or 
+	(Job = 'Manager' And Sal > 2900);
+
+
+8.Display the records sorted as per the job. Make sure that within each job the records are sorted as per the highest to lowest commissions.
+
+Select *
+From Emp
+Order By Job , Comm desc;
+
+
+9.Display name, salary, 30% of salary as tax and salary – tax as take home salary for records of employee table working in deptno 20.
+
+Select  Ename,
+	Sal,
+	Sal*0.3 as Tax,
+	Sal-Sal*0.3 as Home_Salary
+From Emp
+Where Deptno = 20;
+
+
+10.Display records from emp table of all Salesman from deptno 20 only.
+
+Select * 
+From
+	emp
+Where
+	Job = 'Salesman'
+	And
+	Deptno = 20;
+
+
+11.Display records from emp table of all those employees who are not reporting to anyone.
+
+Select *
+From
+	emp
+Where
+	Mgr is NULL;
+
+
+12.Display records from emp table of those employees who are earning salary less than or equal to 2000.
+ Records should be sorted as per deptno, and within deptno as per their salaries highest to lowest.
+
+Select *
+From 
+	Emp
+Where
+	Sal <= 2000
+Order By Deptno,Sal Desc;
+
+
+
+13.Display Name, Salary, Commission and Total as Salary + 30% of Commission 
+for all those employees whose difference between Salary and Commission is less than or equal to 1200.
+
+Select  Ename,
+	Sal,
+	Comm,
+	Sal+Comm*0.3 as Total_Salary
+From Emp
+Where Sal-Comm <= 1200;
+
+
+
+14.Produce the exact same output as shown below:
+
+Ename Salary is sal
+
+Select Concat(
+	Substring(Ename,1,1), lower(Substring(Ename,2)), "'s salary is " ,  Sal ) as "Salary Details" 
+From
+	Emp;
+
+
+15.Question  Display India records of year 2018 of Amount > 15000, China records of year 2018 of Amount < 20000 and Singapore records of year 2018 of Amount > 40000.
+
+Select * 
+From 
+	Asia
+Where 	(Country = 'India' and year(Dot) = 2018 and Amount > 15000)
+	Or
+	(Country = 'China' and year(Dot) = 2018 and Amount < 20000)
+	Or
+	(Country = 'Singapore' and year(Dot) = 2018 and Amount > 40000);
+
+
+	
+
+
+

@@ -1,0 +1,141 @@
+SQL Assignments - Set 2
+Common Instructions
+
+a)For character data type either char or varchar should be taken as per the case and appropriate size should be given.
+b)Enter at least 2 records to ensure the validity of data types, size and constraints.
+c)If the table with the same name already exists in your schema, then do not drop it. Provide some different name for your table.
+
+1.Create the table student_master with the following specifications
+
+Column Name	Data type	Constraints and other details
+Rollno		Numeric		Primary Key
+Name		Character	Cannot be empty
+City		Character	By default, it should be Mumbai.
+Marks		Numeric		Cannot be less than 0 and cannot exceed 100
+Invoice_No	Character	Cannot repeat, but can be blank
+
+Create Table Student_Master (
+RollNo Int Primary Key,
+Name VarChar(20) Not NULL,
+City VarChar(20) Default 'Mumbai',
+Marks Int Check( 0>= Marks <= 100 ),
+Invoice_No VarChar(20) Unique
+);
+
+
+2.Create the table certificate_details with the following specifications
+
+Column Name		Data type	Constraints and other details
+Rollno			Numeric		Taken from student_details table’s rollno. 
+Date_Of_Certificate	Date		Cannot be empty
+Course			Character	Can be Oracle or Power BI or Azure Data Factory
+
+CREATE TABLE Certificate_details (
+    RollNo INT,
+    DOC DATE NOT NULL,
+    Course VARCHAR(20),
+    FOREIGN KEY (RollNo) REFERENCES Student_Master(Rollno),
+    CHECK (Course IN ('Oracle', 'Power BI', 'Azure Data Factory'))
+);
+
+3.Create the table First_Attempt_Marks with the following specifications
+
+ColumnName	Data type	Constraints and other details
+Rollno		Numeric		Rollno and Subject should make a composite primary key
+Subject		Character	
+Marks		Numeric		Cannot be empty
+
+Create Table First_Attempt_Marks (
+Rollno Int,
+Subject VarChar(20),
+Marks Int Not Null,
+Primary key ( Rollno, Subject)
+);
+
+
+4.Create the table First_Attempt_Grades with the following specifications
+
+Column Name	Data type	Constraints and other details
+Rollno		Numeric	
+Subject		Character	
+Grade		Character	Should be either A or B 
+				Rollno and Subjects should be taken from First_Attempt_Marks
+
+Create Table First_Attempt_Grades (
+Rollno Int,
+Subject Varchar(20),
+Grade Varchar(1) check ( grade = 'A' or grade = 'B'), 
+Foreign key (Rollno,subject) References First_Attempt_marks(Rollno,Subject)
+);
+
+Insert into First_Attempt_Grades (Rollno, subject, grade)
+Values 
+	(15, ' Maths', 'A'),
+	(15, 'English', 'B'),
+	(15, 'Science', 'A');
+
+
+5.Create the table cost_analysis with the following specifications
+
+Column Name	Data type	Constraints and other details
+Company_ID	Numeric		Primary Key
+Company_Name	Character	Cannot be empty
+Export_Cost	Numeric	
+Import_Cost	Numeric	
+Import_Cost should always be greater the or equal to 40% of the export_cost
+
+
+Create Table cost_analysis(
+Company_ID int Primary Key,
+Company_Name Varchar(20) Not Null,
+Export_Cost int,
+Import_Cost int,
+check( Import_Cost >= Export_Cost*0.4)
+);
+
+
+6.Create the table Salesman_Data with the following specifications
+
+Column Name	Data type	Constraints and other details
+Salesman_ID	Numeric	Primary Key
+Salesman_Name	Character	Cannot be blank
+Area_Code	Numeric	Cannot repeat
+Sales_Amt	Numeric	
+Profit_Amt	Numeric	
+Either Sales_Amt should be above 5000 OR Profit_Amt should be above 700.
+
+
+Create Table Salesman_Data (
+Salesman_ID Int Primary Key,
+Salesman_Name Varchar(20) Not Null,
+Area_Code Int Unique,
+Sales_Amt Int,
+Profit_Amt Int,
+Check( Sales_Amt > 5000 Or Profit_Amt > 700)
+);
+
+Insert into Salesman_Data (Salesman_ID, Salesman_Name, Area_Code, Sales_Amt, Profit_Amt)
+Values
+	(19, "Ankit", 4594, 5887 , 6000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

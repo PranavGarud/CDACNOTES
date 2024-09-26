@@ -1,0 +1,179 @@
+Expression Columns or Derived Colomns in Select Statement:
+
+select 6+7 as "Ans";
+
+select ename, sal, sal * 12 "Annual Salary" from emp;
+
+
+Functions in SQL:
+Types of SQL fuctions as per their creation:
+1)Built-in (Either ANSI or Proprietory)
+2)User Defined(Programmmatically in that databases)
+
+Types of Built-i SQL Functions as per thier execution :
+1)Single Row(or Scalar)
+2)Multi Row Functions or Aggregate Function or Group Fuctions
+
+
+1)Single Row Functions:
+They will return a single value for every row returned by select statement or by the query.
+
+Types of Single row functions as per their return value:
+1) String or Text Functions.
+2) Numberic Functions.
+3) Null Handling functions.
+4) Conditional Functions.
+5) Date Functions.
+6) Type Casting functions.
+
+In MYSQL there is a function konown as IFNull
+
+IfNull(Column Name or Expression,Value or Expression if the first parameter is null)
+
+select ename,sal,comm,sal+IfNull(comm,0) as "Total" from emp;
+
+Coalesce in ANSI SQL function.
+It returns the first not null value form the parameter list.
+
+select ename,sal,comm,sal + Coalesce(comm,0) as "Total" from emp;
+
+Conditional Functions:
+1) Case acting as switch Case where it checks the exat value.
+
+And
+
+2) Case acting as IF ... Else If ... Else where it checks the boolean condition
+
+
+Example:
+1) Case acting as switch Case where it checks the exat value.
+
+Select Ename,Deptno, Case Deptno
+					When 10 Then 'A'
+					When 20 Then 'B'
+					Else
+					'C'
+			End as "Department Code"
+From Emp; 
+
+Select Ename,Deptno, Case Deptno
+					When 10 Then 'A'
+					When 20 Then 'B'
+					-- Else
+					-- 'C'
+			End as "Department Code"
+From Emp; 
+
+
+SYNTAX:
+Case Column Name or Expression
+				When Value1 Then Statement1
+				When Value2 Then Statement2
+				When Value3 Then Statement3
+				...........................
+				[Else
+						Statement
+				]
+End
+
+
+Example:
+
+2) Case acting as IF ... Else If ... Else where it checks the boolean condition
+After case you cannot mention coulumn name we directly jump to when cluase after case.
+
+Select Ename, Sal, Case 
+				When Sal >= 4000 Then 'A+'
+				When Sal >= 2990 Then 'A'
+				When Sal >= 2400 Then 'B+'
+				When Sal >= 1800 Then 'B'
+				Else
+				'C'
+			End as "Salary Class"
+From Emp;
+				
+Select Ename, Sal, Case 
+				When Sal >= 2990 Then 'A'
+				When Sal >= 4000 Then 'A+'
+				When Sal >= 2400 Then 'B+'
+				When Sal >= 1800 Then 'B'
+				Else
+				'C'
+			End as "Salary Class"
+From Emp;	
+
+Select Ename,Sal,Case			
+				When Sal Between 3000 and 6000 then 'A'
+				When Sal Between 800 and 1500 then 'B'
+				When Sal Between 1501 and 2999 then 'C'
+			End as "Salary Class"
+From Emp;
+
+SYNTAX:
+Case:
+	When Boolean Condition 1 Then Statement 1
+	When Boolean Condition 2 Then Statement 2
+	...........................
+	...........................
+	[Else
+	Statement n
+	]
+End
+
+Select ename, length(ename),sal,length(sal) form emp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,256 @@
+`1.Display the average, lowest, highest and difference in lowest and highest salaries for each department number.
+
+Select  Deptno,
+	Avg(Sal) as "Average Salary",
+	Min(Sal) as "Minimum Salary",
+	Max(Sal) as "Maximum Salary",
+	Max(Sal)-Min(Sal) as "Difference"
+From 
+	Emp
+Group By Deptno;
+
+
+2.Display the number of employees within each job.
+Select  Job,
+	Count(Job) as "Number_Of_Employees"
+From 	Emp
+Group By Job;
+
+
+3.Display the lowest salaries job-wise within each department number.
+Select  Deptno,
+	Job,
+	Min(Sal)
+From Emp
+Group By Deptno,Job
+Order By 1,2;
+
+
+4.Display only those jobs where the minimum salary is greater than or equal to 3000.
+Select  Job,
+	Min(Sal) As "Min_Salary"
+From 	Emp
+Group By Job
+Having Min(Sal) >= 3000;
+
+
+5.Display the records sorted as per the job. Make sure that within each job the records are sorted as per the highest to lowest salaries.
+Select *
+From Emp
+Order By Job, Sal Desc; 	
+
+
+6.Display Deptno, total of that deptno and Grade. 
+Grade should be A if the total is greater than 10000, else it should be B. 
+Sort the summary output as per the highest to lowest Grade.
+
+Select 	Deptno,
+	Sum(Sal) as "Total",
+Case
+	When
+		(Sum(Sal) > 10000) Then  'A'
+	Else
+		'B'
+End as Grade
+From Emp
+Group By Deptno
+Order By Grade Desc;
+
+
+7.Calculate and display only the average salaries paid to all those employees where the employee name starts with A and name starts with S.
+
+Select  Round(Avg(Sal)) As "Average Sal"
+From Emp
+Where Ename Like 'A%' Or Ename Like 'S%'; 
+
+
+8.Product exactly same output as shown below:
+
+Select Concat( "The total of job type ", Lower(Substring(Job,1)), " is ", Sum(sal)) as "Job Wise Total Salaries"
+From Emp 
+Where Job != 'President'
+Group By Job 
+Order By Job;
+
+
+9.Display Mgr code and number of sub ordinates reporting to them for only those managers who have at least 3 sub ordinates.
+Select  Mgr,
+	Count(Mgr) as "Number Of Sub-Ordinates"
+From Emp
+Group By Mgr
+Having Count(Mgr)>=3;
+	
+
+10.Product exactly same output as shown below:
+    
+Select  Deptno,
+	Sum(Sal) As "Total Salary",
+	Sum(Sal)*0.1 As "Tax:10% of Total",
+	Sum(Sal)-Sum(Sal)*0.1 As "Net Total:Deducting Tax"
+From Emp
+Group By DeptNo
+Order By DeptNo;
+
+
+11.Display the Highest sales for each product within a country for each continent.
+
+Select 	Continent,
+	Country,
+	Pname,
+	Max(Sales) as "Highest Sales"
+From Products2
+Group By Continent,Country,Pname;
+
+
+12.Display the average sales for each product region-type wise within each area for each country.
+
+Select  Country,
+	Area,
+	Region_type,
+	Pname,
+	Avg(Sales) as "Average Sales"
+From Products2
+Group By Country,Area,Region_Type,Pname;
+
+13.Display the country-wise number of products for each product
+Select  Country,
+	count(Pname) As "Number Of Products"
+From Products2
+Group By Country;
+
+
+14.Display the Country wise total of sales for each Continent. 
+The summary records should be shown as per highest to lowest sequence of totals. 
+But in the final display only first 2 records should be shown.
+
+Select  Country,
+	
+	Sum(Sales)
+
+
+15.Display the exact following report:
+
+Select  Concat_Ws("-", Continent, Country, Area, Region_Type) As "Geography",
+	Sum(Sales) As "Total Sales"
+From Products2
+Group By Continent, Country, Area, Region_Type;
+
+
+16.Display the product name wise total sales excluding records of Rural region of North area.
+
+Select  Pname,
+	Sum(Sales) As "Total Sales"
+From Products2
+Where 	Area <> 'North'
+	And
+	Region_Type <> 'Rural'
+Group By Pname;
+
+
+17.Display country wise average sales excluding country India
+
+Select  Country,
+	Avg(Sales) As "Average_Sales"
+From Products2
+Where Country <> 'India'
+Group By Country;
+
+Select  Country,
+	Avg(Sales) As "Average_Sales"
+From Products2
+Group By Country
+Having Country <> 'India';
+
+18.Display product name wise total sales for all the transactions done from transaction id 23 onwards.
+
+Select  Pname,
+	Sum(Sales) As "Total Sales"
+From Products2
+Where Trans_Id >22
+Group By Pname;
+
+	
+19.Display Country wise count of transactions done.
+
+Select  Country,
+	Count(Trans_Id) As "Number_Of_Transactions"
+From Products2
+Group By Country;
+
+
+20.Display Country wise average sales done of Samsung only.
+
+Select  Country,
+	Avg(Sales) As "Average_Sales"
+From Products2
+Where Pname = 'Samsung'
+Group By Country;
+
+21.Display product name wise count of records from India table.
+Select  Pname,
+	Count(Qty) as "Total_Quantity"
+From India
+Group By Pname;
+
+
+23.Display the total amount as per code which will be grouped by 3rd, 4th, 5th and 6th characters of code column’s values.
+
+Select Sum(amount) As Substring(Code,3,6)
+From Code_Data;
+
+SELECT 
+    SUBSTRING(code, 3, 4) AS Code_Group,
+    SUM(amount) AS Total_Amount
+FROM 
+    Code_Data
+GROUP BY 
+    SUBSTRING(code, 3, 4);
+
+
+24.The last 4 digits of code values represent the year. Display year wise total amount.
+
+Select  Substring(Code,8) As Year,
+	Sum(Amount) As Total_Amount
+From
+	Code_Data
+Group By
+	Substring(Code,8);
+
+
+
+25.Display the average amount as per the 6th character of code column’s values.
+
+Select  Substring(Code,6,1) As Code,
+	Avg(Amount) As Average_Amount
+From
+	Code_Data
+Group By
+	Substring(Code,6,1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

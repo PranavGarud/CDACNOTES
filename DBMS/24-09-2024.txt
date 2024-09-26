@@ -1,0 +1,842 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 41
+Server version: 8.0.39 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use mydb0
+Database changed
+mysql> show tables
+    -> ;
++-----------------+
+| Tables_in_mydb0 |
++-----------------+
+| australia       |
+| comp            |
+| d               |
+| dept            |
+| dept1           |
+| e               |
+| emp             |
+| emp1            |
+| india           |
+| mech            |
+| p               |
+| pcodes          |
+| period          |
+| rates           |
++-----------------+
+14 rows in set (0.00 sec)
+
+mysql> select * from emp
+    -> ;
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.00 sec)
+
+mysql> select 6+7;
++-----+
+| 6+7 |
++-----+
+|  13 |
++-----+
+1 row in set (0.04 sec)
+
+mysql> select 6+7 as "Ans";
++-----+
+| Ans |
++-----+
+|  13 |
++-----+
+1 row in set (0.00 sec)
+
+mysql> select 6+7 from emp;
++-----+
+| 6+7 |
++-----+
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
++-----+
+14 rows in set (0.00 sec)
+
+mysql> select 6+7 as "Ans" from emp;
++-----+
+| Ans |
++-----+
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
++-----+
+14 rows in set (0.00 sec)
+
+mysql> select 6+7 as "Ans" from emp where deptno = 20;
++-----+
+| Ans |
++-----+
+|  13 |
+|  13 |
+|  13 |
+|  13 |
+|  13 |
++-----+
+5 rows in set (0.00 sec)
+
+mysql> select 6+7 as "Ans" from emp where deptno = 77;
+Empty set (0.00 sec)
+
+mysql> select ename, sal, sal*12 "Annual Salary" from emp;
++--------+------+---------------+
+| ename  | sal  | Annual Salary |
++--------+------+---------------+
+| SMITH  |  800 |          9600 |
+| ALLEN  | 1600 |         19200 |
+| WARD   | 1250 |         15000 |
+| JONES  | 2975 |         35700 |
+| MARTIN | 1250 |         15000 |
+| BLAKE  | 2850 |         34200 |
+| CLARK  | 2450 |         29400 |
+| SCOTT  | 3000 |         36000 |
+| KING   | 5000 |         60000 |
+| TURNER | 1500 |         18000 |
+| ADAMS  | 1100 |         13200 |
+| JAMES  |  950 |         11400 |
+| FORD   | 3000 |         36000 |
+| MILLER | 1300 |         15600 |
++--------+------+---------------+
+14 rows in set (0.00 sec)
+
+mysql> --l;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--l' at line 1
+mysql> -po;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-po' at line 1
+mysql> select ename, lower(ename) from emp;
++--------+--------------+
+| ename  | lower(ename) |
++--------+--------------+
+| SMITH  | smith        |
+| ALLEN  | allen        |
+| WARD   | ward         |
+| JONES  | jones        |
+| MARTIN | martin       |
+| BLAKE  | blake        |
+| CLARK  | clark        |
+| SCOTT  | scott        |
+| KING   | king         |
+| TURNER | turner       |
+| ADAMS  | adams        |
+| JAMES  | james        |
+| FORD   | ford         |
+| MILLER | miller       |
++--------+--------------+
+14 rows in set (0.02 sec)
+
+mysql> select * from emp
+    -> where lower(ename) = 'smith';
++-------+-------+-------+------+------------+------+------+--------+
+| EMPNO | ENAME | JOB   | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+-------+-------+------+------------+------+------+--------+
+|  7369 | SMITH | CLERK | 7902 | 1980-12-17 |  800 | NULL |     20 |
++-------+-------+-------+------+------------+------+------+--------+
+1 row in set (0.00 sec)
+
+mysql> select lower(ename) from emp
+    -> where lower(ename) = 'smith';
++--------------+
+| lower(ename) |
++--------------+
+| smith        |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select emp.*, lower(ename) from emp;
++-------+--------+-----------+------+------------+------+------+--------+--------------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | lower(ename) |
++-------+--------+-----------+------+------------+------+------+--------+--------------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 | smith        |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 | allen        |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 | ward         |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 | jones        |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 | martin       |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 | blake        |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 | clark        |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 | scott        |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 | king         |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 | turner       |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 | adams        |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 | james        |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 | ford         |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 | miller       |
++-------+--------+-----------+------+------------+------+------+--------+--------------+
+14 rows in set (0.00 sec)
+
+mysql> select *, lower(ename) from emp;
++-------+--------+-----------+------+------------+------+------+--------+--------------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | lower(ename) |
++-------+--------+-----------+------+------------+------+------+--------+--------------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 | smith        |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 | allen        |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 | ward         |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 | jones        |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 | martin       |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 | blake        |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 | clark        |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 | scott        |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 | king         |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 | turner       |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 | adams        |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 | james        |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 | ford         |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 | miller       |
++-------+--------+-----------+------+------------+------+------+--------+--------------+
+14 rows in set (0.00 sec)
+
+mysql> select concat ('abc', 'def');
++-----------------------+
+| concat ('abc', 'def') |
++-----------------------+
+| abcdef                |
++-----------------------+
+1 row in set (0.02 sec)
+
+mysql> select concat ('abc', 'def', 'tyu');
++------------------------------+
+| concat ('abc', 'def', 'tyu') |
++------------------------------+
+| abcdeftyu                    |
++------------------------------+
+1 row in set (0.00 sec)
+mysql> select concat('Job of ', ename, ' is ', job)
+    -> as "Job Details" from emp;
++---------------------------+
+| Job Details               |
++---------------------------+
+| Job of SMITH is CLERK     |
+| Job of ALLEN is SALESMAN  |
+| Job of WARD is SALESMAN   |
+| Job of JONES is MANAGER   |
+| Job of MARTIN is SALESMAN |
+| Job of BLAKE is MANAGER   |
+| Job of CLARK is MANAGER   |
+| Job of SCOTT is ANALYST   |
+| Job of KING is PRESIDENT  |
+| Job of TURNER is SALESMAN |
+| Job of ADAMS is CLERK     |
+| Job of JAMES is CLERK     |
+| Job of FORD is ANALYST    |
+| Job of MILLER is CLERK    |
++---------------------------+
+14 rows in set (0.00 sec)
+
+mysql> select concat('Job of ', ename, ' is ', sal)
+    -> as "J^C Details" from emp;
+mysql> select concat('Salary of ', ename, ' is ', sal)
+    -> as "Salary Details" from emp;
++--------------------------+
+| Salary Details           |
++--------------------------+
+| Salary of SMITH is 800   |
+| Salary of ALLEN is 1600  |
+| Salary of WARD is 1250   |
+| Salary of JONES is 2975  |
+| Salary of MARTIN is 1250 |
+| Salary of BLAKE is 2850  |
+| Salary of CLARK is 2450  |
+| Salary of SCOTT is 3000  |
+| Salary of KING is 5000   |
+| Salary of TURNER is 1500 |
+| Salary of ADAMS is 1100  |
+| Salary of JAMES is 950   |
+| Salary of FORD is 3000   |
+| Salary of MILLER is 1300 |
++--------------------------+
+14 rows in set (0.00 sec)
+
+mysql> select concat(1,2);
++-------------+
+| concat(1,2) |
++-------------+
+| 12          |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select concat_ws('-','CDAC',"Training','Pune','2024');
+    ">
+    "> ^C
+mysql> select concat_ws('-','CDAC',"Training','Pune','2024');
+    ">
+    ">
+    "> ;
+    "> ;
+    "> "
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 6
+mysql> select concat_ws('-','CDAC','Training','Pune','2024');
++------------------------------------------------+
+| concat_ws('-','CDAC','Training','Pune','2024') |
++------------------------------------------------+
+| CDAC-Training-Pune-2024                        |
++------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select 5*null;
++--------+
+| 5*null |
++--------+
+|   NULL |
++--------+
+1 row in set (0.01 sec)
+
+mysql> select 5/null;
++--------+
+| 5/null |
++--------+
+|   NULL |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select ename, sal, comm, sal+comm as "Total" from emp;
++--------+------+------+-------+
+| ename  | sal  | comm | Total |
++--------+------+------+-------+
+| SMITH  |  800 | NULL |  NULL |
+| ALLEN  | 1600 |  300 |  1900 |
+| WARD   | 1250 |  500 |  1750 |
+| JONES  | 2975 | NULL |  NULL |
+| MARTIN | 1250 | 1400 |  2650 |
+| BLAKE  | 2850 | NULL |  NULL |
+| CLARK  | 2450 | NULL |  NULL |
+| SCOTT  | 3000 | NULL |  NULL |
+| KING   | 5000 | NULL |  NULL |
+| TURNER | 1500 |    0 |  1500 |
+| ADAMS  | 1100 | NULL |  NULL |
+| JAMES  |  950 | NULL |  NULL |
+| FORD   | 3000 | NULL |  NULL |
+| MILLER | 1300 | NULL |  NULL |
++--------+------+------+-------+
+14 rows in set (0.00 sec)
+
+mysql> select ename,sal,comm,sal+IfNull(comm,0) as "Total" from emp;
++--------+------+------+-------+
+| ename  | sal  | comm | Total |
++--------+------+------+-------+
+| SMITH  |  800 | NULL |   800 |
+| ALLEN  | 1600 |  300 |  1900 |
+| WARD   | 1250 |  500 |  1750 |
+| JONES  | 2975 | NULL |  2975 |
+| MARTIN | 1250 | 1400 |  2650 |
+| BLAKE  | 2850 | NULL |  2850 |
+| CLARK  | 2450 | NULL |  2450 |
+| SCOTT  | 3000 | NULL |  3000 |
+| KING   | 5000 | NULL |  5000 |
+| TURNER | 1500 |    0 |  1500 |
+| ADAMS  | 1100 | NULL |  1100 |
+| JAMES  |  950 | NULL |   950 |
+| FORD   | 3000 | NULL |  3000 |
+| MILLER | 1300 | NULL |  1300 |
++--------+------+------+-------+
+14 rows in set (0.00 sec)
+
+mysql> select coalesce(null, null, 56 , null, 78);
++-------------------------------------+
+| coalesce(null, null, 56 , null, 78) |
++-------------------------------------+
+|                                  56 |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select ename,sal,comm,sal+ Coalesce(comm,0) as "Total" from emp;
++--------+------+------+-------+
+| ename  | sal  | comm | Total |
++--------+------+------+-------+
+| SMITH  |  800 | NULL |   800 |
+| ALLEN  | 1600 |  300 |  1900 |
+| WARD   | 1250 |  500 |  1750 |
+| JONES  | 2975 | NULL |  2975 |
+| MARTIN | 1250 | 1400 |  2650 |
+| BLAKE  | 2850 | NULL |  2850 |
+| CLARK  | 2450 | NULL |  2450 |
+| SCOTT  | 3000 | NULL |  3000 |
+| KING   | 5000 | NULL |  5000 |
+| TURNER | 1500 |    0 |  1500 |
+| ADAMS  | 1100 | NULL |  1100 |
+| JAMES  |  950 | NULL |   950 |
+| FORD   | 3000 | NULL |  3000 |
+| MILLER | 1300 | NULL |  1300 |
++--------+------+------+-------+
+14 rows in set (0.00 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_mydb0 |
++-----------------+
+| australia       |
+| comp            |
+| d               |
+| dept            |
+| dept1           |
+| e               |
+| emp             |
+| emp1            |
+| india           |
+| mech            |
+| p               |
+| pcodes          |
+| period          |
+| rates           |
++-----------------+
+14 rows in set (0.00 sec)
+
+mysql> select * australia
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'australia' at line 1
+mysql> select * from australia;
++------------+-----------------+------+--------+
+| TrID       | Pname           | Qty  | Amount |
++------------+-----------------+------+--------+
+| Aus_101_C1 | LCD             |    1 |  25000 |
+| Aus_102_C1 | Dinning Table   |    1 |  25000 |
+| Aus_103_C2 | Dinning Table   |    1 |  10000 |
+| Aus_104_C3 | Sofa            |    1 |  10000 |
+| Aus_105_C3 | Washing Machine |   12 |  60000 |
+| Aus_106_C4 | LCD             |    1 |  20000 |
+| Aus_107_C2 | LCD             |    1 |  25000 |
+| Aus_108_C4 | LCD             |    2 |  50000 |
+| Aus_109_C1 | Sofa            |    1 |  25000 |
+| Aus_110_C2 | Sofa            |    2 |  10000 |
+| Aus_111_C3 | Sofa            |   10 |  50000 |
+| Aus_112_C3 | Washing Machine |    5 |  25000 |
+| Aus_113_C4 | LCD             |    1 |  20000 |
+| Aus_114_C1 | LCD             |    1 |  25000 |
+| Aus_115_C2 | LCD             |    1 |  25000 |
+| Aus_116_C3 | LCD             |    1 |  25000 |
+| Aus_117_C4 | LCD             |    1 |  25000 |
+| Aus_118_C1 | LCD             |    1 |  25000 |
+| Aus_119_C4 | Sofa            |    1 |  25000 |
+| Aus_120_C2 | Sofa            |    2 |  10000 |
+| Aus_121_C3 | Refrigerator    |    4 |  20000 |
+| Aus_122_C1 | Sofa            |    1 |  19000 |
+| Aus_123_C3 | Refrigerator    |   20 | 100000 |
+| Aus_124_C2 | Refrigerator    |    1 |  19000 |
++------------+-----------------+------+--------+
+24 rows in set (0.00 sec)
+
+mysql> select * from pcodes;
++--------+------+
+| Code   | Qty  |
++--------+------+
+| A01    |   10 |
+| AB01   |   20 |
+| ABC01  |   30 |
+| ABCD01 |   25 |
+| P01    |   35 |
+| PQ04   |   27 |
+| PQR01  |   29 |
+| 01     |   28 |
+| A%C01  |   31 |
+| A%D01  |   32 |
+| AB_01  |   33 |
++--------+------+
+11 rows in set (0.00 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_mydb0 |
++-----------------+
+| australia       |
+| comp            |
+| d               |
+| dept            |
+| dept1           |
+| e               |
+| emp             |
+| emp1            |
+| india           |
+| mech            |
+| p               |
+| pcodes          |
+| period          |
+| rates           |
++-----------------+
+14 rows in set (0.00 sec)
+
+mysql> show comp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'comp' at line 1
+mysql> select * from comp;
++--------+-------+
+| rollno | marks |
++--------+-------+
+|    201 |    78 |
+|    202 |    88 |
+|    203 |    43 |
+|    204 |    56 |
+|    205 |    59 |
++--------+-------+
+5 rows in set (0.00 sec)
+
+mysql>
+mysql> select * from india;
++------------+-----------------+------+--------+
+| TrID       | Pname           | Qty  | Amount |
++------------+-----------------+------+--------+
+| Ind_101_C1 | Washing Machine |    1 |  20000 |
+| Ind_102_C3 | LCD             |    1 |  25000 |
+| Ind_103_C2 | LCD             |    1 |  20000 |
+| Ind_104_C2 | LCD             |    1 |  19000 |
+| Ind_105_C1 | Refrigerator    |    1 |  19000 |
+| Ind_106_C1 | Refrigerator    |    1 |  20000 |
+| Ind_107_C3 | Washing Machine |    1 |  20000 |
+| Ind_108_C4 | Washing Machine |    1 |  25000 |
+| Ind_109_C1 | Refrigerator    |    1 |  10000 |
+| Ind_110_C2 | LCD             |    1 |  25000 |
+| Ind_111_C2 | Washing Machine |    1 |  19000 |
+| Ind_112_C3 | LCD             |    1 |  20000 |
+| Ind_113_C4 | LCD             |    1 |  20000 |
+| Ind_114_C3 | Washing Machine |    1 |  25000 |
+| Ind_115_C1 | Washing Machine |    1 |  19000 |
+| Ind_116_C1 | Refrigerator    |    1 |  10000 |
+| Ind_117_C3 | Chairs          |    4 |  20000 |
+| Ind_118_C2 | Chairs          |    6 |  30000 |
+| Ind_119_C1 | LCD             |    2 |  20000 |
+| Ind_120_C2 | Washing Machine |    1 |  25000 |
++------------+-----------------+------+--------+
+20 rows in set (0.00 sec)
+
+mysql> select * from mech;
++--------+-------+
+| rollno | marks |
++--------+-------+
+|    101 |    90 |
+|    102 |    56 |
+|    103 |    78 |
+|    104 |    35 |
+|    105 |   100 |
+|    106 |    56 |
++--------+-------+
+6 rows in set (0.00 sec)
+
+mysql> Select Ename,Deptno, Case Deptno
+    -> When 10 Then 'A'
+    -> When 20 Then 'B'
+    -> Else
+    -> 'C'
+    -> End as "Department Code"
+    -> From Emp;
++--------+--------+-----------------+
+| Ename  | Deptno | Department Code |
++--------+--------+-----------------+
+| SMITH  |     20 | B               |
+| ALLEN  |     30 | C               |
+| WARD   |     30 | C               |
+| JONES  |     20 | B               |
+| MARTIN |     30 | C               |
+| BLAKE  |     30 | C               |
+| CLARK  |     10 | A               |
+| SCOTT  |     20 | B               |
+| KING   |     10 | A               |
+| TURNER |     30 | C               |
+| ADAMS  |     20 | B               |
+| JAMES  |     30 | C               |
+| FORD   |     20 | B               |
+| MILLER |     10 | A               |
++--------+--------+-----------------+
+14 rows in set (0.00 sec)
+
+mysql> Select Ename,Deptno, Case Deptno
+    -> When 10 Then 'A'
+    -> When 20 Then 'B'
+    -> --Else
+    -> --'C'
+    -> End as "Department Code"
+    -> From Emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Else
+--'C'
+End as "Department Code"
+From Emp' at line 4
+mysql> Select Ename,Deptno, Case Deptno
+    -> When 10 Then 'A'
+    -> When 20 Then 'B'
+    -> -- Else
+    -> -- 'C'
+    -> End as "Department Code"
+    -> From Emp;
++--------+--------+-----------------+
+| Ename  | Deptno | Department Code |
++--------+--------+-----------------+
+| SMITH  |     20 | B               |
+| ALLEN  |     30 | NULL            |
+| WARD   |     30 | NULL            |
+| JONES  |     20 | B               |
+| MARTIN |     30 | NULL            |
+| BLAKE  |     30 | NULL            |
+| CLARK  |     10 | A               |
+| SCOTT  |     20 | B               |
+| KING   |     10 | A               |
+| TURNER |     30 | NULL            |
+| ADAMS  |     20 | B               |
+| JAMES  |     30 | NULL            |
+| FORD   |     20 | B               |
+| MILLER |     10 | A               |
++--------+--------+-----------------+
+14 rows in set (0.00 sec)
+
+mysql> Select Ename, Sal, Case
+    -> When Sal >= 4000 Then 'A+'
+    -> When Sal >= 2990 Then 'A'
+    -> When Sal >= 2400 Then 'B+'
+    -> When Sal >= 1800 Then 'B'
+    -> Else
+    -> 'C'
+    -> Else as "Salary Class"
+    -> From Emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Else as "Salary Class"
+From Emp' at line 8
+mysql> Select Ename, Sal, Case
+    -> When Sal >= 4000 Then 'A+'
+    -> When Sal >= 2990 Then 'A'
+    -> When Sal >= 2400 Then 'B+'
+    -> When Sal >= 1800 Then 'B'
+    -> Else
+    -> 'C'
+    -> End as "Salary Class"
+    -> From Emp;
++--------+------+--------------+
+| Ename  | Sal  | Salary Class |
++--------+------+--------------+
+| SMITH  |  800 | C            |
+| ALLEN  | 1600 | C            |
+| WARD   | 1250 | C            |
+| JONES  | 2975 | B+           |
+| MARTIN | 1250 | C            |
+| BLAKE  | 2850 | B+           |
+| CLARK  | 2450 | B+           |
+| SCOTT  | 3000 | A            |
+| KING   | 5000 | A+           |
+| TURNER | 1500 | C            |
+| ADAMS  | 1100 | C            |
+| JAMES  |  950 | C            |
+| FORD   | 3000 | A            |
+| MILLER | 1300 | C            |
++--------+------+--------------+
+14 rows in set (0.00 sec)
+
+mysql> Select Ename, Sal, Case
+    -> When Sal >= 2990 Then 'A'
+    -> When Sal >= 4000 Then 'A+'
+    -> When Sal >= 2400 Then 'B+'
+    -> When Sal >= 1800 Then 'B'
+    -> Else
+    -> 'C'
+    -> End as "Salary Class"
+    -> From Emp;
++--------+------+--------------+
+| Ename  | Sal  | Salary Class |
++--------+------+--------------+
+| SMITH  |  800 | C            |
+| ALLEN  | 1600 | C            |
+| WARD   | 1250 | C            |
+| JONES  | 2975 | B+           |
+| MARTIN | 1250 | C            |
+| BLAKE  | 2850 | B+           |
+| CLARK  | 2450 | B+           |
+| SCOTT  | 3000 | A            |
+| KING   | 5000 | A            |
+| TURNER | 1500 | C            |
+| ADAMS  | 1100 | C            |
+| JAMES  |  950 | C            |
+| FORD   | 3000 | A            |
+| MILLER | 1300 | C            |
++--------+------+--------------+
+14 rows in set (0.00 sec)
+
+mysql>
+mysql> Select Ename,Sal,Case
+    -> When Sal Between 3000 and 6000 then 'A'
+    -> When Sal Between 800 and 1500 then 'B'
+    -> When Sal Between 1501 and 2999 then 'C'
+    -> End as "Salary Class"
+    -> From Emp;
++--------+------+--------------+
+| Ename  | Sal  | Salary Class |
++--------+------+--------------+
+| SMITH  |  800 | B            |
+| ALLEN  | 1600 | C            |
+| WARD   | 1250 | B            |
+| JONES  | 2975 | C            |
+| MARTIN | 1250 | B            |
+| BLAKE  | 2850 | C            |
+| CLARK  | 2450 | C            |
+| SCOTT  | 3000 | A            |
+| KING   | 5000 | A            |
+| TURNER | 1500 | B            |
+| ADAMS  | 1100 | B            |
+| JAMES  |  950 | B            |
+| FORD   | 3000 | A            |
+| MILLER | 1300 | B            |
++--------+------+--------------+
+14 rows in set (0.00 sec)
+
+mysql> select ename, sal, if(sal >= 2000,'A','B') as "Salary Class"
+    -> form emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form emp' at line 2
+mysql> select ename, sal, if(sal >= 2000,'A','B') as "Salary Class"
+    -> from emp;
++--------+------+--------------+
+| ename  | sal  | Salary Class |
++--------+------+--------------+
+| SMITH  |  800 | B            |
+| ALLEN  | 1600 | B            |
+| WARD   | 1250 | B            |
+| JONES  | 2975 | A            |
+| MARTIN | 1250 | B            |
+| BLAKE  | 2850 | A            |
+| CLARK  | 2450 | A            |
+| SCOTT  | 3000 | A            |
+| KING   | 5000 | A            |
+| TURNER | 1500 | B            |
+| ADAMS  | 1100 | B            |
+| JAMES  |  950 | B            |
+| FORD   | 3000 | A            |
+| MILLER | 1300 | B            |
++--------+------+--------------+
+14 rows in set (0.00 sec)
+
+mysql> select ename, sal, if(sal >= 2000,'A') as "Salary Class"
+    -> from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') as "Salary Class"
+from emp' at line 1
+mysql> select ename, sal, if(sal >= 2000,'A','B') as "Salary Class"
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    -> From Emp;
++--------+------+--------------+
+| ename  | sal  | Salary Class |
++--------+------+--------------+
+| SMITH  |  800 | B            |
+| ALLEN  | 1600 | B            |
+| WARD   | 1250 | B            |
+| JONES  | 2975 | A            |
+| MARTIN | 1250 | B            |
+| BLAKE  | 2850 | A            |
+| CLARK  | 2450 | A            |
+| SCOTT  | 3000 | A            |
+| KING   | 5000 | A            |
+| TURNER | 1500 | B            |
+| ADAMS  | 1100 | B            |
+| JAMES  |  950 | B            |
+| FORD   | 3000 | A            |
+| MILLER | 1300 | B            |
++--------+------+--------------+
+14 rows in set (0.00 sec)
+
+mysql> select ename, deptno, if(deptno = 10, 'A', if(deptno = 20, 'B', 'C')) as "Grade"
+    -> from emp
+    -> ;
++--------+--------+-------+
+| ename  | deptno | Grade |
++--------+--------+-------+
+| SMITH  |     20 | B     |
+| ALLEN  |     30 | C     |
+| WARD   |     30 | C     |
+| JONES  |     20 | B     |
+| MARTIN |     30 | C     |
+| BLAKE  |     30 | C     |
+| CLARK  |     10 | A     |
+| SCOTT  |     20 | B     |
+| KING   |     10 | A     |
+| TURNER |     30 | C     |
+| ADAMS  |     20 | B     |
+| JAMES  |     30 | C     |
+| FORD   |     20 | B     |
+| MILLER |     10 | A     |
++--------+--------+-------+
+14 rows in set (0.00 sec)
+
+mysql> ;'LKJHGFDSA][POIUYTREWWWWWWWQ/,,,NBVXZZZXXCVBVN,./"
+ERROR:
+No query specified
+
+    '>
+    '>
+    '>
+    '> :;;;
+    '> ;
+    '> ^C
+mysql>
+mysql> Select Ename,Sal,Case
+    -> When Sal Between 3000 and 6000 then 'A'
+    -> When Sal Between 800 and 1500 then 'B'
+    -> When Sal Between 1501 and 2999 then 'C'
+    -> End as "Salary Class"
+    -> From Emp;
++--------+------+--------------+
+| Ename  | Sal  | Salary Class |
++--------+------+--------------+
+| SMITH  |  800 | B            |
+| ALLEN  | 1600 | C            |
+| WARD   | 1250 | B            |
+| JONES  | 2975 | C            |
+| MARTIN | 1250 | B            |
+| BLAKE  | 2850 | C            |
+| CLARK  | 2450 | C            |
+| SCOTT  | 3000 | A            |
+| KING   | 5000 | A            |
+| TURNER | 1500 | B            |
+| ADAMS  | 1100 | B            |
+| JAMES  |  950 | B            |
+| FORD   | 3000 | A            |
+| MILLER | 1300 | B            |
++--------+------+--------------+
+14 rows in set (0.00 sec)
+

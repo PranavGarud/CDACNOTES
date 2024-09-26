@@ -1,0 +1,119 @@
+Creating Tables:
+1)Creating table without Data Intgrity Rules(Constraints)
+
+Create Table Cust_Master()
+(CustID Int,
+CustName  Varchar(20),
+CustCity Varchar(10)
+);
+
+CREATE TABLE Cust_Master (
+    CustID INT,
+    CustName VARCHAR(20),
+    CustCity VARCHAR(10)
+);
+
+
+Inserting records in the table
+Insert into Cust_Master Values(1,'John','Pune');
+
+-- or
+
+Insert into Cust_Master Values(CustID,CustName,CustCity)Values(2,'Martin','Mumbai');
+
+Insert into Cust_Master (CustName) Values('Roger');
+
+
+2)Creating table with Data Intgrity Rules(Constraints)
+Constraints are declared 2 levels:
+a)Column Level
+b)Table Level
+
+Create Table Cust_Master0
+(CustID Int Primary Key,
+CustName Varchar(20) Not Null,
+CustCity Varchar(10) defalut 'Pune',
+Deposit Int Check(Deposit>=500),
+Credit_Card_No Int Unique
+);
+
+CREATE TABLE Cust_Master0 (
+    CustID INT PRIMARY KEY,
+    CustName VARCHAR(20) NOT NULL,
+    CustCity VARCHAR(10) DEFAULT 'Pune',
+    Deposit INT CHECK (Deposit >= 500),
+    Credit_Card_No INT UNIQUE
+);
+
+CREATE TABLE Cust_Transactions
+(CustID Int References Cust_Master0,
+Amount Int
+);
+
+Insert into Cust_Transactions Values(1,500);
+--Although MySQL accepts;other databases throw error
+
+Insert into Cust_Master0 Values(1,'John',default,400,Null);--Check constraint error
+
+
+Insert into Cust_Master0 Values(1,'John',default,600,Null);
+
+Table Level Constraints:
+
+create Table t1
+(a int,
+b int not null,
+c int,
+d int,
+Primary Key(a),
+Unique (c),
+Check (d > 100)
+);
+
+Need of Table Level Constraints:
+1)When we are Comparing columns of the tables
+2)While creating Composite Keys
+
+1)E.g : When we are Comparing columns of the tables
+create table t1
+(a int,
+b int,
+c int check (c>b)
+); - Error
+
+create table t1
+(a int,
+b int,
+c int, check (c>b)
+);
+
+
+2)E.g : While creating Composite Keys
+
+create table t2
+(a int,
+b int,
+c int,
+Primary Key(a,b)
+);
+
+Foreign key at table level :
+Create Table Cust_Transaction_Intl
+(CustID Int,
+Amount Int,
+Foreign Key(CustID) References Cust_Master0(CustID)
+);
+
+
+Delete and Update Records :
+
+--Deleting records
+Delete
+From Emp
+Where EMPID = 7698;
+
+
+--Updating records
+Update Emp
+Set Sal = 7000
+Where Ename = 'KING'; 

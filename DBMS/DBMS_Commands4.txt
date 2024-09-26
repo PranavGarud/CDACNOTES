@@ -1,0 +1,292 @@
+Summary Queries:
+
+1)Distinct Clause -- To eleminate duplicates
+select distinct job from emp;
+select distinct deptno from emp;
+select distinct job, deptno from emp;
+
+select distinct job, deptno from emp;
+
+-------------------------------------------------------------
+
+Multi row functions or Aggregate functions:
+They will return a single value for a group of values.
+If a grouping is not there then the entire table or filtered table can be a group.
+
+select sum(sal) 
+from emp;
+
+select sum(sal) 
+from emp
+where deptno=20;
+
+select sum(comm)
+from emp;
+
+select sum(comm)
+from emp
+where comm is null;
+
+select avg(sal) from emp;
+
+select round(avg(sal))from emp;
+
+select avg(comm)from emp;
+
+select max(sal) from emp;
+
+select min(sal) from emp;
+
+select min(hiredate) from emp;
+
+select max(hiredate) from emp;
+
+select max(ename) from emp;
+
+select min(ename) from emp;
+
+select max(ename) from emp;
+
+select count(comm) 
+from emp;
+
+select count('cedac') 
+from emp;
+
+select count('*') 
+from emp;
+
+select count(1) 
+from emp;
+
+********************************************************************************
+
+Group By Clause:
+
+Group by is the extension of Distinct clause.
+
+select job
+from emp
+Group By job;
+
+Group by eliminates the duplicates of the column (s) specified like Distinct.
+*But the value add is that group by can do aggregation in each distinct value returned.
+
+Display deptno wise total salaries.
+
+Select Deptno,Sum(Sal) as "Total"
+From Emp
+Group by deptno;
+
+Display job wise count of employees
+Select Job,Count(*) as count 
+from emp
+Group by  job;
+
+Multiple Column Grouping:
+Select Job,Deptno
+From Emp
+Group By Job,Deptno;
+
+Display the total salary for each deptno within each job
+
+Select Job,Deptno,Sum(Sal) as "Total"
+From emp
+Group By Job,Deptno;
+
+
+Display the total sales for each product within each count from product2 talbe.
+
+Select Country,Pname,Sum(Sales) as "Total Sales"
+From Product2
+Group BY Country,Pname
+
+Select Country,Pname,Sum(Sales) as "Total Sales"
+From Product2
+Group BY Country,Pname
+Order By 1,2;
+
+Select Country,Pname,Sum(Sales) as "Total Sales"
+From Product2
+Group BY Pname,Country;
+
+
+Group By On "Expression Columns or Derived Columns":
+
+This is achived using single row functions
+Display joining year wise count of employees.
+
+Select year(hiredate) as "Joining Year", Count(*) as "Number of Employees"
+ from emp
+Group By Year(Hiredate);
+
+Select year(hiredate) as "Joining Year", 
+month(hiredate) as "joining month", 
+Count(*) as "Number of Employees"
+form emp
+Group by year(Hiredate),month(hiredate)
+order by 1,2;
+
+
+Golden Rules : 
+Rules of Summary Queries:
+
+Select Deptno, Sum(sal) as "Total"
+from Emp;--Error
+
+Select Deptno, Sum(sal) as "Total"
+from Emp
+Group By Job;--Error
+
+"All Non Aggregate Column of select statements MUST come in the Group By Clause."
+
+Select Country, Pname, Sum(Sales)as "Total Sales"
+From Product2
+Group By Country; -- Error
+
+Select Country, Pname, Sum(Sales) as "Total Sales"
+From Product2
+Group By Pname; -- Error
+
+--Empno is PK
+
+Select Empno, Max(Sal) as "Highest Salary"
+From Emp
+Group By Empno; --Wrong Output
+
+The non aggregate column should NOT have unique values.
+
+Filtering Summarized Rows:
+
+select deptno, sum(sal)
+    -> From Emp
+    -> Group By Deptno;
+
+Display dept number wise total salaries where the total salary is >= 10000.
+
+Select Deptno, sum(sal)
+from emp
+group by deptno
+where sum (sal)>= 10000; -- Error
+
+Select deptno, sum(sal)
+from emp
+where sum(sal) >= 10000
+group by deptno;
+
+When we need to filter the aggregate valuees then we should use Having clause.
+Having will not filter summary rows.
+
+select deptno,sum(sal)
+from emp
+group by deptno
+having sum(sal)>=10000;
+
+Select Empno, Max(Sal) as "Highest Slaray"
+From Emp
+Group By EMpno
+Having Count(Empno)>1; --To esure empno is to be grouped or not
+
+Aggregation on table having no rows:
+
+Create table agr1
+(a int);
+
+Select sum(a),Avg(a),Min(a),Count(a)
+from agr1;
+
+select count(*) from agr1;
+
+Count always returns zero for no rows or positive integers.
+
+Grouping on column having nulls:
+Select comm
+from emp
+group by comm;
+
+Select Avg(Sal)
+from emp
+group by deptno;
+
+Select Max(Avg(Sal))--Nesting of Aggregation is Not supported in MySQL
+From Emp
+Group By Deptno;
+
+Using Where as well as Having clause in same select statement.
+
+Display job wise highest salary excluding President for those jobs who have their highest salary
+above 2800;The Final output should be descending highests salary wise.
+
+Select job, max(Sal)
+from emp
+group by job;
+
+Select job, max(Sal)
+from emp
+Where job<>'President'
+group by job;
+
+Select job, max(Sal)
+from emp
+Where job<>'President' -- Good Tuning wise
+group by job
+having max(sal) > 2800;
+
+Select job, max(Sal)
+from emp
+group by job
+having max(sal) > 2800 And job <> 'PRESIDENT'; -- Not Good Tuning wise
+
+
+Select job, max(Sal)
+from emp
+where job <> 'PRESIDENT' -- Good tuning wise
+group by job
+having max(sal) > 2800 
+Order By 2 Desc;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

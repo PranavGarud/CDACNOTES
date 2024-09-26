@@ -1,0 +1,189 @@
+Jois:
+
+Mostly it is required when we need to display columns (data) from 2 or multiple tables based on the matching or non matching values of the 
+common colums within those tables.
+
+Generally useful to show data from parent and child tables.
+
+This is a feature used only in SQL Databases.
+
+Supported by ANSI SQL
+
+Types of Joins:
+
+Distinctly there are 3 types of joins.
+1)Inner
+2)Outer
+3)Cross.
+
+-----------------------------------------
+1)Inner Join:
+a)Equi Join
+b)Non Equi JOin
+
+There are 2 Types of syntaxes of Inner Joins:
+1)ANSI 89
+2)ANSI 92 or 2000 or above ( Highly Recommended)
+
+Inner Join : Equi Join : Display data from tables based on only matching values of the common columns.
+
+Examples of ANSI 89 Syntax --
+
+Select EName,DName
+From Emp, Dept
+Where Emp.Deptno = Dept.Deptno;
+
+Select EName,DName
+From Emp, Dept; -- Landed accidentally in Cross Join!!!
+
+ANSI 92 or above syntax : 
+
+Select EName,DName
+From Emp Inner Join Dept
+On Emp.Deptno = Dept.Deptno;
+
+Select EName,DName
+From Emp Inner Join Dept; --Although MySQL gives cross join other all SQL database throw error
+
+
+Select EName,DName,Deptno  --Error Column name is ambiguous.
+From Emp Inner Join Dept
+On Emp.Deptno = Dept.Deptno; 
+
+Select EName,DName,Emp.Deptno
+From Emp Inner Join Dept
+On Emp.Deptno = Dept.Deptno;	 -- Rectified 
+
+Select Emp.EName,Dept.DName,Emp.Deptno
+From Emp Inner Join Dept
+On Emp.Deptno = Dept.Deptno;	
+
+The BEST Pratice is as shown Below;
+
+Select e.EName,d.DName,e.Deptno
+From Emp e Join Dept d
+On e.Deptno = d.Deptno;	
+
+Join Condition and Fileter Condition Together :
+
+Select ename , dname,sal
+from emp join dept
+on emp.deptno = dept.deptno
+where sal > 2000;
+
+Select ename , dname,sal
+from emp join dept
+on emp.deptno = dept.deptno AND sal > 2000;
+
+Select ename , dname,sal
+from emp join dept
+on emp.deptno = dept.deptno AND sal > 2000;  --Partial Cross Join
+
+
+Examples of NonEQu join Join:
+Select e.ename , e.sal, sg.grade
+from emp e join Salgrade sg
+on emp.Sal Between sg.losal AND sg.hisal;
+
+
+More tha 2 tables joins:
+
+Select ename,dname,pname
+from e join d
+on e.deptno = d.deptno
+join p
+on d.pcode = p.pcode;
+
+Select username,privname
+from user join upm
+on users.userid = upm.userid
+
+
+----------------------------------------
+
+Outer Join:
+
+Outer Join is extension of Inner Join.
+
+Types of Outer Join :
+1)Left Outer Join
+2)Right Outer Join
+3)Full Outer Join
+
+1)Left Outer Join :
+
+Select Ename,Dname
+From Emp1 Left Outer Join Dept1
+On Emp1.Deptno = Dept1.Deptno;
+
+Left Outer Join Matching records from both the tables and remaining all records of left table.
+
+
+2)Right Outer Join :
+Select Ename,Dname
+From Dept1 Left Outer Join Emp1
+On Emp1.Deptno = Dept1.Deptno; --It considers Dname as left outer join.
+
+Right Outer Join Matching records from both the tables and remaining all records of right table.
+
+Select Ename,Dname
+From Emp1 Right Outer Join Dept1
+On Emp1.Deptno =  Dept1.Deptno;
+
+
+Full Outer Join = Inner + Remaining of Left Tabe + Remaining of Right Table
+
+Select Ename,Dname
+From Emp1 Full Outer Join Dept1
+On Emp1.Deptno =  Dept1.Deptno;
+
+
+Left or Right Outer Join can also be used to show "Only Non Matching value records",
+Display enames from  emp1 where depno is not matching as per dept1.
+
+Select Ename,Dname
+From Emp1 Left Outer Join Dept1
+On Emp1.Deptno = Dept1.Deptno
+Where Dept1.Deptno is Null;
+
+Select Ename as "ENames Not in Dept1"
+From Emp1 Left Outer Join Dept1
+On Emp1.Deptno = Dept1.Deptno
+Where Dept1.Deptno is Null;
+
+
+
+Select ename ,dname
+from emp cross join dept
+on emp.deptno = dept.deptno;
+
+
+-----------------------------------------------------------------------------------
+Cross Joins :
+
+Select scheme, roi, code, month, roi * month as "Final Value"
+from rates cross join period;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,706 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 40
+Server version: 8.0.39 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> Create Table Cust_Master()
+    -> (CustID Int,
+    -> CustName  Varchar(20),
+    -> CustCity Varchar(10)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+(CustID Int,
+CustName  Varchar(20),
+CustCity Varchar(10)' at line 1
+mysql> Create Table Cust_Master()
+    -> (CustID Int,
+    -> CustName  Varchar(20),
+    -> CustCity Varchar(10)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+(CustID Int,
+CustName  Varchar(20),
+CustCity Varchar(10)' at line 1
+mysql> Create Table Cust_Master0
+    -> (CustID Int,
+    -> CustName Varchar(20),
+    -> CustCity Varchar(10)
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mycollege          |
+| mydb0              |
+| mydb1              |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use mysql
+Database changed
+mysql> show tables
+    -> ;
++------------------------------------------------------+
+| Tables_in_mysql                                      |
++------------------------------------------------------+
+| columns_priv                                         |
+| component                                            |
+| db                                                   |
+| default_roles                                        |
+| engine_cost                                          |
+| func                                                 |
+| general_log                                          |
+| global_grants                                        |
+| gtid_executed                                        |
+| help_category                                        |
+| help_keyword                                         |
+| help_relation                                        |
+| help_topic                                           |
+| innodb_index_stats                                   |
+| innodb_table_stats                                   |
+| ndb_binlog_index                                     |
+| password_history                                     |
+| plugin                                               |
+| procs_priv                                           |
+| proxies_priv                                         |
+| replication_asynchronous_connection_failover         |
+| replication_asynchronous_connection_failover_managed |
+| replication_group_configuration_version              |
+| replication_group_member_actions                     |
+| role_edges                                           |
+| server_cost                                          |
+| servers                                              |
+| slave_master_info                                    |
+| slave_relay_log_info                                 |
+| slave_worker_info                                    |
+| slow_log                                             |
+| tables_priv                                          |
+| time_zone                                            |
+| time_zone_leap_second                                |
+| time_zone_name                                       |
+| time_zone_transition                                 |
+| time_zone_transition_type                            |
+| user                                                 |
++------------------------------------------------------+
+38 rows in set (0.00 sec)
+
+mysql> showdatabases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'showdatabases' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mycollege          |
+| mydb0              |
+| mydb1              |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use mydb0
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_mydb0 |
++-----------------+
+| australia       |
+| comp            |
+| d               |
+| dept            |
+| dept1           |
+| e               |
+| emp             |
+| emp1            |
+| india           |
+| mech            |
+| p               |
+| pcodes          |
+| period          |
+| rates           |
++-----------------+
+14 rows in set (0.00 sec)
+
+mysql> create database myday1;
+Query OK, 1 row affected (0.30 sec)
+
+mysql> Create Table Cust_Master()
+    -> (CustID Int,
+    -> CustName  Varchar(20),
+    -> CustCity Varchar(10)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+(CustID Int,
+CustName  Varchar(20),
+CustCity Varchar(10)
+)' at line 1
+mysql> use myday1;
+Database changed
+mysql> Create Table Cust_Master()
+    -> (CustID Int,
+    -> CustName  Varchar(20),
+    -> CustCity Varchar(10)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+(CustID Int,
+CustName  Varchar(20),
+CustCity Varchar(10)
+)' at line 1
+mysql> Create Table Cust_Master()
+    -> (CustID Int,
+    -> CustName Varchar(20),
+    -> CustCity Varchar(10)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+(CustID Int,
+CustName Varchar(20),
+CustCity Varchar(10)
+)' at line 1
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> Create Table Cust_Master0()
+    -> (CustID Int,
+    -> CustName Varchar(20),
+    -> CustCity Varchar(10)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+(CustID Int,
+CustName Varchar(20),
+CustCity Varchar(10)
+)' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mycollege          |
+| myday1             |
+| mydb0              |
+| mydb1              |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use mydb1
+Database changed
+mysql>
+mysql> Create Table Cust_Master()
+    -> (CustID Int,
+    -> CustName  Varchar(20),
+    -> CustCity Varchar(10)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+(CustID Int,
+CustName  Varchar(20),
+CustCity Varchar(10)
+)' at line 1
+mysql> CREATE TABLE Cust_Master (
+    ->     CustID INT,
+    ->     CustName VARCHAR(20),
+    ->     CustCity VARCHAR(10)
+    -> );
+Query OK, 0 rows affected (1.52 sec)
+
+mysql> insert into Cust_Master()(CustId, CustName, CustCity) Values(2,'Martin','Mumbai');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CustId, CustName, CustCity) Values(2,'Martin','Mumbai')' at line 1
+mysql> INSERT INTO Cust_Master (CustId, CustName, CustCity) VALUES (2, 'Martin', 'Mumbai');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> Insert into Cust_Master (CustName) Values('Roger');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> Create Table Cust_Master0
+    -> (CustID Int Primary Key,
+    -> CustName Varchar(20) Not Null,
+    -> CustCity Varchar(10) defalut 'Pune',
+    -> Deposit Int Check(Deposit >= 500),
+    -> Credit_Card_No Int Unique
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'defalut 'Pune',
+Deposit Int Check(Deposit >= 500),
+Credit_Card_No Int Unique
+)' at line 4
+mysql> Create Table Cust_Master0
+    -> (CustID Int Primary Key,
+    -> CustName Varchar(20) Not Null,
+    -> CustCity Varchar(10) defalut 'Pune',
+    -> Deposit Int Check(Deposit >= 500),
+    -> Credit_Card_No Int Unique
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'defalut 'Pune',
+Deposit Int Check(Deposit >= 500),
+Credit_Card_No Int Unique
+)' at line 4
+mysql> show tables;
++-----------------+
+| Tables_in_mydb1 |
++-----------------+
+| cust_master     |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> Create Table Cust_Master0
+    -> (CustID Int Primary Key,
+    -> CustName Varchar(20) Not Null,
+    -> CustCity Varchar(10) defalut 'Pune',
+    -> Deposit Int Check(Deposit>=500),
+    -> Credit_Card_No Int Unique
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'defalut 'Pune',
+Deposit Int Check(Deposit>=500),
+Credit_Card_No Int Unique
+)' at line 4
+mysql> CREATE TABLE Cust_Master0 (    CustID INT PRIMARY KEY,    CustName VARCHAR(20) NOT NULL,    CustCity VARCHAR(10) DEFAULT 'Pune',    Deposit INT CHECK (Deposit >= 500),    Credit_Card_No INT UNIQUE);
+Query OK, 0 rows affected (0.97 sec)
+
+mysql> CREATE TABLE Cust_Transactions
+    -> (CustID Int References Cust_Master0,
+    -> Amount Int
+    -> );
+Query OK, 0 rows affected (0.81 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_mydb1   |
++-------------------+
+| cust_master       |
+| cust_master0      |
+| cust_transactions |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> Insert into Cust_Transactions Values(1,500);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from Cust_Transactions;
++--------+--------+
+| CustID | Amount |
++--------+--------+
+|      1 |    500 |
++--------+--------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> Insert into Cust_Master0 Values(1,'John',default,400,Null);
+ERROR 3819 (HY000): Check constraint 'cust_master0_chk_1' is violated.
+mysql> Insert into Cust_Master0 Values(1,'John',default,600,Null);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> ^C
+mysql> Insert into Cust_Master0 Values(1,'Martin',default,600,Null);
+ERROR 1062 (23000): Duplicate entry '1' for key 'cust_master0.PRIMARY'
+mysql> select * from Cust_Master0;
++--------+----------+----------+---------+----------------+
+| CustID | CustName | CustCity | Deposit | Credit_Card_No |
++--------+----------+----------+---------+----------------+
+|      1 | John     | Pune     |     600 |           NULL |
++--------+----------+----------+---------+----------------+
+1 row in set (0.00 sec)
+
+mysql> create Table t1
+    -> (a int,
+    -> b int not null,
+    -> c int,
+    -> d int,
+    -> Primary Key(a),
+    -> Unique (c),
+    -> Check (d > 100)
+    -> );
+Query OK, 0 rows affected (0.62 sec)
+
+mysql> create table t2
+    -> {a int,
+    -> b int,
+    -> c int check(c>b)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '{a int,
+b int,
+c int check(c>b)
+)' at line 2
+mysql> create table t2
+    -> {a int,
+    -> b int,
+    -> c int check (c>b)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '{a int,
+b int,
+c int check (c>b)
+)' at line 2
+mysql> create table t1
+    -> (a int,
+    -> b int,
+    -> c int check (c>b)
+    -> );
+ERROR 3813 (HY000): Column check constraint 't1_chk_1' references other column.
+mysql> create table t1
+    -> (a int,
+    -> b int,
+    -> c int, check (c>b)
+    -> );
+ERROR 1050 (42S01): Table 't1' already exists
+mysql> );create table t2
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+    -> (a int,
+    -> b int,
+    -> c int,
+    -> Primary Key(a,b)
+    -> );
+Query OK, 0 rows affected (0.84 sec)
+
+mysql> Foreign key at table level :
+    -> Create Table Cust_Transaction_Intl
+    -> (CustID Int,
+    -> Amount Int,
+    -> Foreign Key(CustID) References Cust_Master0(CustID)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Foreign key at table level :
+Create Table Cust_Transaction_Intl
+(CustID Int,
+Amo' at line 1
+mysql> Create Table Cust_Transaction_Intl
+    -> (CustID Int,
+    -> Amount Int,
+    -> Foreign Key(CustID) References Cust_Master0(CustID)
+    -> );
+Query OK, 0 rows affected (0.60 sec)
+
+mysql>  show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mycollege          |
+| myday1             |
+| mydb0              |
+| mydb1              |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use sys
+Database changed
+mysql> show table
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> show tables;
++-----------------------------------------------+
+| Tables_in_sys                                 |
++-----------------------------------------------+
+| host_summary                                  |
+| host_summary_by_file_io                       |
+| host_summary_by_file_io_type                  |
+| host_summary_by_stages                        |
+| host_summary_by_statement_latency             |
+| host_summary_by_statement_type                |
+| innodb_buffer_stats_by_schema                 |
+| innodb_buffer_stats_by_table                  |
+| innodb_lock_waits                             |
+| io_by_thread_by_latency                       |
+| io_global_by_file_by_bytes                    |
+| io_global_by_file_by_latency                  |
+| io_global_by_wait_by_bytes                    |
+| io_global_by_wait_by_latency                  |
+| latest_file_io                                |
+| memory_by_host_by_current_bytes               |
+| memory_by_thread_by_current_bytes             |
+| memory_by_user_by_current_bytes               |
+| memory_global_by_current_bytes                |
+| memory_global_total                           |
+| metrics                                       |
+| processlist                                   |
+| ps_check_lost_instrumentation                 |
+| schema_auto_increment_columns                 |
+| schema_index_statistics                       |
+| schema_object_overview                        |
+| schema_redundant_indexes                      |
+| schema_table_lock_waits                       |
+| schema_table_statistics                       |
+| schema_table_statistics_with_buffer           |
+| schema_tables_with_full_table_scans           |
+| schema_unused_indexes                         |
+| session                                       |
+| session_ssl_status                            |
+| statement_analysis                            |
+| statements_with_errors_or_warnings            |
+| statements_with_full_table_scans              |
+| statements_with_runtimes_in_95th_percentile   |
+| statements_with_sorting                       |
+| statements_with_temp_tables                   |
+| sys_config                                    |
+| user_summary                                  |
+| user_summary_by_file_io                       |
+| user_summary_by_file_io_type                  |
+| user_summary_by_stages                        |
+| user_summary_by_statement_latency             |
+| user_summary_by_statement_type                |
+| version                                       |
+| wait_classes_global_by_avg_latency            |
+| wait_classes_global_by_latency                |
+| waits_by_host_by_latency                      |
+| waits_by_user_by_latency                      |
+| waits_global_by_latency                       |
+| x$host_summary                                |
+| x$host_summary_by_file_io                     |
+| x$host_summary_by_file_io_type                |
+| x$host_summary_by_stages                      |
+| x$host_summary_by_statement_latency           |
+| x$host_summary_by_statement_type              |
+| x$innodb_buffer_stats_by_schema               |
+| x$innodb_buffer_stats_by_table                |
+| x$innodb_lock_waits                           |
+| x$io_by_thread_by_latency                     |
+| x$io_global_by_file_by_bytes                  |
+| x$io_global_by_file_by_latency                |
+| x$io_global_by_wait_by_bytes                  |
+| x$io_global_by_wait_by_latency                |
+| x$latest_file_io                              |
+| x$memory_by_host_by_current_bytes             |
+| x$memory_by_thread_by_current_bytes           |
+| x$memory_by_user_by_current_bytes             |
+| x$memory_global_by_current_bytes              |
+| x$memory_global_total                         |
+| x$processlist                                 |
+| x$ps_digest_95th_percentile_by_avg_us         |
+| x$ps_digest_avg_latency_distribution          |
+| x$ps_schema_table_statistics_io               |
+| x$schema_flattened_keys                       |
+| x$schema_index_statistics                     |
+| x$schema_table_lock_waits                     |
+| x$schema_table_statistics                     |
+| x$schema_table_statistics_with_buffer         |
+| x$schema_tables_with_full_table_scans         |
+| x$session                                     |
+| x$statement_analysis                          |
+| x$statements_with_errors_or_warnings          |
+| x$statements_with_full_table_scans            |
+| x$statements_with_runtimes_in_95th_percentile |
+| x$statements_with_sorting                     |
+| x$statements_with_temp_tables                 |
+| x$user_summary                                |
+| x$user_summary_by_file_io                     |
+| x$user_summary_by_file_io_type                |
+| x$user_summary_by_stages                      |
+| x$user_summary_by_statement_latency           |
+| x$user_summary_by_statement_type              |
+| x$wait_classes_global_by_avg_latency          |
+| x$wait_classes_global_by_latency              |
+| x$waits_by_host_by_latency                    |
+| x$waits_by_user_by_latency                    |
+| x$waits_global_by_latency                     |
++-----------------------------------------------+
+101 rows in set (0.06 sec)
+
+mysql>  show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mycollege          |
+| myday1             |
+| mydb0              |
+| mydb1              |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use mycollege
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_mycollege |
++---------------------+
+| student             |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> use mydb1;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_mydb1       |
++-----------------------+
+| cust_master           |
+| cust_master0          |
+| cust_transaction_intl |
+| cust_transactions     |
+| t1                    |
+| t2                    |
++-----------------------+
+6 rows in set (0.00 sec)
+
+mysql> use mydb0
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_mydb0 |
++-----------------+
+| australia       |
+| comp            |
+| d               |
+| dept            |
+| dept1           |
+| e               |
+| emp             |
+| emp1            |
+| india           |
+| mech            |
+| p               |
+| pcodes          |
+| period          |
+| rates           |
++-----------------+
+14 rows in set (0.00 sec)
+
+mysql> select * form emp
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form emp' at line 1
+mysql> Select from emp
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from emp' at line 1
+mysql> Select * from emp;
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.00 sec)
+
+mysql> Delete 7698 from emp
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '7698 from emp' at line 1
+mysql> Delete from emp where Empno 7659
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '7659' at line 1
+mysql> Delete from emp where Empno 7659
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '7659' at line 1
+mysql> Update Emp
+    -> Set Sai = 7000
+    -> Where Ename = 'KING';
+ERROR 1054 (42S22): Unknown column 'Sai' in 'field list'
+mysql> Update Emp
+    -> Set Sal = 7000
+    -> Where Ename = 'KING';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> drop table emp;
+Query OK, 0 rows affected (0.82 sec)
+
+mysql> CREATE TABLE EMP
+    ->        (EMPNO Integer Primary Key,
+    ->         ENAME Varchar(15),
+    ->         JOB Varchar(9),
+    ->         MGR Integer,
+    ->         HIREDATE Date,
+    ->         SAL Integer,
+    ->         COMM Integer,
+    ->         DEPTNO Integer);
+Query OK, 0 rows affected (0.92 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7369, 'SMITH',  'CLERK',     7902, '1980-12-17',
+    ->         800, NULL, 20);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7499, 'ALLEN',  'SALESMAN',  7698,
+    ->         '1981-05-20',1600,  300, 30);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7521, 'WARD',   'SALESMAN',  7698,
+    ->         '1981-05-22', 1250,  500, 30);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7566, 'JONES',  'MANAGER',   7839,
+    ->         '1981-04-02',  2975, NULL, 20);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7654, 'MARTIN', 'SALESMAN',  7698,
+    ->         '1981-09-20', 1250, 1400, 30);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7698, 'BLAKE',  'MANAGER',   7839,
+    ->         '1981-05-01',  2850, NULL, 30);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7782, 'CLARK',  'MANAGER',   7839,
+    ->         '1981-06-8',  2450, NULL, 10);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7788, 'SCOTT',  'ANALYST',   7566,
+    ->         '1982-12-09', 3000, NULL, 20);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7839, 'KING',   'PRESIDENT', NULL,
+    ->         '1981-11-17', 5000, NULL, 10);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7844, 'TURNER', 'SALESMAN',  7698,
+    ->         '1981-08-09',  1500,    0, 30);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7876, 'ADAMS',  'CLERK',     7788,
+    ->         '1983-12-01', 1100, NULL, 20);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7900, 'JAMES',  'CLERK',     7698,
+    ->         '1981-12-03',   950, NULL, 30);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7902, 'FORD',   'ANALYST',   7566,
+    ->         '1981-03-06',  3000, NULL, 20);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7934, 'MILLER', 'CLERK',     7782,
+    ->         '1982-01-23', 1300, NULL, 10);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
