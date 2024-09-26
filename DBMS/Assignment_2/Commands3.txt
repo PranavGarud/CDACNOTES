@@ -123,9 +123,13 @@ Group By Country;
 The summary records should be shown as per highest to lowest sequence of totals. 
 But in the final display only first 2 records should be shown.
 
-Select  Country,
-	
-	Sum(Sales)
+Select  Continent, 
+	Country,
+	Sum(Sales) As "Total"
+From Products2
+Group By Continent,Country
+Order By Total Desc
+Limit 2;
 
 
 15.Display the exact following report:
@@ -190,6 +194,15 @@ Group By Country;
 Select  Pname,
 	Count(Qty) as "Total_Quantity"
 From India
+Group By Pname;
+
+
+22.Display product name wise total of quantity for the transactions having quantity above 1.
+
+Select  Pname,
+	Sum(Qty) as "Total_Quantity"
+From India
+Where Qty > 1
 Group By Pname;
 
 

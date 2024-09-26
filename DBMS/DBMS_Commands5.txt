@@ -1,4 +1,4 @@
-Jois:
+Joins:
 
 Mostly it is required when we need to display columns (data) from 2 or multiple tables based on the matching or non matching values of the 
 common colums within those tables.
@@ -34,7 +34,7 @@ From Emp, Dept
 Where Emp.Deptno = Dept.Deptno;
 
 Select EName,DName
-From Emp, Dept; -- Landed accidentally in Cross Join!!!
+From Emp Inner Join Dept; -- Landed accidentally in Cross Join!!!
 
 ANSI 92 or above syntax : 
 
@@ -86,7 +86,7 @@ from emp e join Salgrade sg
 on emp.Sal Between sg.losal AND sg.hisal;
 
 
-More tha 2 tables joins:
+More than 2 tables joins:
 
 Select ename,dname,pname
 from e join d
@@ -136,7 +136,7 @@ Full Outer Join = Inner + Remaining of Left Tabe + Remaining of Right Table
 Select Ename,Dname
 From Emp1 Full Outer Join Dept1
 On Emp1.Deptno =  Dept1.Deptno;
-
+*-*Full Outer Join Is Not Supported in MYSQL.
 
 Left or Right Outer Join can also be used to show "Only Non Matching value records",
 Display enames from  emp1 where depno is not matching as per dept1.
@@ -163,6 +163,89 @@ Cross Joins :
 
 Select scheme, roi, code, month, roi * month as "Final Value"
 from rates cross join period;
+
+
+Where Dept1.Deptno is NULL;
+
+---------------------------------------------
+
+Self Join:
+It means joining the same table with itself.
+
+1)It is useful when the PK and FK exists int the same table.That means we have hierarchical data in
+the single table.
+
+select e.ename as "Sub Ordinate",m.ename as "Manager"
+from emp e join emp m
+on e.mgr = m.empno;
+
+select e.ename as "Sub Ordinate",m.ename as "Manager"
+from emp e left join emp m
+on e.mgr = m.empno;
+
+select e.ename as "Sub Ordinate", IfNull(m.ename , "No Manager") As "Manager"
+from emp e left join emp m
+on e.mgr = m.empno;
+
+2)To display the duplicate rows which have unique primary Key but the 
+remaining record getting duplicated.
+
+Select e.*
+from emp e join emp m
+on e.empno <> m.empno
+	and e.ename = m.ename
+	and e.job = m.job
+	and e.sal = m.sal;
+
+Join on Expression:
+Select ename, sal, sal+amount as "Take Home Salary"
+from emp e join bonus b
+on year(e.hiredate) = b.joy;
+
+
+--------------------------------------------------------------------------------------
+1)Duplicating a table:
+
+Create Table newemp
+as 
+select * from emp;
+
+
+2)Duplicating the table with some rows
+
+Create table newemp2
+as
+select * from emp
+where job = 'clerk';
+
+
+3)Dupicating the table without records
+
+Create Table newemp3
+as 
+select * from emp
+where 5>78;
+
+
+4) Duplicating the table with some columns
+
+Create table newemp4
+as
+select empno,ename,deptno, job from emp;
+
+
+
+
+
+Referential Integrity : (MySQL can have some exceptions)
+
+1) ON DELET CASCADE :When the parent record are deleted then the corresponding child records 
+will get deleted.It is a weak Entity.
+
+
+2)ON DELET SET NULL : When the parent record are deleted then the corresponding child table's
+foregin key values becomes null.It is a strong Entity.
+
 
 
 
