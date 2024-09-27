@@ -1,0 +1,98 @@
+Mandar Mule
+Normalization :
+A Non-Key attribute should be placed in only one entity
+This proccess of placing attributes in the correct entities is called normalization.
+
+Flar File - Zero Normal Form (0NF) : Every thing is in the single hetrogenous file.
+
+The Column which have underline is primary key.
+
+Transitive Dependency : Whenever non key column depandant on another non - key then it is
+transitive dependenct.
+
+First Normal Form (1NF)  : Attributes must not repeat within a table. No repeating groups.
+Second Normal Form (2NF) : An attribute must relate to the entire Primary key , not just a protion.
+			   Tables with a single 
+Third Normal Form (3NF)  :
+Fourth Normal Form (4NF) : Addresses multivalued dependencies.
+
+Entity - Relationship Model :
+* Used for conceptual data modeling
+* Developed by Peter Chen in 1976
+* made up of entities, attributes and cardinality (i.e.,relationships) within the entities.
+
+
+Entity :
+* Person,place,object,event or concepth about which an organization
+  (or users) want to maintian data about(or track)
+Examples:
+-Person : Employee,student,patient
+-Place  : State,Region,Country
+-Object : Machine,Building,Automobile
+
+Attributes :
+* Properties of an entity are attributes.
+* Attributes tell the characteristics of that entity.
+
+Cardinality :
+*Cardinality refers to the number of occurrences of common 
+ column of one entity that can or must
+ be linked with number of occurrences of common
+ column of another entity.
+
+create table epm0
+(empno int primary key,
+ename varchar(20)
+);
+
+create tabe off0
+(off0 int primary key,
+offname varchar(20),
+empno int references emp0,
+unique(empno)
+);
+
+
+Insert into emp0 Values(1,'A');
+Insert into off() Values(101,'PQR',1);
+Insert into off() Values(102,'JKL',1);--Error
+
+
+
+Select * from emp
+Limit 3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+Practice Programs
+
+Program 1:
+Create a Student class with rollno, name and array for storing marks
+1. Calculate Average marks
+2. Calculate percentage
+
+Program 2:
+1 Create a Product class with prodid, name, price
+2. Create Store class with methods : 1. Display product list, 2. Search Product
+[To search a product first create Product array, and if id is found in
+the array return index at which it is found]
+
+
+Program 3
+1. Create a document class with documentid, title, content
+2. Create a method createContent() - this method will take string input from 
+the user until exit condition is not given (hint use while(true) and break
+when "exit" is entered . Use StringBuffer to save the input
+3. Create a method to print charactor count in the content
+
+

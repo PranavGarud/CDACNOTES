@@ -1,0 +1,108 @@
+create table Products2
+(trans_id Integer Primary Key Auto_Increment,
+ continent varchar(10),
+ country varchar(10),
+ area varchar(10),
+ region_type varchar(10),
+ pname varchar(10),
+ sales Integer);
+
+Insert into Products2(continent,country,area,region_type,pname,sales)
+Values('Asia','India','North','Rural','Nokia',200);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','North','Rural','Nokia',100);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','North','Rural','Nokia',500);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','North','Rural','Nokia',800);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','North','Urban','Nokia',1200);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','North','Urban','Nokia',1500);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','North','Urban','Nokia',1400);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','North','Urban','Nokia',1300);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','South','Rural','Nokia',100);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','South','Rural','Nokia',300);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','South','Urban','Nokia',1100);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','South','Urban','Nokia',2100);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','South','Urban','Nokia',3000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','North','Rural','Nokia',9000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','North','Rural','Nokia',10000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','North','Urban','Nokia',21000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','South','Urban','Nokia',26000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','South','Rural','Nokia',26000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','North','Rural','Samsung',40);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','North','Rural','Samsung',80);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','North','Urban','Samsung',900);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','North','Urban','Samsung',400);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','South','Urban','Samsung',1400);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','South','Urban','Samsung',1500);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','South','Rural','Samsung',300);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Asia','India','South','Rural','Samsung',400);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','North','Rural','Samsung',40000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','North','Rural','Samsung',45000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','North','Urban','Samsung',90000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','North','Urban','Samsung',40000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','South','Urban','Samsung',3000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','South','Urban','Samsung',4000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','South','Rural','Samsung',8000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values('Europe','UK','South','Rural','Samsung',6000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','North','Rural','Nokia',900);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','North','Rural','Nokia',800);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','North','Rural','Samsung',600);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','North','Rural','Samsung',400);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','North','Urban','Nokia',650);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','North','Urban','Nokia',400);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','North','Urban','Samsung',200);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','North','Urban','Samsung',500);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','South','Rural','Nokia',680);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','South','Rural','Nokia',700);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','South','Rural','Samsung',1000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','South','Rural','Samsung',1400);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','South','Urban','Nokia',5000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','South','Urban','Nokia',3500);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','South','Urban','Samsung',2000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Asia','China','South','Urban','Samsung',3500);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','North','Rural','Nokia',800);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','North','Rural','Nokia',400);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','North','Rural','Samsung',300);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','North','Rural','Samsung',600);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','North','Urban','Nokia',4000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','North','Urban','Nokia',3000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','North','Urban','Samsung',450);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','North','Urban','Samsung',550);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','South','Rural','Nokia',300);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','South','Rural','Nokia',400);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','South','Rural','Samsung',1000);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','South','Rural','Samsung',400);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','South','Urban','Nokia',800);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','South','Urban','Nokia',600);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','South','Urban','Samsung',700);
+Insert into Products2(continent,country,area,region_type,pname,sales) Values
+('Europe','France','South','Urban','Samsung',800);

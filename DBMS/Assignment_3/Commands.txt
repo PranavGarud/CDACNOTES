@@ -1,0 +1,145 @@
+Display the employee names and department names of all the employees working in the job type Salesman as well as Analyst
+Select  e.Ename,
+	d.DeptNo,
+	e.Job
+From Emp e Join Dept d
+On e.Deptno = d.Deptno
+Where e.Job = 'Analyst' Or e.Job = 'Salesman';
+
+select e.ename,d.dname,e.job
+from emp e join dept d
+on e.deptno = d.deptno and (e.job ='Analyst' or e.job = 'Salesman');
+
+2)Display the following report.
+
+Select  e.Ename as "ENAME",
+	Concat( Upper(e.Ename) , " works in " , d.Dname) As "DEPARTMENT NAME"
+From Emp e Join Dept d
+On e.DeptNo = D.DeptNo;
+
+
+3.Display the highest salary for each job within each department as per the following report –
+
+Select 	d.DName as "Department",
+	e.Job,
+	Max(e.Sal) as "Highest Sal"
+From Emp e Join Dept d
+On e.DeptNo = d.DeptNo
+Group By d.dname,e.Job
+Order By d.Dname;
+
+Select d.dname as 'Department',
+e.job as 'JOB',
+max(e.sal) as 'Highest sal'
+from emp e join dept d
+on e.deptno = d.deptno 
+group by d.dname,e.job;
+
+
+
+
+4. Display employee name, department name, location and job for all employees of MANAGER job having salary above 2900.
+Select  e.Ename,
+	d.Dname,
+	d.Loc,
+	e.Job
+From Emp e Join Dept d
+On e.DeptNo = d.DeptNo
+Where   E.Job = 'MANAGER'
+	And
+	E.Sal > 2900;
+
+5.Display the name of the employees reporting to KING.
+
+Select e1.Ename
+From Emp e Join Emp e1
+On e.Empno = e1.Mgr
+Where   e1.Mgr = e.Empno
+	And
+	e.EName = 'KING';
+
+
+6.Display the count of employees reporting to KING.
+
+Select count(e1.mgr) as "Count" 
+From Emp e Join Emp e1
+On e.Empno = e1.Mgr
+Where   e1.Mgr = e.Empno
+	And
+	e.EName = 'KING';
+
+7.Produce the following output –
+
+Select Concat( "The Manager of ", m.Ename, " is ", e.Ename) As "Manager Names"
+From Emp e Join Emp m
+On m.Mgr = e.EmpNo;
+
+
+8.Display the names of the customers who are going to depart on time.
+
+Select c.CustName
+From Customers c Join Flights f
+On f.FlightNo = c.FlightNo
+Where f.Status = "Departure On Time";
+
+
+9.Display the names of those customers who are not flying from Pune to Bangalore
+
+Select c.CustName
+From Customers c Join Flights f
+On f.FlightNo = c.FlightNo
+Where f.route <> 'Pune-Bangalore';
+
+
+10.Display the names of those customers who all are going from Gate number 1.
+
+Select c.CustName
+From Customers c Join Flights f
+On f.FlightNo = c.FlightNo
+Where f.GateNo='G1';
+
+
+11.Display the names of those customers who are going to Chandigad through King Fisher airlines only.
+
+Select c.CustName
+From Customers c Join Flights f
+On f.FlightNo = c.FlightNo
+Where 	f.Route = 'Pune-Chandigad'
+	And
+	f.FlightName = 'King Fisher';
+
+
+12.Generate the following report –
+
+Select  cd.CustId,
+	cd.Cname,
+	pd.Amount,
+	Case 
+		When pd.Status = "Paid"
+			Then "Customer Present in Payment_Details"
+		Else
+			"Customer Absent in Payment_Details"
+	End As "Remark"			
+From Customer_Details cd Left Join Payment_Details pd
+On cd.CustId = pd.CustId
+Order By pd.Status Desc;
+
+
+13.Display the customer id customer name, status and amount of the customers who have paid as well as those who have not paid.
+
+Select 	cd.CustID,
+	cd.Cname,
+	pd.Status,
+	pd.Amount
+From Customer_Details cd Left Join Payment_Details pd
+On cd.CustId = pd.CustId;
+
+
+14)Display transaction id, continent name, country name, city name, amount allocated and amount spent.
+
+
+
+
+
+
+

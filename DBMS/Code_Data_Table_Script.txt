@@ -1,0 +1,8 @@
+create table code_data
+(code varchar(25),
+ amount int);
+
+Insert into code_data Values('BXABCD_2022', 100);
+Insert into code_data Values('PXABCD_2022', 200);    
+Insert into code_data Values('QXJKLM_2023', 500);
+Insert into code_data Values('QXJKLM_2023', 700);
