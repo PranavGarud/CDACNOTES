@@ -1,0 +1,405 @@
+Sub Query:
+
+There are 2 types of SQ:
+1)Non Correlated
+
+2Correlated
+
+1)Non Correlated:
+E.g. 1 -- Display records of employees who earn sal greater than Smith,s salary.
+Select *
+From Emp
+Where Sal>(Select Sal 
+	   From Emp
+	   Where Ename = 'TURNER');
+
+*******1) Hint to use SQ : Whenever there is a derived or indirect value in the where clause or having 
+clause for complarison,then that we can get that derived or indirect value using the sub query 
+technique************
+
+E.g 2 -- Display name and salary of the highest earner.
+
+Select ename,max(sal)
+From Emp; --Error
+
+Select ename,max(sal)
+From Emp
+Group By ename; --Mandar says Logically Wrong Output
+
+Select Ename,Sal as "Highest Salary"
+From Emp
+Where Sal = (Select Max(Sal)
+	     From Emp);
+
+******2nd Hint to use SQ : Whenever we want to compare aggregate value directly without
+grouping in the where clause use sub query.*******
+
+
+Types of Non Correlated SQ:
+1) Single Row SQ
+2) Multi Row SQ
+3) Along with Exists and Not Exists operators
+4) Nested SQ
+
+1)Single Row SQ: When the child query returns ONLY ONE value to its parent query 
+then it is categorized as Single Row SQ.
+
+2)Multi Row SQ : When the child query returns MORE THAN ONe value to its parent 
+query then it is categorized as Multi Row SQ.
+
+Select * 
+From Emp
+Where Sal > (Select Sal
+	     From Emp
+	     Where Deptno = 20); --Error : Subquery returns more than 1 row.
+
+Select * 
+From Emp
+Where Sal > (800,2975,3000,1100,3000); --Error : Operand should contain 1 column(s).
+
+Select * 
+From Emp
+Where Sal > ANY (800,2975,3000,1100,3000); --Not For MYSQL
+
+Select * 
+From Emp
+Where Sal > ALL (800,2975,3000,1100,3000); --Not For MYSQL
+
+Select * 
+From Emp
+Where Sal < ANY (800,2975,3000,1100,3000); --Not For MYSQL
+
+Select * 
+From Emp
+Where Sal < ALL (800,2975,3000,1100,3000); --Not For MYSQL
+
+Select * 
+From Emp
+Where Sal >ANY (Select Sal
+	       From Emp
+	       Where Deptno = 20);
+
+Select * 
+From Emp
+Where Sal >All (Select Sal
+	       From Emp
+	       Where Deptno = 20);
+
+Select * 
+From Emp
+Where Sal = All (Select Sal
+	       From Emp
+	       Where Deptno = 20); --Empty Set
+
+
+Display records from emp1 table who have deptno matching as per dept1 table.
+
+Instead of joins we can use SQ technique.
+
+Select * 
+From Emp1
+Where Deptno in (Select deptno
+		 From dept1);
+
+
+Display records from emp1 table who DO NOT have deptno matching as per dept1 table.
+
+Select * 
+From Emp1
+Where Deptno Not In (Select deptno
+		     From dept1
+		     Where deptno is not NULL);
+
+-----------------------------------------------------------------------
+Using Non Correlated SQ in DML statements.
+Means the parent query need not to only select query.
+The parent query can be Insert or Update or Delete.
+
+Create table EmpC1
+as 
+Select * from emp;
+
+Create table EmpC2
+as 
+Select * from emp;
+
+Create table EmpC3
+as 
+Select * from emp;
+
+Create table EmpC4
+as 
+Select * from emp;
+
+Delete the record (s) having the highest salary.
+
+Delete From EmpC1
+Where Sal = (Select Max(Sal)
+	     From EmpC1); --MYSQL Exception  // Error :  You can't specify target table 'EmpC1' for update in FROM clause
+
+Delete From EmpC1
+Where Sal = (Select Max(Sal)
+	     From Emp);
+
+Select * From EmpC1;	
+
+Change the salary of the lowest earner(s).It raise should be 50%.
+
+Update EmpC2
+Set Sal = (Sal + (Sal*0.5))
+Where Sal = (Select Min(Sal)
+	     From EmpC2); --MYSQL Exception  // Error :  You can't specify target table 'EmpC1' for update in FROM clause
+
+Update EmpC2
+Set Sal = (Sal + (Sal*0.5))
+Where Sal = (Select Min(Sal)
+	     From Emp);--Now works fine in Myswq because the table is different.
+
+
+-------------------------------------------------------------------------------------
+
+3) Along with Exists and Not Exists Operators
+
+Select * 
+From Emp
+Where Exists (Select*
+	      From Dept
+	      Where deptno = 98);
+
+The Parent query execution is decided based by Exists operator.
+If the Exists operator gets False from SQ then the parent query will NOT get executed.
+If the Exists operator gets True from SQ then the parent query will get executed.
+
+Select * 
+From Emp
+Where Exists (Select*
+	      From Dept
+	      Where deptno > 20);
+
+The SQ is Not returning any actual to the parent for comparison.
+But the SQ only returns either True or False to its Parent via Exists operator.
+
+So the column list of the child query is of zero significance.
+
+Select * 
+From Emp
+Where Exists (Select 'CDAC'
+	      From Dept
+              Where deptno > 20);
+
+Select * 
+From Emp
+Where Exists (Select Null
+	      From Dept
+	      Where deptno > 20); --Fastest Execution
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+
+Real life example of Exists and NOT Exists
+Records of Emp should be shown if the current day is Saturday:
+Select *
+From Emp
+Where Exists (Select Null 
+	      From Emp 
+	      Where dayname(curdate()) = 'Saturday');
+
+Records of Emp should be shown if the current day is Sunday:
+Select *
+From Emp
+Where Exists (Select Null
+	      From Emp
+	      Where dayname(curdate()) = 'SUNDAY');
+
+
+Select *
+From Dept
+Where Exists (Select Null 
+	      From Emp 
+	      Where dayname(curdate()) = 'Saturday');
+Select *
+From Dept
+Where Exists (Select Null 
+	      From Emp 
+	      Where dayname(curdate()) = 'Sunday');
+
+Select *
+From Dept
+Where Not Exists (Select Null 
+	      From Emp 
+	      Where dayname(curdate()) = 'Sunday');
+
+----------------------------------------------------------------------------
+
+Nested SQ : Inside a SQ There will be another SQ.
+Display records who have sal greater than Ford's job's Highest Salary
+
+Select * 
+From Emp
+Where sal > (select Max(Sal)
+	     From emp
+	     Where job = (Select Job
+			  From Emp
+			  Where ename = 'FORD'
+			 )
+	    );
+
+-----------------------------------------------------------------------------
+
+Set Operators :
+
+They will enable us to combine the rows given by 2 or more Select Satements and 
+finally One output is given.			
+
+1) Union ALL:
+It will combine the rows of 2 select statements and display all the records.
+It wil NOT Eliminate duplicates.
+It will NOT do any Sorting
+
+Select * 
+From India
+Union ALL
+Select * 
+From Australia;
+
+Select * 
+From India
+Union ALL
+Select * 
+From Australia
+Order By Pname;
+
+Select Pname
+From India
+Union ALL
+Select Pname
+From Australia
+Group By Pname;
+
+
+2)Union :
+It will combine the rows of 2 select statements and display all the records.
+It will Eliminate Duplicates.
+It will sort ascending as per ther first column by default.(But Not in MySQL ).
+
+Select PName 
+From India
+Union
+Select PName
+From Australia;
+
+Select * 
+From India
+Union
+Select *
+From Australia;
+
+Rules for Succesfull execution of set Operators:
+
+1)Number of columns of each select statement MUSTBE SAME.
+
+Select PName,Qty
+From India
+Union 
+Select PName
+From Australia; --ERROR 1222 (21000): The used SELECT statements have a different number of columns
+
+Select PName,Qty
+From India
+Union 
+Select PName,Null
+From Australia; --Work around
+
+2)Positional columns should be compatible data type wise.
+
+Select PName,Qty
+From India
+Union 
+Select Qty,PName
+From Australia;--WRONG output in MySQL. Other all SQL databases WILL THROW ERROR.
+
+3) Order By clause if present then should be added after the LAST SELECT STATEMENT.
+
+Select PName
+From India
+Order By PName
+Union ALL
+Select PName
+From Australia; --Error
+
+Select PName
+From India
+Union ALL
+Select PName
+From Australia
+Order By PName;
+------------------------------------------------------------------------------------------
+
+3) Intersect :
+
+It will combine the rows of 2 select statements and display all the records.
+*****It will consider ONLY COMMON ROWS from those 2 select statements
+It will Eliminate Duplicates
+It Will Sort ascending as per the first column by default.(But Not In MYSQL)
+
+Display the different types of products sold in common in India and Australia.
+
+Select PName
+From India
+Intersect
+Select PName
+From Australia;
+
+4) Minus or Except :
+It will combine the rows of 2 select statements and display all the records.
+*****It will consider rows of FIRST select statement which are NOT in the second select statement.
+It will Eliminate Duplicates.
+It will sort ascending as per the first column by default.(But not in MYSQL).
+
+Display the different types of products sold in India but not in Australia.
+
+Select PName
+From India
+Except 
+Select PName
+From Australia;
+
+Select PName
+From Australia
+Except 
+Select PName
+From India;
+
+Allias
+The Column Alias of the first select Satatement is considered other will be ignored.
+
+Select PName as "A"
+From India
+Union
+Select PName as "B"
+From Australia;
+
+
+
+
+
+
+
+
+
+

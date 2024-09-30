@@ -1,0 +1,1419 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.39 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| assignment2        |
+| assignment3        |
+| assignment4        |
+| information_schema |
+| mycollege          |
+| myday1             |
+| mydb0              |
+| mydb1              |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+11 rows in set (0.01 sec)
+
+mysql> use assignment4
+Database changed
+mysql> show tables
+    -> ;
++-----------------------+
+| Tables_in_assignment4 |
++-----------------------+
+| continent_master      |
+| country_master        |
+| customer_details      |
+| customers             |
+| flights               |
+| payment_details       |
+| transactions          |
++-----------------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select * from continent_master;
++-------------+-------------------+----------------------------+
+| ContinentID | Name_of_Continent | Continent_Amount_Allocated |
++-------------+-------------------+----------------------------+
+| Con1        | Asia              |                      50000 |
+| Con2        | Africa            |                      30000 |
+| Con3        | Europe            |                      80000 |
+| Con4        | Australia         |                      85000 |
+| Con5        | Americas          |                      90000 |
++-------------+-------------------+----------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from country_master;
++-------------+-----------+-----------------+--------------------------+
+| ContinentID | CountryID | Name_of_Country | Country_Amount_Allocated |
++-------------+-----------+-----------------+--------------------------+
+| Con1        | Cu1       | India           |                    10000 |
+| Con1        | Cu2       | China           |                    20000 |
+| Con1        | Cu3       | UAE             |                    15000 |
+| Con2        | Cu4       | Sudan           |                    15000 |
+| Con2        | Cu5       | Kenya           |                    15000 |
+| Con3        | Cu6       | France          |                    20000 |
+| Con3        | Cu7       | Germany         |                    20000 |
+| Con3        | Cu8       | Italy           |                    20000 |
+| Con4        | Cu9       | Australia       |                    12000 |
+| Con4        | Cu10      | New Zealand     |                     9000 |
+| Con5        | Cu11      | USA             |                    50000 |
+| Con5        | Cu12      | Canada          |                    35000 |
+| Con5        | Cu13      | Brazil          |                    20000 |
+| Con5        | Cu14      | Argentina       |                    15000 |
++-------------+-----------+-----------------+--------------------------+
+14 rows in set (0.00 sec)
+
+mysql> show tables;
++-----------------------+
+| Tables_in_assignment4 |
++-----------------------+
+| continent_master      |
+| country_master        |
+| customer_details      |
+| customers             |
+| flights               |
+| payment_details       |
+| transactions          |
++-----------------------+
+7 rows in set (0.00 sec)
+
+mysql> use mydb0;
+Database changed
+mysql> Select *
+    -> From Emp
+    -> Where Sal>(Select Sal
+    ->    From Emp
+    ->    Where Ename = 'SMITH');
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+13 rows in set (0.12 sec)
+
+mysql> Select *
+    -> from emp
+    -> where Ename = 'SMITH';
++-------+-------+-------+------+------------+------+------+--------+
+| EMPNO | ENAME | JOB   | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+-------+-------+------+------------+------+------+--------+
+|  7369 | SMITH | CLERK | 7902 | 1980-12-17 |  800 | NULL |     20 |
++-------+-------+-------+------+------------+------+------+--------+
+1 row in set (0.00 sec)
+
+mysql> Select *
+    -> From Emp
+    -> Where Sal>(Select Sal
+    ->    From Emp
+    ->    Where Ename = 'TURNER');
++-------+-------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+-------+-----------+------+------------+------+------+--------+
+|  7499 | ALLEN | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7698 | BLAKE | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
++-------+-------+-----------+------+------------+------+------+--------+
+7 rows in set (0.00 sec)
+
+mysql>  Select ename,max(sal)
+    -> From Emp;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'mydb0.Emp.ENAME'; this is incompatible with sql_mode=only_full_group_by
+mysql> Select ename,max(sal)
+    -> From Emp
+    -> Group By ename;
++--------+----------+
+| ename  | max(sal) |
++--------+----------+
+| SMITH  |      800 |
+| ALLEN  |     1600 |
+| WARD   |     1250 |
+| JONES  |     2975 |
+| MARTIN |     1250 |
+| BLAKE  |     2850 |
+| CLARK  |     2450 |
+| SCOTT  |     3000 |
+| KING   |     5000 |
+| TURNER |     1500 |
+| ADAMS  |     1100 |
+| JAMES  |      950 |
+| FORD   |     3000 |
+| MILLER |     1300 |
++--------+----------+
+14 rows in set (0.00 sec)
+
+mysql> Select Ename,Sal as "Highest Salary"
+    -> From Emp
+    -> Where Sal = (Select Max(Sal)
+    ->      From Emp);
++-------+----------------+
+| Ename | Highest Salary |
++-------+----------------+
+| KING  |           5000 |
++-------+----------------+
+1 row in set (0.00 sec)
+
+mysql> Select *
+    -> From Emp
+    -> Where Sal>(Select Sal
+    ->    From Emp
+    ->    Where Ename = 'TURNERi');
+Empty set (0.00 sec)
+
+mysql> Select *
+    -> From Emp
+    -> Where Sal > (Select Sal
+    ->      From Emp
+    ->      Where Deptno = 20);
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> Select *
+    -> From Emp
+    -> Where Sal > (800,2975,3000,1100,3000);
+ERROR 1241 (21000): Operand should contain 1 column(s)
+mysql> Select *
+    -> From Emp
+    -> Where Sal > ANY(800,2975,3000,1100,3000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '800,2975,3000,1100,3000)' at line 3
+mysql> Select *
+    -> From Emp
+    -> Where Sal > ANY (800,2975,3000,1100,3000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '800,2975,3000,1100,3000)' at line 3
+mysql> Select *
+    -> From Emp
+    -> Where Sal >ANY (Select Sal
+    ->        From Emp
+    ->        Where Deptno = 20);
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+13 rows in set (0.05 sec)
+
+mysql> Select *
+    -> From Emp
+    -> Where Sal >All (Select Sal
+    ->        From Emp
+    ->        Where Deptno = 20);
++-------+-------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+-------+-----------+------+------------+------+------+--------+
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
++-------+-------+-----------+------+------------+------+------+--------+
+1 row in set (0.00 sec)
+
+mysql> Select *
+    -> From Emp
+    -> Where Sal = All (Select Sal
+    ->        From Emp
+    ->        Where Deptno = 20);
+Empty set (0.00 sec)
+
+mysql> Select *
+    -> From Emp1
+    -> Where Deptno in (Select deptno
+    ->  From dept1);
++-------+--------+--------+
+| empno | ename  | deptno |
++-------+--------+--------+
+| E1    | Smith  |     10 |
+| E2    | Roger  |     20 |
+| E3    | Martin |     10 |
+| E4    | Kim    |     30 |
++-------+--------+--------+
+4 rows in set (0.01 sec)
+
+mysql> Select *
+    -> From Emp1
+    -> Where Deptno Not In (Select deptno
+    ->      From dept1);
++-------+----------+--------+
+| empno | ename    | deptno |
++-------+----------+--------+
+| E5    | Glen     |     77 |
+| E6    | Richards |     80 |
++-------+----------+--------+
+2 rows in set (0.04 sec)
+
+mysql> Select *
+    -> From Emp1
+    -> Where Deptno Not In (Select deptno
+    ->      From dept1
+    ->      Where deptno != 'NULL');
++-------+----------+--------+
+| empno | ename    | deptno |
++-------+----------+--------+
+| E5    | Glen     |     77 |
+| E6    | Richards |     80 |
++-------+----------+--------+
+2 rows in set, 1 warning (0.00 sec)
+
+mysql> Select *
+    -> From Emp1
+    -> Where Deptno Not In (Select deptno
+    ->      From dept1
+    ->      Where deptno is not 'NULL');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''NULL')' at line 5
+mysql> Select *
+    -> From Emp1
+    -> Where Deptno Not In (Select deptno
+    ->      From dept1
+    ->      Where deptno is not NULL);
++-------+----------+--------+
+| empno | ename    | deptno |
++-------+----------+--------+
+| E5    | Glen     |     77 |
+| E6    | Richards |     80 |
++-------+----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> Create table EmpC1
+    -> as
+    -> Select * from emp;
+Query OK, 14 rows affected (0.57 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> Create table EmpC2
+    -> as
+    -> Select * from emp;
+Query OK, 14 rows affected (1.23 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> Create table EmpC3
+    -> as
+    -> Select * from emp;
+Query OK, 14 rows affected (0.55 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> Create table EmpC4
+    -> as
+    -> Select * from emp;
+Query OK, 14 rows affected (1.72 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+mysql> Select * from Empc1;
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.00 sec)
+
+mysql> Delete From EmpC1
+    -> Where Sal = (Select Max(Sal)
+    ->      From EmpC1);
+ERROR 1093 (HY000): You can't specify target table 'EmpC1' for update in FROM clause
+mysql> Delete From EmpC1
+    -> Where Sal = (Select Max(Sal)
+    ->      From Emp);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> Select * From EmpC1;
++-------+--------+----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER  | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+----------+------+------------+------+------+--------+
+13 rows in set (0.00 sec)
+
+mysql> Update EmpC2
+    -> Set Sal = (Sal + (Sal*0.5))
+    -> Where Sal = (Select Min(Sal)
+    ->      From EmpC2
+    ->     );
+ERROR 1093 (HY000): You can't specify target table 'EmpC2' for update in FROM clause
+mysql> Update EmpC2
+    -> Set Sal = (Sal + (Sal*0.5))
+    -> Where Sal = (Select Min(Sal)
+    ->      From Emp);
+Query OK, 1 row affected (0.16 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> Select * From EmpC1;
++-------+--------+----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER  | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+----------+------+------------+------+------+--------+
+13 rows in set (0.00 sec)
+
+mysql> Select * From EmpC2;
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 | 1200 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.00 sec)
+
+mysql> Select * Select * From EmpC2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Select * From EmpC2' at line 1
+mysql> From Emp
+    -> Where Exists (Select*
+    ->       From Dept
+    ->       Where Deptno = 98);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'From Emp
+Where Exists (Select*
+      From Dept
+      Where Deptno = 98)' at line 1
+mysql> Select *
+    -> From Emp
+    -> Where Exists (Select*
+    ->       From Dept
+    ->       Where deptno = 98);
+Empty set (0.00 sec)
+
+mysql> Select *
+    -> From Emp
+    -> Where Exists (Select*
+    ->       From Dept
+    ->       Where deptno = 20);
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.00 sec)
+
+mysql> Select *
+    -> From Emp
+    -> Where Exists (Select*
+    ->       From Dept
+    ->       Where deptno > 20);
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.00 sec)
+
+mysql> Select *
+    -> From Emp
+    -> Where Exists (Select 'CDAC'
+    ->       From Dept
+    ->       Where deptno > 20);
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.00 sec)
+
+mysql> Select *
+    -> From Emp
+    -> Where Exists (Select Null
+    ->       From Dept
+    ->       Where deptno > 20); --Fastest Execution
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.00 sec)
+
+    -> SELECT DAYNAME("2017-06-15");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--Fastest Execution
+SELECT DAYNAME("2017-06-15")' at line 1
+mysql> SELECT DAYNAME("2017-06-15");
++-----------------------+
+| DAYNAME("2017-06-15") |
++-----------------------+
+| Thursday              |
++-----------------------+
+1 row in set (0.03 sec)
+
+mysql> Select curdate();
++------------+
+| curdate()  |
++------------+
+| 2024-09-29 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> Select DAYNAME(curdate());
++--------------------+
+| DAYNAME(curdate()) |
++--------------------+
+| Sunday             |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> Select * from emp
+    -> where Exists (Select dayname(curdate()) = ('SUNDAY');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> Select * from emp
+    -> where Exists (Select dayname(curdate()) ='SUNDAY';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql>
+mysql> Select *
+    -> From Emp
+    -> Where Exists (Select Null From Emp Where dayname(curdate()) = 'Saturday');
+Empty set (0.00 sec)
+
+mysql> Select *
+    -> From Emp
+    -> Where Exists (Select Null From Emp Where dayname(curdate()) = 'SUNDAY');
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.00 sec)
+
+mysql> Select *
+    -> From Emp
+    -> Where Exists (Select Null
+    ->       From Emp
+    ->       Where dayname(curdate()) = 'Saturday');
+Empty set (0.00 sec)
+
+mysql> Select *
+    -> From Dept
+    -> Where Exists (Select Null
+    ->       From Emp
+    ->       Where dayname(curdate()) = 'Sunday');
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> Select *
+    -> From Dept
+    -> Where Not Exists (Select Null
+    -> From emp
+    -> From dayname(curdate()) = 'Sunday');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'From dayname(curdate()) = 'Sunday')' at line 5
+mysql> `Select *
+    `> From Dept
+    `> Where Not Exists (Select Null
+    `>       From Emp
+    `>       Where dayname(curdate()) = 'Sunday');
+    `>
+    `>
+    `> ^C
+mysql> Select *
+    -> From Dept
+    -> Where Not Exists (Select Null
+    ->       From Emp
+    ->       Where dayname(curdate()) = 'Sunday');
+Empty set (0.00 sec)
+
+mysql> `Select *
+    `> From Dept
+    `> Where Not Exists (Select Null
+    `>       From Emp
+    `>       Where dayname(curdate()) = 'Sunday');
+    `>
+    `>
+    `>
+    `>
+    `> `
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`Select *
+From Dept
+Where Not Exists (Select Null
+      From Emp
+      Where d' at line 1
+mysql>
+mysql> Select *
+    -> From Emp
+    -> Where sal > (select Max(Sal)
+    ->      From emp
+    ->      Where job = (Select Job
+    ->   From Emp
+    ->   Where ename = 'FORD'
+    ->  )
+    ->     );
++-------+-------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+-------+-----------+------+------------+------+------+--------+
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
++-------+-------+-----------+------+------------+------+------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from india;
++------------+-----------------+------+--------+
+| TrID       | Pname           | Qty  | Amount |
++------------+-----------------+------+--------+
+| Ind_101_C1 | Washing Machine |    1 |  20000 |
+| Ind_102_C3 | LCD             |    1 |  25000 |
+| Ind_103_C2 | LCD             |    1 |  20000 |
+| Ind_104_C2 | LCD             |    1 |  19000 |
+| Ind_105_C1 | Refrigerator    |    1 |  19000 |
+| Ind_106_C1 | Refrigerator    |    1 |  20000 |
+| Ind_107_C3 | Washing Machine |    1 |  20000 |
+| Ind_108_C4 | Washing Machine |    1 |  25000 |
+| Ind_109_C1 | Refrigerator    |    1 |  10000 |
+| Ind_110_C2 | LCD             |    1 |  25000 |
+| Ind_111_C2 | Washing Machine |    1 |  19000 |
+| Ind_112_C3 | LCD             |    1 |  20000 |
+| Ind_113_C4 | LCD             |    1 |  20000 |
+| Ind_114_C3 | Washing Machine |    1 |  25000 |
+| Ind_115_C1 | Washing Machine |    1 |  19000 |
+| Ind_116_C1 | Refrigerator    |    1 |  10000 |
+| Ind_117_C3 | Chairs          |    4 |  20000 |
+| Ind_118_C2 | Chairs          |    6 |  30000 |
+| Ind_119_C1 | LCD             |    2 |  20000 |
+| Ind_120_C2 | Washing Machine |    1 |  25000 |
++------------+-----------------+------+--------+
+20 rows in set (0.00 sec)
+
+mysql> select * from australia;
++------------+-----------------+------+--------+
+| TrID       | Pname           | Qty  | Amount |
++------------+-----------------+------+--------+
+| Aus_101_C1 | LCD             |    1 |  25000 |
+| Aus_102_C1 | Dinning Table   |    1 |  25000 |
+| Aus_103_C2 | Dinning Table   |    1 |  10000 |
+| Aus_104_C3 | Sofa            |    1 |  10000 |
+| Aus_105_C3 | Washing Machine |   12 |  60000 |
+| Aus_106_C4 | LCD             |    1 |  20000 |
+| Aus_107_C2 | LCD             |    1 |  25000 |
+| Aus_108_C4 | LCD             |    2 |  50000 |
+| Aus_109_C1 | Sofa            |    1 |  25000 |
+| Aus_110_C2 | Sofa            |    2 |  10000 |
+| Aus_111_C3 | Sofa            |   10 |  50000 |
+| Aus_112_C3 | Washing Machine |    5 |  25000 |
+| Aus_113_C4 | LCD             |    1 |  20000 |
+| Aus_114_C1 | LCD             |    1 |  25000 |
+| Aus_115_C2 | LCD             |    1 |  25000 |
+| Aus_116_C3 | LCD             |    1 |  25000 |
+| Aus_117_C4 | LCD             |    1 |  25000 |
+| Aus_118_C1 | LCD             |    1 |  25000 |
+| Aus_119_C4 | Sofa            |    1 |  25000 |
+| Aus_120_C2 | Sofa            |    2 |  10000 |
+| Aus_121_C3 | Refrigerator    |    4 |  20000 |
+| Aus_122_C1 | Sofa            |    1 |  19000 |
+| Aus_123_C3 | Refrigerator    |   20 | 100000 |
+| Aus_124_C2 | Refrigerator    |    1 |  19000 |
++------------+-----------------+------+--------+
+24 rows in set (0.00 sec)
+
+mysql> Select *
+    -> From India
+    -> Union ALL
+    -> Select *
+    -> From Australia;
++------------+-----------------+------+--------+
+| TrID       | Pname           | Qty  | Amount |
++------------+-----------------+------+--------+
+| Ind_101_C1 | Washing Machine |    1 |  20000 |
+| Ind_102_C3 | LCD             |    1 |  25000 |
+| Ind_103_C2 | LCD             |    1 |  20000 |
+| Ind_104_C2 | LCD             |    1 |  19000 |
+| Ind_105_C1 | Refrigerator    |    1 |  19000 |
+| Ind_106_C1 | Refrigerator    |    1 |  20000 |
+| Ind_107_C3 | Washing Machine |    1 |  20000 |
+| Ind_108_C4 | Washing Machine |    1 |  25000 |
+| Ind_109_C1 | Refrigerator    |    1 |  10000 |
+| Ind_110_C2 | LCD             |    1 |  25000 |
+| Ind_111_C2 | Washing Machine |    1 |  19000 |
+| Ind_112_C3 | LCD             |    1 |  20000 |
+| Ind_113_C4 | LCD             |    1 |  20000 |
+| Ind_114_C3 | Washing Machine |    1 |  25000 |
+| Ind_115_C1 | Washing Machine |    1 |  19000 |
+| Ind_116_C1 | Refrigerator    |    1 |  10000 |
+| Ind_117_C3 | Chairs          |    4 |  20000 |
+| Ind_118_C2 | Chairs          |    6 |  30000 |
+| Ind_119_C1 | LCD             |    2 |  20000 |
+| Ind_120_C2 | Washing Machine |    1 |  25000 |
+| Aus_101_C1 | LCD             |    1 |  25000 |
+| Aus_102_C1 | Dinning Table   |    1 |  25000 |
+| Aus_103_C2 | Dinning Table   |    1 |  10000 |
+| Aus_104_C3 | Sofa            |    1 |  10000 |
+| Aus_105_C3 | Washing Machine |   12 |  60000 |
+| Aus_106_C4 | LCD             |    1 |  20000 |
+| Aus_107_C2 | LCD             |    1 |  25000 |
+| Aus_108_C4 | LCD             |    2 |  50000 |
+| Aus_109_C1 | Sofa            |    1 |  25000 |
+| Aus_110_C2 | Sofa            |    2 |  10000 |
+| Aus_111_C3 | Sofa            |   10 |  50000 |
+| Aus_112_C3 | Washing Machine |    5 |  25000 |
+| Aus_113_C4 | LCD             |    1 |  20000 |
+| Aus_114_C1 | LCD             |    1 |  25000 |
+| Aus_115_C2 | LCD             |    1 |  25000 |
+| Aus_116_C3 | LCD             |    1 |  25000 |
+| Aus_117_C4 | LCD             |    1 |  25000 |
+| Aus_118_C1 | LCD             |    1 |  25000 |
+| Aus_119_C4 | Sofa            |    1 |  25000 |
+| Aus_120_C2 | Sofa            |    2 |  10000 |
+| Aus_121_C3 | Refrigerator    |    4 |  20000 |
+| Aus_122_C1 | Sofa            |    1 |  19000 |
+| Aus_123_C3 | Refrigerator    |   20 | 100000 |
+| Aus_124_C2 | Refrigerator    |    1 |  19000 |
++------------+-----------------+------+--------+
+44 rows in set (0.00 sec)
+
+mysql> Select *
+    -> From India
+    -> Union ALL
+    -> Select *
+    -> From Australia
+    -> Order By Pname;
++------------+-----------------+------+--------+
+| TrID       | Pname           | Qty  | Amount |
++------------+-----------------+------+--------+
+| Ind_117_C3 | Chairs          |    4 |  20000 |
+| Ind_118_C2 | Chairs          |    6 |  30000 |
+| Aus_103_C2 | Dinning Table   |    1 |  10000 |
+| Aus_102_C1 | Dinning Table   |    1 |  25000 |
+| Ind_119_C1 | LCD             |    2 |  20000 |
+| Ind_102_C3 | LCD             |    1 |  25000 |
+| Ind_103_C2 | LCD             |    1 |  20000 |
+| Ind_104_C2 | LCD             |    1 |  19000 |
+| Aus_106_C4 | LCD             |    1 |  20000 |
+| Aus_115_C2 | LCD             |    1 |  25000 |
+| Aus_114_C1 | LCD             |    1 |  25000 |
+| Aus_101_C1 | LCD             |    1 |  25000 |
+| Ind_110_C2 | LCD             |    1 |  25000 |
+| Aus_113_C4 | LCD             |    1 |  20000 |
+| Ind_112_C3 | LCD             |    1 |  20000 |
+| Ind_113_C4 | LCD             |    1 |  20000 |
+| Aus_108_C4 | LCD             |    2 |  50000 |
+| Aus_107_C2 | LCD             |    1 |  25000 |
+| Aus_116_C3 | LCD             |    1 |  25000 |
+| Aus_117_C4 | LCD             |    1 |  25000 |
+| Aus_118_C1 | LCD             |    1 |  25000 |
+| Ind_116_C1 | Refrigerator    |    1 |  10000 |
+| Aus_124_C2 | Refrigerator    |    1 |  19000 |
+| Ind_106_C1 | Refrigerator    |    1 |  20000 |
+| Ind_105_C1 | Refrigerator    |    1 |  19000 |
+| Ind_109_C1 | Refrigerator    |    1 |  10000 |
+| Aus_121_C3 | Refrigerator    |    4 |  20000 |
+| Aus_123_C3 | Refrigerator    |   20 | 100000 |
+| Aus_109_C1 | Sofa            |    1 |  25000 |
+| Aus_110_C2 | Sofa            |    2 |  10000 |
+| Aus_111_C3 | Sofa            |   10 |  50000 |
+| Aus_104_C3 | Sofa            |    1 |  10000 |
+| Aus_120_C2 | Sofa            |    2 |  10000 |
+| Aus_122_C1 | Sofa            |    1 |  19000 |
+| Aus_119_C4 | Sofa            |    1 |  25000 |
+| Aus_112_C3 | Washing Machine |    5 |  25000 |
+| Ind_111_C2 | Washing Machine |    1 |  19000 |
+| Ind_108_C4 | Washing Machine |    1 |  25000 |
+| Ind_107_C3 | Washing Machine |    1 |  20000 |
+| Aus_105_C3 | Washing Machine |   12 |  60000 |
+| Ind_120_C2 | Washing Machine |    1 |  25000 |
+| Ind_101_C1 | Washing Machine |    1 |  20000 |
+| Ind_115_C1 | Washing Machine |    1 |  19000 |
+| Ind_114_C3 | Washing Machine |    1 |  25000 |
++------------+-----------------+------+--------+
+44 rows in set (0.00 sec)
+
+mysql> Select *
+    -> From India
+    -> Union ALL
+    -> Select *
+    -> From Australia
+    -> Order By TrID;
++------------+-----------------+------+--------+
+| TrID       | Pname           | Qty  | Amount |
++------------+-----------------+------+--------+
+| Aus_101_C1 | LCD             |    1 |  25000 |
+| Aus_102_C1 | Dinning Table   |    1 |  25000 |
+| Aus_103_C2 | Dinning Table   |    1 |  10000 |
+| Aus_104_C3 | Sofa            |    1 |  10000 |
+| Aus_105_C3 | Washing Machine |   12 |  60000 |
+| Aus_106_C4 | LCD             |    1 |  20000 |
+| Aus_107_C2 | LCD             |    1 |  25000 |
+| Aus_108_C4 | LCD             |    2 |  50000 |
+| Aus_109_C1 | Sofa            |    1 |  25000 |
+| Aus_110_C2 | Sofa            |    2 |  10000 |
+| Aus_111_C3 | Sofa            |   10 |  50000 |
+| Aus_112_C3 | Washing Machine |    5 |  25000 |
+| Aus_113_C4 | LCD             |    1 |  20000 |
+| Aus_114_C1 | LCD             |    1 |  25000 |
+| Aus_115_C2 | LCD             |    1 |  25000 |
+| Aus_116_C3 | LCD             |    1 |  25000 |
+| Aus_117_C4 | LCD             |    1 |  25000 |
+| Aus_118_C1 | LCD             |    1 |  25000 |
+| Aus_119_C4 | Sofa            |    1 |  25000 |
+| Aus_120_C2 | Sofa            |    2 |  10000 |
+| Aus_121_C3 | Refrigerator    |    4 |  20000 |
+| Aus_122_C1 | Sofa            |    1 |  19000 |
+| Aus_123_C3 | Refrigerator    |   20 | 100000 |
+| Aus_124_C2 | Refrigerator    |    1 |  19000 |
+| Ind_101_C1 | Washing Machine |    1 |  20000 |
+| Ind_102_C3 | LCD             |    1 |  25000 |
+| Ind_103_C2 | LCD             |    1 |  20000 |
+| Ind_104_C2 | LCD             |    1 |  19000 |
+| Ind_105_C1 | Refrigerator    |    1 |  19000 |
+| Ind_106_C1 | Refrigerator    |    1 |  20000 |
+| Ind_107_C3 | Washing Machine |    1 |  20000 |
+| Ind_108_C4 | Washing Machine |    1 |  25000 |
+| Ind_109_C1 | Refrigerator    |    1 |  10000 |
+| Ind_110_C2 | LCD             |    1 |  25000 |
+| Ind_111_C2 | Washing Machine |    1 |  19000 |
+| Ind_112_C3 | LCD             |    1 |  20000 |
+| Ind_113_C4 | LCD             |    1 |  20000 |
+| Ind_114_C3 | Washing Machine |    1 |  25000 |
+| Ind_115_C1 | Washing Machine |    1 |  19000 |
+| Ind_116_C1 | Refrigerator    |    1 |  10000 |
+| Ind_117_C3 | Chairs          |    4 |  20000 |
+| Ind_118_C2 | Chairs          |    6 |  30000 |
+| Ind_119_C1 | LCD             |    2 |  20000 |
+| Ind_120_C2 | Washing Machine |    1 |  25000 |
++------------+-----------------+------+--------+
+44 rows in set (0.00 sec)
+
+mysql> Select *
+    -> From India
+    -> Union ALL
+    -> Select *
+    -> From Australia
+    -> Order By Amount;
++------------+-----------------+------+--------+
+| TrID       | Pname           | Qty  | Amount |
++------------+-----------------+------+--------+
+| Ind_116_C1 | Refrigerator    |    1 |  10000 |
+| Ind_109_C1 | Refrigerator    |    1 |  10000 |
+| Aus_103_C2 | Dinning Table   |    1 |  10000 |
+| Aus_104_C3 | Sofa            |    1 |  10000 |
+| Aus_110_C2 | Sofa            |    2 |  10000 |
+| Aus_120_C2 | Sofa            |    2 |  10000 |
+| Ind_111_C2 | Washing Machine |    1 |  19000 |
+| Ind_104_C2 | LCD             |    1 |  19000 |
+| Ind_105_C1 | Refrigerator    |    1 |  19000 |
+| Ind_115_C1 | Washing Machine |    1 |  19000 |
+| Aus_124_C2 | Refrigerator    |    1 |  19000 |
+| Aus_122_C1 | Sofa            |    1 |  19000 |
+| Ind_103_C2 | LCD             |    1 |  20000 |
+| Ind_101_C1 | Washing Machine |    1 |  20000 |
+| Ind_107_C3 | Washing Machine |    1 |  20000 |
+| Ind_117_C3 | Chairs          |    4 |  20000 |
+| Ind_106_C1 | Refrigerator    |    1 |  20000 |
+| Ind_112_C3 | LCD             |    1 |  20000 |
+| Ind_113_C4 | LCD             |    1 |  20000 |
+| Ind_119_C1 | LCD             |    2 |  20000 |
+| Aus_106_C4 | LCD             |    1 |  20000 |
+| Aus_113_C4 | LCD             |    1 |  20000 |
+| Aus_121_C3 | Refrigerator    |    4 |  20000 |
+| Ind_102_C3 | LCD             |    1 |  25000 |
+| Ind_108_C4 | Washing Machine |    1 |  25000 |
+| Aus_107_C2 | LCD             |    1 |  25000 |
+| Aus_109_C1 | Sofa            |    1 |  25000 |
+| Ind_110_C2 | LCD             |    1 |  25000 |
+| Aus_112_C3 | Washing Machine |    5 |  25000 |
+| Ind_114_C3 | Washing Machine |    1 |  25000 |
+| Ind_120_C2 | Washing Machine |    1 |  25000 |
+| Aus_115_C2 | LCD             |    1 |  25000 |
+| Aus_116_C3 | LCD             |    1 |  25000 |
+| Aus_117_C4 | LCD             |    1 |  25000 |
+| Aus_118_C1 | LCD             |    1 |  25000 |
+| Aus_101_C1 | LCD             |    1 |  25000 |
+| Aus_102_C1 | Dinning Table   |    1 |  25000 |
+| Aus_114_C1 | LCD             |    1 |  25000 |
+| Aus_119_C4 | Sofa            |    1 |  25000 |
+| Ind_118_C2 | Chairs          |    6 |  30000 |
+| Aus_108_C4 | LCD             |    2 |  50000 |
+| Aus_111_C3 | Sofa            |   10 |  50000 |
+| Aus_105_C3 | Washing Machine |   12 |  60000 |
+| Aus_123_C3 | Refrigerator    |   20 | 100000 |
++------------+-----------------+------+--------+
+44 rows in set (0.00 sec)
+
+mysql> Select Pname
+    -> From India
+    -> Union ALL
+    -> Select Pname
+    -> From Australia;
++-----------------+
+| Pname           |
++-----------------+
+| Washing Machine |
+| LCD             |
+| LCD             |
+| LCD             |
+| Refrigerator    |
+| Refrigerator    |
+| Washing Machine |
+| Washing Machine |
+| Refrigerator    |
+| LCD             |
+| Washing Machine |
+| LCD             |
+| LCD             |
+| Washing Machine |
+| Washing Machine |
+| Refrigerator    |
+| Chairs          |
+| Chairs          |
+| LCD             |
+| Washing Machine |
+| LCD             |
+| Dinning Table   |
+| Dinning Table   |
+| Sofa            |
+| Washing Machine |
+| LCD             |
+| LCD             |
+| LCD             |
+| Sofa            |
+| Sofa            |
+| Sofa            |
+| Washing Machine |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| Sofa            |
+| Sofa            |
+| Refrigerator    |
+| Sofa            |
+| Refrigerator    |
+| Refrigerator    |
++-----------------+
+44 rows in set (0.00 sec)
+
+mysql> Select Pname
+    -> From India
+    -> Union ALL
+    -> Select Pname
+    -> From Australia
+    -> Group By Pname;
++-----------------+
+| Pname           |
++-----------------+
+| Washing Machine |
+| LCD             |
+| LCD             |
+| LCD             |
+| Refrigerator    |
+| Refrigerator    |
+| Washing Machine |
+| Washing Machine |
+| Refrigerator    |
+| LCD             |
+| Washing Machine |
+| LCD             |
+| LCD             |
+| Washing Machine |
+| Washing Machine |
+| Refrigerator    |
+| Chairs          |
+| Chairs          |
+| LCD             |
+| Washing Machine |
+| LCD             |
+| Dinning Table   |
+| Sofa            |
+| Washing Machine |
+| Refrigerator    |
++-----------------+
+25 rows in set (0.00 sec)
+
+mysql>
+mysql> Select PName
+    -> From India
+    -> Union
+    -> Select PName
+    -> From Australia;
++-----------------+
+| PName           |
++-----------------+
+| Washing Machine |
+| LCD             |
+| Refrigerator    |
+| Chairs          |
+| Dinning Table   |
+| Sofa            |
++-----------------+
+6 rows in set (0.00 sec)
+
+mysql> Select PName
+    -> From India
+    -> Union
+    -> Select PName
+    -> From Australia;
++-----------------+
+| PName           |
++-----------------+
+| Washing Machine |
+| LCD             |
+| Refrigerator    |
+| Chairs          |
+| Dinning Table   |
+| Sofa            |
++-----------------+
+6 rows in set (0.00 sec)
+
+mysql> Select *
+    -> From India
+    -> Union
+    -> Select *
+    -> From Australia;
++------------+-----------------+------+--------+
+| TrID       | Pname           | Qty  | Amount |
++------------+-----------------+------+--------+
+| Ind_101_C1 | Washing Machine |    1 |  20000 |
+| Ind_102_C3 | LCD             |    1 |  25000 |
+| Ind_103_C2 | LCD             |    1 |  20000 |
+| Ind_104_C2 | LCD             |    1 |  19000 |
+| Ind_105_C1 | Refrigerator    |    1 |  19000 |
+| Ind_106_C1 | Refrigerator    |    1 |  20000 |
+| Ind_107_C3 | Washing Machine |    1 |  20000 |
+| Ind_108_C4 | Washing Machine |    1 |  25000 |
+| Ind_109_C1 | Refrigerator    |    1 |  10000 |
+| Ind_110_C2 | LCD             |    1 |  25000 |
+| Ind_111_C2 | Washing Machine |    1 |  19000 |
+| Ind_112_C3 | LCD             |    1 |  20000 |
+| Ind_113_C4 | LCD             |    1 |  20000 |
+| Ind_114_C3 | Washing Machine |    1 |  25000 |
+| Ind_115_C1 | Washing Machine |    1 |  19000 |
+| Ind_116_C1 | Refrigerator    |    1 |  10000 |
+| Ind_117_C3 | Chairs          |    4 |  20000 |
+| Ind_118_C2 | Chairs          |    6 |  30000 |
+| Ind_119_C1 | LCD             |    2 |  20000 |
+| Ind_120_C2 | Washing Machine |    1 |  25000 |
+| Aus_101_C1 | LCD             |    1 |  25000 |
+| Aus_102_C1 | Dinning Table   |    1 |  25000 |
+| Aus_103_C2 | Dinning Table   |    1 |  10000 |
+| Aus_104_C3 | Sofa            |    1 |  10000 |
+| Aus_105_C3 | Washing Machine |   12 |  60000 |
+| Aus_106_C4 | LCD             |    1 |  20000 |
+| Aus_107_C2 | LCD             |    1 |  25000 |
+| Aus_108_C4 | LCD             |    2 |  50000 |
+| Aus_109_C1 | Sofa            |    1 |  25000 |
+| Aus_110_C2 | Sofa            |    2 |  10000 |
+| Aus_111_C3 | Sofa            |   10 |  50000 |
+| Aus_112_C3 | Washing Machine |    5 |  25000 |
+| Aus_113_C4 | LCD             |    1 |  20000 |
+| Aus_114_C1 | LCD             |    1 |  25000 |
+| Aus_115_C2 | LCD             |    1 |  25000 |
+| Aus_116_C3 | LCD             |    1 |  25000 |
+| Aus_117_C4 | LCD             |    1 |  25000 |
+| Aus_118_C1 | LCD             |    1 |  25000 |
+| Aus_119_C4 | Sofa            |    1 |  25000 |
+| Aus_120_C2 | Sofa            |    2 |  10000 |
+| Aus_121_C3 | Refrigerator    |    4 |  20000 |
+| Aus_122_C1 | Sofa            |    1 |  19000 |
+| Aus_123_C3 | Refrigerator    |   20 | 100000 |
+| Aus_124_C2 | Refrigerator    |    1 |  19000 |
++------------+-----------------+------+--------+
+44 rows in set (0.00 sec)
+
+mysql> Select PName,Qty
+    -> From India
+    -> Union
+    -> Select PName
+    -> From Australia;
+ERROR 1222 (21000): The used SELECT statements have a different number of columns
+mysql> Select PName,Qty
+    -> From India
+    -> Union
+    -> Select PName,Null
+    -> From Australia; --Work around
++-----------------+------+
+| PName           | Qty  |
++-----------------+------+
+| Washing Machine |    1 |
+| LCD             |    1 |
+| Refrigerator    |    1 |
+| Chairs          |    4 |
+| Chairs          |    6 |
+| LCD             |    2 |
+| LCD             | NULL |
+| Dinning Table   | NULL |
+| Sofa            | NULL |
+| Washing Machine | NULL |
+| Refrigerator    | NULL |
++-----------------+------+
+11 rows in set (0.00 sec)
+
+    ->
+    -> Select PName,Qty
+    -> From India
+    -> Union
+    -> Select Qty,PName
+    -> From Australia; --Work around
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--Work around
+
+Select PName,Qty
+From India
+Union
+Select Qty,PName
+From Australi' at line 1
+    ->
+    -> Select PName,Qty
+    -> From India
+    -> Union
+    -> Select Qty,PName
+    -> From Australia;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--Work around
+
+Select PName,Qty
+From India
+Union
+Select Qty,PName
+From Australi' at line 1
+mysql>
+mysql> Select PName,Qty
+    -> From India
+    -> Union
+    -> Select Qty,PName
+    -> From Australia;
++-----------------+-----------------+
+| PName           | Qty             |
++-----------------+-----------------+
+| Washing Machine | 1               |
+| LCD             | 1               |
+| Refrigerator    | 1               |
+| Chairs          | 4               |
+| Chairs          | 6               |
+| LCD             | 2               |
+| 1               | LCD             |
+| 1               | Dinning Table   |
+| 1               | Sofa            |
+| 12              | Washing Machine |
+| 2               | LCD             |
+| 2               | Sofa            |
+| 10              | Sofa            |
+| 5               | Washing Machine |
+| 4               | Refrigerator    |
+| 20              | Refrigerator    |
+| 1               | Refrigerator    |
++-----------------+-----------------+
+17 rows in set (0.00 sec)
+
+mysql>
+mysql> Select PName,Qty
+    -> From India
+    -> Union
+    -> Select Qty,PName
+    -> From Australia;
++-----------------+-----------------+
+| PName           | Qty             |
++-----------------+-----------------+
+| Washing Machine | 1               |
+| LCD             | 1               |
+| Refrigerator    | 1               |
+| Chairs          | 4               |
+| Chairs          | 6               |
+| LCD             | 2               |
+| 1               | LCD             |
+| 1               | Dinning Table   |
+| 1               | Sofa            |
+| 12              | Washing Machine |
+| 2               | LCD             |
+| 2               | Sofa            |
+| 10              | Sofa            |
+| 5               | Washing Machine |
+| 4               | Refrigerator    |
+| 20              | Refrigerator    |
+| 1               | Refrigerator    |
++-----------------+-----------------+
+17 rows in set (0.00 sec)
+
+mysql> Select PName
+    -> From India
+    -> Order By PName
+    -> Union ALL
+    -> Select PName
+    -> From Australia;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Union ALL
+Select PName
+From Australia' at line 4
+mysql> Select PName
+    -> From India
+    -> Union ALL
+    -> Select PName
+    -> From Australia
+    -> Order By PName;
++-----------------+
+| PName           |
++-----------------+
+| Chairs          |
+| Chairs          |
+| Dinning Table   |
+| Dinning Table   |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| LCD             |
+| Refrigerator    |
+| Refrigerator    |
+| Refrigerator    |
+| Refrigerator    |
+| Refrigerator    |
+| Refrigerator    |
+| Refrigerator    |
+| Sofa            |
+| Sofa            |
+| Sofa            |
+| Sofa            |
+| Sofa            |
+| Sofa            |
+| Sofa            |
+| Washing Machine |
+| Washing Machine |
+| Washing Machine |
+| Washing Machine |
+| Washing Machine |
+| Washing Machine |
+| Washing Machine |
+| Washing Machine |
+| Washing Machine |
++-----------------+
+44 rows in set (0.00 sec)
+
+mysql> Select PName
+    -> From India
+    -> Intersect
+    -> Select PName
+    -> From Australia;
++-----------------+
+| PName           |
++-----------------+
+| Washing Machine |
+| LCD             |
+| Refrigerator    |
++-----------------+
+3 rows in set (0.00 sec)
+
+mysql> Select PName
+    -> From India
+    -> Except
+    -> Select PName
+    -> From Australia;
++--------+
+| PName  |
++--------+
+| Chairs |
++--------+
+1 row in set (0.00 sec)
+
+mysql> Select PName
+    -> From Australia
+    -> Except
+    -> Select PName
+    -> From India;
++---------------+
+| PName         |
++---------------+
+| Dinning Table |
+| Sofa          |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from mech where marks >= 70
+    -> Union ALL
+    -> Select * from comp where marks >= 70;
++--------+-------+
+| rollno | marks |
++--------+-------+
+|    101 |    90 |
+|    103 |    78 |
+|    105 |   100 |
+|    201 |    78 |
+|    202 |    88 |
++--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> Select PName as "A"
+    -> From India
+    -> Select PName as "B"
+    -> From Australia;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Select PName as "B"
+From Australia' at line 3
+mysql>
+mysql> Select PName as "A"
+    -> From India
+    -> Union
+    -> Select PName as "B"
+    -> From Australia;
++-----------------+
+| A               |
++-----------------+
+| Washing Machine |
+| LCD             |
+| Refrigerator    |
+| Chairs          |
+| Dinning Table   |
+| Sofa            |
++-----------------+
+6 rows in set (0.00 sec)
+
+mysql>

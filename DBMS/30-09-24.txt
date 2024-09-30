@@ -1,0 +1,118 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 18
+Server version: 8.0.39 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use mydb0;
+Database changed
+mysql> Select * From Emp
+    -> Where Sal <(Select AVG(Sal)
+    -> From Emp
+    -> Where Job = 'CLERK'
+    -> )
+    -> AND
+    -> Job = 'CLERK';
++-------+-------+-------+------+------------+------+------+--------+
+| EMPNO | ENAME | JOB   | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+-------+-------+------+------------+------+------+--------+
+|  7369 | SMITH | CLERK | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7900 | JAMES | CLERK | 7698 | 1981-12-03 |  950 | NULL |     30 |
++-------+-------+-------+------+------------+------+------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select avg(sal) from emp where job = 'CLERK';
++-----------+
+| avg(sal)  |
++-----------+
+| 1037.5000 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> Select * From Emp
+    -> Where Sal <(Select AVG(Sal)
+    -> From Emp
+    -> Where Job = 'Manager'
+    -> )
+    -> AND
+    -> Job = 'Manager';
++-------+-------+---------+------+------------+------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+-------+---------+------+------------+------+------+--------+
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-08 | 2450 | NULL |     10 |
++-------+-------+---------+------+------------+------+------+--------+
+1 row in set (0.00 sec)
+
+mysql> Select * From Emp
+    -> Where Sal <(Select AVG(Sal)
+    -> From Emp
+    -> Where Job = 'salesman'
+    -> )
+    -> AND
+    -> Job = 'Salesman';
++-------+--------+----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+----------+------+------------+------+------+--------+
+|  7521 | WARD   | SALESMAN | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
++-------+--------+----------+------+------------+------+------+--------+
+2 rows in set (0.00 sec)
+
+mysql> Select * From emp E
+    -> where sal < (select avg(sal)
+    -> from emp
+    -> where job = E.job);
++-------+--------+----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7782 | CLARK  | MANAGER  | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950 | NULL |     30 |
++-------+--------+----------+------+------------+------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select deptno, max(sal)
+    -> from emp
+    -> group by deptno;
++--------+----------+
+| deptno | max(sal) |
++--------+----------+
+|     20 |     3000 |
+|     30 |     2850 |
+|     10 |     5000 |
++--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> update emp
+    -> set dname = ( select dname
+    -> from dept
+    -> where emp.deptno = dept.deptno);
+ERROR 1054 (42S22): Unknown column 'dname' in 'field list'
+mysql> update emp
+    -> set dname = (select dname
+    -> from dept
+    -> where emp.deptno = dept.deptno);
+ERROR 1054 (42S22): Unknown column 'dname' in 'field list'
+mysql> select distinct sal as "Fourth Highest Salary"
+    -> from emp e
+    -> where 4 = (Select count(Distinct Sal) from emp
+    -> where sal >= e.sal)
+    -> ;
++-----------------------+
+| Fourth Highest Salary |
++-----------------------+
+|                  2850 |
++-----------------------+
+1 row in set (0.02 sec)
+
+mysql> agar.io/#M2MPZN^C
+mysql>

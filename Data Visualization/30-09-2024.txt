@@ -1,0 +1,132 @@
+1) Show Product wise Avg Marketing values using Pivot table.Display the values upto 2 decimal points. Show
+US$ as currency.
+
+BI operations : 
+Most Important Charts in Business - 
+1. Bar
+2. Pie
+3. Line - used in Time-series analysis
+Year	-1
+Quarter	-4
+Month	-12
+Week	-52
+Daily	-365
+
+Year to Daily : Drill - down
+Daily to Year : Roll - up
+
+
+Create pivot table to show no. of records for each Market and build a pie chart to show % of values for each market.
+
+
+Create pivot table to show no. of records for each Product Type and buils a pie chart to show % of values for each
+Product Type.
+
+Create pivot table to show no. of records for each Market size and build a pie chart to show % of values for 
+each Market Size.
+
+Create a pie chart to show % profit by each market and identify the best profit making market.
+
+Create monthly line chart using Inventory field. Then apply product name on filter.
+
+------------------------------------------------------------------------------------
+Scatter Plot:
+
+Used to compare two nemeric variables in business to verify the correlation between them
+
+Scatter plot of Profit vs Inventory By Product Name.
+
+----------------------------------------------------------
+1) Using the data on Pie chart sheet, build 3 seprate pie charts for each category by Market
+and identify the market with highest & lowest %.
+
+2) Using the data on Pie chart sheet, build 3 separate pie charts for each category byAge 
+Group and identify the market with highest & lowest %.
+
+--------------------------------------------------------------------
+Build histogram of profit values and set the bin size to 25.
+
+How to generate random numbers between start and end number range
+
+1) Generate 12 random numbers for monthly demand and supply from Jan to Dec and create line chart using these values.
+Use random numbers between 200 to 400.
+
+2)Create list of 100 Customer Ids from 1 to 100.Then add 5 important parameters of a product in 3 columns.
+For each parameter, generate random value for rating (1 to 5) for all 100 customers.
+Finally calculate how many customers have given ratings 1 to 5 in each parameter
+using COUNTIF function.
+
+3)Use COUNTIFS fuction here to find out how many customers have given rating 5 to all 5 parameters.
+
+4) Generate 30 random numbers betweeen 300 to 700. Then build histogram
+of these values with bin size 50.
+
+Data validation - How to highlight invalid data
+
+Common use is to highlight losses in business or any data which above or below normal values.
+
+1) Using data validation, highlight monthly losses in a pharma company
+
+2) In clumn c generate 20 random numbers between 1000 to 2500 fir Taxes. Any tax value
+above 2000 should be circled as invalid.
+--------------------------------------------------------
+
+Data Consolidation - This technique is used to collect the data from different sheets by matching
+headers and create combined report.
+
+1)Give heading in column A as Month, column B heading as Profit,
+Column C heading as Discount and column D heading as Cost.Copy - past same heading on row no 17.
+
+Populate profit column using random no. between 250 to 450, Discount column between 40 to 75
+and Cost column between 700 to 950.
+
+------------------------------------------------------------------------------------------------------
+
+Financial functions in Excel -
+1)PMT (Payment)      - Calculate EMI amount
+2)FV  (Future Value) - Calculate Fixed deposite (FD) maturity
+3)PV (Present Value) - Calculate current investment required for future returns.
+
+NPER - No. of periods (months)
+Intrest rate in annual %
+Loan amount
+
+---------------------------------------------------------
+
+1) Calculate EMI for home loan of 10,00,000 at intrest rate of 10% for 15 years.
+
+2) Calculate EMI for home loan of 15,50,000 at interest rate of 7.75% for 11 years.
+
+3) Calculate EMI for home loan of home loan of 8,75,000 at interest rate of 6.15% for 7 years.
+
+4) A customer wants to apply for vehicle loan of 750000 at 2 banks - ABC and PQR. Bank ABC offers
+loan at interest rate of 7.80% for 6.5 years while Bank PQR has interest rate of 7.4% for 7 years and 3 months. 
+Which bank would beneficial for the customer?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

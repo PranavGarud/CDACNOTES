@@ -54,9 +54,7 @@ Where   E.Job = 'MANAGER'
 Select e1.Ename
 From Emp e Join Emp e1
 On e.Empno = e1.Mgr
-Where   e1.Mgr = e.Empno
-	And
-	e.EName = 'KING';
+Where	e.EName = 'KING';
 
 
 6.Display the count of employees reporting to KING.
@@ -137,9 +135,26 @@ On cd.CustId = pd.CustId;
 
 14)Display transaction id, continent name, country name, city name, amount allocated and amount spent.
 
+Select  trans.TrID,
+	cont.Name_of_Continent,
+	coun.Name_of_Country,
+	trans.Name_of_City,
+	coun.Country_Amount_Allocated,
+	trans.Amount_Spent
+From Country_Master Coun join Continent_Master cont
+On Coun.ContinentID = cont.ContinentID
+Join Transactions trans
+on trans.CountryId = Coun.CountryID;
 
 
+15)Display the total amount spent for each city, within each country from each continent.
 
-
-
-
+Select  cont.Name_of_Continent,
+	coun.Name_of_Country,
+	trans.Name_of_City,
+	Sum(trans.Amount_Spent) as "Total Amount Spent"
+From Country_Master Coun join Continent_Master cont
+On Coun.ContinentID = cont.ContinentID
+Join Transactions trans
+on trans.CountryId = Coun.CountryID
+Group By cont.Name_of_Continent, coun.Name_of_Country, trans.Name_of_City;

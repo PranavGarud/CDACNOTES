@@ -1,0 +1,71 @@
+Correlated Sub Queries :
+Nesting Loop Mechanis
+int i,j;
+for(i=0;i<=10;i++)
+	{
+		for(j=0;j<=i;j++)
+			{
+				-Code Line1
+				-Code Line2
+			}
+	} 
+
+Display employees records who earn salary less than the average salary of their own job.
+
+Select * From Emp
+Where Sal <	(Select AVG(Sal)
+		From Emp
+		Where Job = 'salesman'
+		)
+AND
+Job = 'Salesman';
+
+
+Select * From emp E
+where sal < 	(select avg(sal)
+		from emp
+		where job = E.job);
+
+PQ - 	Smith  Clerk 800
+
+
+select deptno, max(sal)
+from emp
+group by deptno;	
+
+Delete records of employees who earns highest Salarys
+
+Delete from emp_1 e
+where sal = (Select Max(Sal)
+		rom emp_1
+		where deptno = e.deptno);
+
+Update :
+update emp
+set dname = (select dname
+		from dept
+		where emp.deptno = dept.deptno);
+
+
+select distinct sal as "Fourth Highest Salary"
+from emp e
+where 4 = (Select count(Distinct Sal) from emp
+	where sal >= e.sal)
+;
+
+
+
+
+
+select ename, sal
+from emp
+Where EXISTS (select null
+from dept
+where emp.deptno = dept.deptno);
+
+
+Display top 2 salary values (SELF STUDY)
+
+select distinct sal as "Top 2 Salaries:
+from emp e
+where 2 >= (select count
