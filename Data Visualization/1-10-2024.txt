@@ -1,0 +1,86 @@
+FV - Future value - Used to calculate the maturity amount on a fixed deposite in the bank
+1) Investment amount
+2) NPER in years
+3) Annual Interest rate in %
+
+
+P.1) A customer has invested amount 200000 in a bank FD for 3 years at interest rate of 6.5%.
+Calclate the maturity amount he will receive.
+
+P.2) A customer has invested amount 475000 in a bank FD for 4.5 years at interest rate of 4.5%.
+Calculate amount he will receive.
+
+P.3)  A customer has invested amount 678500 in a bank FD for 3.75 years at interest rate of 5.15%.
+Calculate amount he will receive.
+
+P.4) A investor wants to invest amount 925000 in the bank FD. There are two banks (B1 & B2) who offer FD options.
+There are two banks (B1& B2) who offer FD options Bank B1 offers FD for 3.5 years interest rate 4.5%.
+Bank B2 offers FD for 4 years interest rate 4.15%. Which bank offer is attractive for the investor?	
+
+
+PV (Present Value) - This value is the  current investment customer needs to make to get required amount in future.
+
+1) NPER - Total years to get maturity amount
+2) Annual interest rate in %
+3) Amount required in future
+
+1) A customer wants to receive amount 750000 for higher education after 8 years 
+at interest rate of 4.6%. How much money he needs to invest today?
+
+2) A customer needs emergency fund of 814500 after 6.5 years a t interest rate of 3.8%. How much amount he should invest today?
+
+3) A customer needs money for SUV car of 670000 after 4.75 year at interest rate of 4.45%. How much amount he should invest today?
+------------------------------------------------------------------------------------------------------------------------
+
+What-If Analysis
+
+1) Goal Seek - Find your target based on bussiness condition
+2) Scenerion Manager = To store financial formula & their combination in Excel
+3) Data Tabel - provides combination of 2 parameters in the financial Calculations.
+
+P1) A customer has applied loan of 500000 for 7 years with interest rate of 7.5%.
+The EMI is 7669 but customer can pay max. EMI of 6000 only. Using Goal Seek, find
+the possible solutions for this EMI.
+
+P2) A customer wants amount of 800000 after 6 years at interest rate 3.75% .Using 
+goal seek find out the possible solutions
+
+P3) Factory production manager wants to earn daily profit of 1500 instead  of 1110. Using Goal Seek,
+find all possible solutions by adjusting daily production, unit cost & unit price.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

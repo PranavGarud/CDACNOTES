@@ -1,0 +1,186 @@
+Tableau
+Owner : Salesforce - CRM
+Tableau Public
+Tableau Desktop profesnol
+Tableau web
+
+1)Tableau Desktop supports 50+ RDBMS	
+  Tableau Public Supports Json Excel Text
+
+2)TP you need to publish project under tableau account till now
+  TD allows user to store locally using .twb or .twbx
+
+3)TP project gets published on web not hidden.Good for learning not for real world Project
+  TD project not get exposed to the web.
+
+Tableau understands data as following :
+
+Measure - Measure is any numeric column (with or without decimal) on which maths &
+          stats functions can be applied to get meaningful result.
+	  e.g. Revenue, Profit, Cost, Discount, Quantity, Demand etc.
+
+Dimension - Dimensin is any numeric or character or data column which is not a measure and most
+		of the times used for grouping.
+	e.g. Department, Surname, Email id, Birth date, Joining date, Rating, Employee ID, Country, State etc.
+
+Only math operations possible on Dimension is COUNT.
+On Measure we can use multiple math operations.
+
+
+Global Superstore
+28 columns
+51290 rows(do not consider headers)
+No. of measures	= 7 (with decimal 5/ without decimal 2)
+No. of dimensions = 21
+(Numeric 1/ Date 3 / Character 17)
+
+Tableau supports 2 types of data joining -
+
+1) Before 2020 - Joins
+2) After 2020 - Relationships
+
+Tableau supports 3 types of sorting on Data Preview - 
+1) Ascending
+2) Descending
+3) Default
+
+Data Types Of Tableau 
+1) Numeric   - '#'
+2) String    - 'abc'
+3) Date      - calender symbol
+4) Geography - Globe symbol
+5) Boolean   - 'T/F'
+
+Dimensions are alway displayed in 'Blue' and Measures are displayed in 'Green' color
+
+------------------------------------------------------------------------------------
+
+3 Components of Tableau - 
+1) Worksheet
+2) Dashboard
+3) Story
+
+Story can be created using Worksheet & Dashboard but Dashboard can't be created using Story.
+
+Tableau provides default 24 types of charts.
+
+
+9 sections on Tableau main page - 
+1) Dimensions
+2) Measures
+3) Rows 
+4) Columns
+5) Canvas
+6) Filter
+7) Marks
+8) Pages
+9) Show Me
+-----------------------------------------------------------------------------
+
+4 Types of Layouts - 
+1) Standard
+2) Fit height
+3) Fit width
+4) Entire view
+-------------------------------------------------------------------------
+
+Q1) Shipping cost by Region & Category (Text Table)
+Q2) Quantity by Sub-Category & Market(Text Table)
+ ------------------------------------------------------------------------------------
+
+Highlight Talbe - Same as text table but works with only one measure. Here each value ger background color based on the value. 
+Bigger value generates Darker color.
+
+1) Quantity by Sub-Category & Market (Highlight table) (>3500)
+2) Profit by Region & Order Priority(Hightlight table) (>75000)
+3) Shipping cost by Market & Ship Mode (Highlight Talbe)(>50000)
+--------------------------------------------------------------------------------------
+
+Pie Chart -
+
+Discrete Color
+
+1) Profit % by Category (Pie chart)
+2) Sales % by Ship Mode (Pie chart)
+3) Quantity % by Order Priority (Pie chart)
+4) Shipping Cost % by Segment (Pie Chart)
+5) Profit % by Market (Pie Chart)
+6) Profit % by Gender (Pie Chart)
+7) No. of records % by market (Pie Chart)
+-------------------------------------------------------------------------------------------
+
+
+Bubble Chart - Alternate to Pie Chart when no. of values are more than 8/10. Every Value is
+dispalyed as a circle whose size varies depending on the value.
+
+P1) Profit by Sub-Category(Bubble chart)
+P2) Sales by Region (Bubble Chart)
+P3) Quantity by Sub-category (Bubble Chart)
+P4) Shipping cost by Region (Bubble Chart)
+
+
+---------------------*********---*-*---------*********-------------------*---------
+			Bar Charts
+3 types of var chart
+1) Simple
+2) 100% Stack
+3) Side-by-Side
+
+Horizontal :
+1) Profit By Region(Bar chart)
+2) Profit by Cub-category(Bar Chart)
+3) Quantity by Sub-Category(Bar Chart)
+
+Vertical:
+1)Profit by Market(Bar Chart)
+2)Shippting cost by Market (Bar Chart)
+3) No. of Records by Market(Bar Chart)
+4) Quantity by Market(Bar Chart)
+
+----------------------------------------------------------------------------------------------
+
+Side-by-side bar chart - This bar is used to compare one dimension within another dimension.
+Total bars created here are no. of values in dimension 1 * no. of values in dimensoin 2.
+
+1) Profit by Segment And Ship mode (Side By Side)
+2) Quantity by Order Priority and Category(Side By Side)
+3) Shipping cost by Ship Mode & Order Priority(Side By Side)
+4) Sales by Order Priority & Segment(Side by Side)
+
+
+1)Profit % by Region & Segment(100% Stack)
+2) Profit % by Sub-Category & Order Priority(100% Stack)
+3) Quantity % by Sub - Category & Segment(100% Stack)
+
+
+Vertical:
+4)Shipping Cost % by Market & Order Priority(100% Stack)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
