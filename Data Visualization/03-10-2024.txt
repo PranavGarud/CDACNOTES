@@ -1,0 +1,168 @@
+1) Sum to Average
+2) Create bubble chart to show avg quantity by Region.
+
+** How to convert a dimension to COUNT? **
+COUNT
+COUNTD - Unique Count
+
+Display horizontal bar chart to show no. of orders by Sub-category.
+
+---------------------------------------------------------
+
+TreeMap:
+Sorting does not work on tree Map.
+It is always displayed in decending order Highest to Lowest.
+
+1) Create TreeMap of count of product by Market.
+2) Create TreeMap of count of customers by Sub-category.
+3) Create TreeMap of No. of orders returned by Return Reason.
+
+--------------------------------------------------------------
+
+Geographic maps :
+1) Symbol
+2) Solid (Choropleth)
+
+---------------------------------------------------------------
+
+Line chart / Area chart
+
+Used to create charts based on time-series data 
+i.e. yearly, quaterly, montly etc
+
+There are two types of data in Tableau -
+1. Discrete (Displayed in Blue)
+2. Continuous (Displayed in Green)
+
+Discreate dates ignore Year part and shows only slected date part
+i.e. Quarter or month or day.
+e.g. monthly discrete chart show only 12 value evertime.
+most effective on e-commerse such as Zomato Or Swiggy  for most orders in month
+
+Continuous dates combine the year with selected date part and shows detailed chart. Here no. of values are no. of years
+* no. of date part(month or quarter).
+
+To create line chart, date field must be added in Column.Add the measure in Rows.
+
+1) Quarterly Profit for each year (Discreate Line)
+2) Quarterly Quantity for each year (Discreate Line)
+3) Quarterly No. of Orders for each year(Discreate Line)
+
+4) Create discreate monthly line chart for sales.
+5) Montly Quantity (Discrete line)
+7) Montly No. of Orders (Discrete line)
+
+8) Month & Year Profit by Gender (Continuous line)
+9) Month & Year Quantity by Gender (Continuous line)
+
+-------------------------------------------------------------------------------------
+
+Area Chart :
+
+1) Quarterly No. of Products for each year (Discreate area).
+2) Quarterly No. of customers for each year (Discrete area).
+
+3) Montly  Profit by Order Priority (Discrete area)
+4) Montly Profit (Continuous area)
+
+5) Montly No. of Orders (Continuous area)
+-----------------------------------------------------------------------------------------
+
+Dual line :
+Dual Combo : Comnination of line and bar.
+
+Expected vs Actual Montly Sales (Dual line)\
+Expected vs Actual Monthly Profit (Dual Combo)
+Date Field is compulsary for Dual Line and Dula Combo.
+------------------------------------------------------------------------------------------
+
+Bullet Graph :
+Bullet Graph Does not require date field
+This chart shows one measure as bar and second measure as black marker.
+Here we use any thing to compare market ,area ,etc. 	
+
+The Bars indicates the percentage of target value
+light bar ends that is 80%
+Dark bar ends that is 60%
+
+1) Expected vs Actual Profit by Region (Bullet Graph)
+2) Expected vs Actual Profit by Sub-Category (Bullet Graph)
+3) Expected vs Actual Sales by Sub-Category (Bullet Graph)
+---------------------------------------------------------------------------------------------
+
+Histogram :
+Histogram requires only one measure Other charts require 1 dimension at least.
+
+1) Quantity Histogram (Bin Size 1)
+
+Box Plot :
+Lower hinge = Q1
+Upper hinge = Q3
+
+1)Quantity and sub-category
+
+21429
+Q1 = 8310
+Q3 = 12336
+IQR = 4026
+
+Upper limit = 18375
+Storage  = 16917
+
+2)No. of order by Region Box Plot
+3)No. of products by Sub-Category(Box Plot)
+---------------------------------------------------------------------
+
+Scatter Plot
+1) With Aggregation
+2) Without Aggregation
+
+In scatter plot, identify the dependent (Y) and independent(X) columns
+
+1)Shipping cost vs Profit by Country Scatter Plot
+
+Actual Profit = 0.171755*Actual Sales + 2.29105
+
+2)Shipping cost vs Profit by Country Scatter Plot(without Aggregation)
+Equation: Actual Profit = 1.16739*Shipping Cost + 15.3497
+--------------------------------------------------------------------------
+
+Basic Analytics options - 
+1) Constant line
+2) Average line
+
+The contant line needs input Average dosen't.
+Constant may have multiple but Average has only one value.
+
+1) Highlight the regions using Constant line  where no. of orders are more than 2000.
+
+No. of order by Region (More than 200)
+
+1)Create horizontal bar chart of quantity & sub- category.
+
+2)Create a scatter plot of sales vs profit using region add two constant line - 1200k for sales
+and 200k for profit. Highlight the area showing regions whose sales is above 1200k and profit above 200k.
+
+Sales vs Profit Scatter plot by Region(Sales > 1200k & profit > 200K)
+
+Create a scatter plot using shipping cost on x asix and profit on y axis using sub category.First targert shipping cost  = 100k
+Quantity by Sub-category (below average)
+
+1)Create discrete montly line chart by profit and add average line to it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

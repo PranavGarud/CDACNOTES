@@ -1,0 +1,253 @@
+Filter
+1.Data Source
+2.Quick
+3.Dimension
+4.Measure
+5.Date
+6.Top/Bottom
+7.Context
+
+-----------------------------------
+
+Styles of Dimension Filter
+1. Multi select(Default)
+2. Single select
+3. Multi dropdown
+4. Single dropdown
+5. Single value slider
+6. Custom
+
+How to make title dynamic by adding filter condition?
+
+1) Create treemap of sub-category using Profit and apply Segment filter.
+Make title dynamic.
+
+2) Create discrete monthly area chart using quantity. Apply Market as filter
+and Make title dynamic.
+
+3) Create bubble chart of Sub - Category & no. of orders. Filter the chart
+using no. of orders and  make title dynamic.
+---------------------------------------------------
+
+Styles of Date filter
+1. Date range
+2. Year
+3. Quarter
+4. Month
+5. Month / Year
+
+1) Create Solid map using State Field and Profit.
+Apply following filters - 
+a) Market - select US
+b) Ship Date - Select Month Only
+Make title dynamic. Show the solid map in two colors - 
+Green & Red (positive vs negative)
+
+2) Build continuous montly quantity line chart.
+Apply these filters and show on right side - 
+a) Segment 
+b) Market
+c) Category
+d) Ship Mode
+Make chart title dynamic
+Show min max lables only
+-----------------------------------------------------------
+
+Top Bottom Filter:
+
+Top 10 Most profitabe customers
+
+Top 10 products by quantity
+
+Bottom 20 countries by no. of orders (Symbol map)
+---------------------------------------------------------------
+
+Context Filter
+When multiple filters are applied and one top bottom filter is applied
+then to decied the sequece we use context filter.
+To decide the order of filter execution when one top/bottom & other regurlar 
+filters are applied simultaneously.
+
+Top 5 sub-categories by Profit
+
+Built bubble char using Product name & quantity.
+Show only top 8. Apply sub-category filter and
+set it as context.
+--------------------------------------------------------------------------------
+
+Creating Custom Groups :
+
+1) Create 4 custom groups based on sub-category - 4 + 4 + 4 + 5
+Custom group 1 - Phones, Accessories, Label & Table
+Custom group 2 - Appliances, Char, Machine & Art
+Custom group 3 - Papper, Bookcase, Storage & Binder
+Custom group 4 - Copier, Supplies, Envelope, Fastener & Furnishing.
+
+Groups can be used to group the child elements using parent element as group. It
+can also be used to create groups within Treemaps.
+------------------------------------------------------------------
+
+Set :
+Set is way to group the data based on certain condition ie the values are 
+within the setoutside the set. Only IN or OUT options are availabe for Sets.
+
+Create chart of top 20 customers by profit. 
+
+2) Create Set of top 10 countries by quantity. Using this set & quantity, create pie chart.
+----------------------------------------------------------------------
+
+Combined Set:
+	Means combining two different sets for analysis.
+	The set has to applied on same dimensions.
+1) Create set no.1 for top 5 countries by profit. Create set no. 2 for bottom 5
+	countries by profit. Then combine them together in set no.3
+----------------------------------------------------------------------------
+Project 3 Ends
+Project 4 Starts
+----------------------------------------------------------------------------
+
+Parameter & Calculated Field
+
+parameters are used to provide user selection for the charts.
+Calculated fields are custom Calculation Using tableu inbuilt functions.
+
+Two types of calculated fields -
+1. With Parameter
+2. Without Parameter
+
+Main use of calculated fields is to create KPIs
+KPI - Key Performance Indicator (Most Valuable,Typically Numeric)
+
+KPIs
+1) Avg Sales
+2) Avg Profit
+3) Avg Shipping Cost
+4) Avg Quantity
+5) Total Quantity
+6) Total Profit
+7) No. of orders
+8) No. of customers
+9) No. of Products
+10) Profit Ratio
+11) No. of countries
+12) No. of cities
+13) No. of returned orders
+14) Avg Discount
+
+How to set global format for calculated fields?
+
+1) Cerate horizontal bar chart of sub-category & profit ratio
+
+2) Create treemap of region & no. of returned orders
+
+3) Create discrete month line chart using avg discount
+---------------------------------------------------------
+
+Create KPIs using IF Condition
+1) No. of male customers
+2) No. of female customers
+
+
+Create Side by side vertical bar chart using Market & 
+No. of male customers, No. of female customers
+
+Using Calculated fields, check if actual ship date is same as 
+expected ship date. If they are same, then that order is On 
+Time otherwise it is Delayed.
+
+Shipment Days - Number 
+Order Status  - Character
+
+Using Order Status field, create two new calculated fields
+1) To display no. of delayed orders
+2) No. of on-time orders
+
+Using shipment days field, create a new calculated field
+- Avg delay
+and show this as integer without decimal
+---------------------------------------------------------
+
+Parameters - 
+1) Regular parameter
+2) Parameter for top/bottom
+
+Create treemap of top 10 customers by sales.
+Make the selection for top customers dynamic
+as - 5/10/15/20
+
+Create symbol map using country & quantity to 
+show top 10 countries. Make it dynamic by 
+creating a parameter- Select no. of countries.
+Set values 8 to 20 with step size 2.
+
+Create a dynamic bar chart to show either
+sales or profit or shipping coat or quantity
+by Sub-category based on user selection.
+
+First create a parameter of type string with 4 words
+- Sales, Profit, Shipping Cost & Quantity.
+Then create new calculated field to select 
+measure based on the word selectd by user.
+
+Create a new parameter of type string - Select
+dimension for report.
+Add 4 words to this parameter - Category, Segment, 
+Order Priority  & Ship Mode.
+Build horixontal bar chart of region & profit for 100%
+Then create a calculated field - Show selected
+dimension by using the above parameter to select the
+dimension. Add this field on Color.
+
+Show parameter on the right side.Give sheet name as 
+Dynamic Profit % by Region. Set dynamic chart title as 
+Profit % by Region & [Selected dimension parameter]
+-------------------------------------------------------------
+
+Reference Line in Analytics 
+
+-------------------------------------------------------------
+
+Table Calculations - (Normal figures into the following figures)
+1. Running Total
+2. Difference
+3. % Difference
+4. Rank
+5. Moving Average
+6. YoY Growth (YOY - Year Over Year)
+
+White trangle refers it is not normal value it is a table calculation value.
+
+Common Question
+In YoY certain Period - Certain Period Last Year
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
