@@ -1,0 +1,134 @@
+
+Diff Between Forecasting and Prediction
+
+Forecasting - for next interval of time by analyzing past records (TCSI)
+Prediction - It is based on linear regresion
+
+TCSI :
+Trend
+Cyclic
+Seasonal
+Irregular
+
+Addititve (T+C+S+I)
+Multiplicative	(T*C*S*I)
+
+Create monthly forecasting for 15 months for no. of orders.
+---------------------------------------------------------------
+
+Clustering 
+(K Means)
+2.195e+05 = 2.195 * 10^5 = 219500
+
+Create Scatter plot of sales vs profit using state and add
+country to filter . Set country to US. then Create cluster of these US states.
+----------------------------------------------------------------
+
+Totals & Sub-Totals:
+
+Highlighter : Only 1 highlighter will work at a time.
+----------------------------------------------------------------
+
+Create Logo for Global Retail company
+specilizing in e-commerce business. Logo image should be
+Transparent JPG size 200x200 pixcel
+
+Total Sales
+Total Profit 
+Total Quantity
+TOtal Shipping Cost
+Total No. of orders
+Total Customers
+Total Product
+Profit Ratio
+Total Returned Order
+Order Status
+Delayed Order %
+Average Discount
+
+1st Page
+Total Sales
+Total Profit 
+Total Quantity
+TOtal Shipping Cost
+Average Discount
+Profit Ratio
+
+2nd Page
+Total No. of orders
+Total Customers
+Total Product
+Total Returned Order
+Delayed Order %
+
+
+DASHBOARD :
+
+Dashboard Is Use to combine two or multiple Sheets Together. 
+Vertical or Horizontal for Two Sheets.
+For 3 Sheets Combine  Multiple Layouts Available As Per Arrangement.
+No limits To The Sheets U Can Combine Many Sheets But Its Complex.
+
+
+COMPONANTS OF DASHBOARD :
+1) Container
+2) Image
+3) Text
+4) Blank
+5) Web page
+6) Navigation
+7) Download
+
+1) Vertical Bar using Order Priority & Sales
+2) Vertical Bar using Segment & Profit
+3) Horizontal Bar using Region & Quantity
+4) Horizontal Bar using Ship mode & Shipping cost
+5) Pie chart of Category & Profit
+6) Pie Chart of Segment & Profit
+7) Pie Chart of Order Priority & Profit
+8) Pie chart of Ship mode & Profit
+9) Line Chart of discrete month & profit ratio
+10) Area chart of continuous month & quantity
+
+Dashboad actions
+1) Filter
+2) Highlight
+3) Go to URL
+
+1) Add container. Put 2 pie charts next ot each other &
+add monthly line chart on top.When user cliks on any month, filter both pie charts.
+(Segment & Order Priority)
+Monthly Profit Ratio & Segment/Order Priority Dashboard
+
+2)  Add container. Put 2 pie charts next ot each other &
+add monthly area chart on top.When user cliks on any month, filter both pie charts.
+(Ship mode & Category)
+
+How to combine KPIs with other charts in Dashboard?
+
+Create two dual combo charts
+a)Expected vs Actual Sales
+b)Expected vs Actual Profit
+
+Create Scatter plot of sales vs profit by Sub- Category. Add average line to scatter plot.
+Build new dashboard using Market Master on top & scatter Plot below.
+
+https://en.m.wikipedia.org/wiki/Main_Page
+
+https://en.m.wikipedia.org/wiki/ Vietnam
+https://en.m.wikipedia.org/wiki/ Brazil
+
+1) Create symbol map of states for US. then add web page with 
+URL https://www.infoplease.com/us/states.
+
+Then add dashboard action to display web page for the state using URL
+https://www.infoplease.com/us/states/  Texas
+
+2) Create solid map of Indian states. Add this to Dashboard. Then add
+webpage with URl -
+https://knowindia.india.gov.in/states-uts/
+
+Add dashboard actions to load URL using state name as below
+
+https://www.   telangana   .gov.in/
+
