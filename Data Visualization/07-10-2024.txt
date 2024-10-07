@@ -1,0 +1,128 @@
+Data Blending - technique to combine the data sources
+with different data fromats e.g. RDBMS, Excel, JSON,
+Text etc.
+
+Data Blending uses two types of data sources - 
+1. Primary
+2. Secondary
+
+Data Source selected to start the blending process is
+considered as Primary and all other data sources are 
+considered Secondary.
+
+In every blending, there is only one Primary data 
+source. But there can be multiple secondary.
+
+Primary data source - Blue color
+Secondary data source - Orange color
+
+1) Create treemap of states & sales fields.
+
+Sales treemap by State(Blending)
+
+2) Create horizontal bar chart using Product
+field & Inventory field. Add average line here.
+Fill area above the line.
+
+Inventory by Product (Average line & Blending)
+
+3) Create pie chart using Market Field & Profit Field.
+Show % on pie chart.
+Profit % by Market(Blending)
+
+4) Create discrete monthlty line chart using Date 
+field & COGS. Show min/max lables. Add two filters - 
+Market Size & Type
+
+5) Create discrete monthly dual combo using sales vs Budget
+ sales. Add two filters - Product Type & Market here.
+
+6) Create box plot usign fields - State & Profit. Add
+two filters - Product (Single value list) & Date Year (Slider)
+
+
+
+ While Dashboard Making If Our Primary Key Are Not Same Then Actions CANT be initiated (Source ,Target)
+
+7) Create Pie chart using Market & Sales.(Select location as primary)
+
+8) Create solid map of States & Sales (Select Location as primary)
+
+Using these two charts, create dashboard.
+------------------------------------------------------------------------
+
+Advanced Charts using Tableau
+1) Sparkline :
+   Sparkline Are the Line Charts Having Individual Axis  Range For Each Line 
+
+How to convert line charts to Sparkline?
+Change Y axis setting to Individual axis range.
+Hide Y axis For all lines.
+
+2) Monthly Sales by Region Sparklines
+Add filters - Segment & Category
+3) Monthly Profit by Sub-Category Sparklines
+Add filters - Order Priority & Market
+4) Monthly Profit by Region Sparklines
+Add filters - Category & Ship Mode
+
+
+2) Word Cloud
+
+Done using Dimension & Measure. Dimension values are
+displayed as individual words & their sizes depend on
+measure value.
+a) put the dimension on Text button & Convert from Automatic to 
+to Text.
+b) put the measure on Size button and adjust font size.
+c) finally put the dimension on color button.
+
+1) Build  word cloud of Country & Profit . Add Market t Filter.
+2) Build  word cloud of State & Quantity for country India.
+Apply two filters - Segment & Category
+3) Build word cloud of Region & No. of orders, Add Discrete month of 
+Order date to the filter.
+
+Donut chart using combination of Pie & Circle charts
+
+1) Create a dummy field with Avg(0) in rows. Duplicate this
+field in rows. 
+2) Select AVG(0) first & change it from automatic to Pie.
+3) Select AVG(0) Second & change it from automatic to Circle.
+4) Make chart entire view
+5) Select First AVG in Marks card. Drag The Dimension ON color button.
+6) Here drag the measure on Angle button & Label button.
+7) Increase the size of pie chart in First AVG.
+8) Select second AVG on Marks card and change circle color to White.
+9) Go to Rows and select second AVG options. Select "Dual Axis option.
+10) Hide both Y axis. 
+11) Go to Marks card for first & second AVG & adjust pie & circle size.
+
+1) Profit by Market Donut Chart
+Add Segment & Order Date year filter.
+
+2) Quantity by Order Priority Donut chart.
+Add Sub-category filter.
+
+Motion Chart(type of animated line chart)
+1) Drag date field to Pages above filter.
+2) Match date type on Pages to that in date in column,
+3) Change marks card from automatic to circle.
+4) Click on Show History option
+---------------------------------------------------------------------------------
+
+Story - Stories are created based on important
+demensions or measeures in the business. e.g. Country, Department,Product,
+Profit,Cost etc.
+It is simillar to PowerPoint in MS Office. Stories are used by top management
+during client meetings for business Promotions.
+
+A story is created by adding story points similar to slides in a PPT.
+
+Create a story based on Product demension
+1) Create bar chart of top 10 products by final sales amount.
+2) Create tree map of product name & units in stock.
+3) Create pie chart using Discontined field & no. of products.
+4) Create bubble chart of top 10 products by reorder level.
+5) Create discrete montly lin chart using order date & no. of
+products & show min/max values.
