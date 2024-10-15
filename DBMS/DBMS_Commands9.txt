@@ -1,0 +1,431 @@
+Procedure will have the following Theory:
+1) DDL, DML statements
+2) DQL stands for Parameterized Querying 
+3) Programmability
+4) Exception Handling
+
+SQL Statement Compilation Phases :-
+1. Syntax Check
+2. Checking Objects existance
+3. Are permissions assigned to access object
+4. Setting the execution plan to fetch the record. 
+
+ * Advantage of Stored Procedure:
+1) SQL Statements are saved in Compiled Format inside SP
+
+1.DELMITER :-
+	
+DELIMITER $$
+create procedure p1()
+Begin 
+ select "Welcome to Stored Procedures!!" as '';
+End$$
+Delimiter;
+
+mysql> CALL p1();
++--------------------------------+
+|                                |
++--------------------------------+
+| Welcome to Stored Procedures!! |
++--------------------------------+
+
+To see the code of procedure
+show create procedure p1;
+mysql> show create procedure p1;
++-----------+-----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+----------------------+----------------------+--------------------+
+| Procedure | sql_mode                                                                                                              | Create Procedure                                                                                              | character_set_client | collation_connection | Database Collation |
++-----------+-----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+----------------------+----------------------+--------------------+
+| p1        | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | CREATE DEFINER=`root`@`localhost` PROCEDURE `p1`()
+Begin
+ select "Welcome to Stored Procedures!!" as '';
+End | cp850                | cp850_general_ci     | utf8mb4_0900_ai_ci |
++-----------+-----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+----------------------+----------------------+--------------------+
+1 row in set (0.00 sec)
+
+To give default 
+Delimiter ;
+-----------------------------------------------------------
+2) Select or DML statements 
+
+DELIMITER //
+create procedure p2()
+Begin 
+	Select * from emp
+	where job = 'CLERK';
+END //
+Delimiter ;
+mysql> call p2();
++-------+--------+-------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB   | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7876 | ADAMS  | CLERK | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7934 | MILLER | CLERK | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-------+------+------------+------+------+--------+
+
+------------
+DELIMITER ??
+Create procedure show_data(p_Deptno integer)
+Begin 
+	Select * 
+	From Emp
+	Where deptno = p_deptno;
+END ??
+Delimiter ;
+mysql> call show_data(20);
++-------+-------+---------+------+------------+------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+-------+---------+------+------------+------+------+--------+
+|  7369 | SMITH | CLERK   | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7788 | SCOTT | ANALYST | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7876 | ADAMS | CLERK   | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-03-06 | 3000 | NULL |     20 |
++-------+-------+---------+------+------------+------+------+--------+
+
+call show_data;--Error
+
+----------------
+select routine_name
+from information_
+---------------
+
+Local variable and if
+
+DELIMITER $$
+create procedure p3()
+Begin
+declare marks int;
+set marks = 78;
+if marks >= 40 then 
+	select 'Passed' as '';
+else
+	select 'Failed';
+end if;
+End$$
+Delimiter ;
+
+mysql> call p3;
++--------+
+|        |
++--------+
+| Passed |
++--------+
+------------------------------
+DELIMITER ??
+create procedure show_salary(p_ename varchar(20))
+begin		
+	declare v_sal int;
+	select sal into v_sal
+	from emp
+	where ename = p_ename;
+	select v_sal;
+end??
+Delimiter ;
+
+mysql> call show_salary("King");
++-------+
+| v_sal |
++-------+
+|  5000 |
++-------+
+ ---------------------------------------
+
+Loops :
+
+DELIMITER//
+Create Procedure basic_loop()
+Begin
+	Declare counter INT DEFAULT 0;
+	abc : LOOP
+			SET counter = counter + 1;
+			IF counter >= 5 THEN
+				LEAVE abc;
+			END IF;
+			Select counter ; 
+		END LOOP abc;
+END //
+			
+
+DELIMITER //
+CREATE PROCEDURE basic_loop()
+BEGIN
+    DECLARE counter INT DEFAULT 0;
+    abc : LOOP
+        SET counter = counter + 1;
+        IF counter >= 5 THEN
+            LEAVE abc;
+        END IF;
+        SELECT counter; 
+    END LOOP abc;
+END //
+DELIMITER ;
+mysql> DELIMITER ;
+mysql> CALL basic_loop();
++---------+
+| counter |
++---------+
+|       1 |
++---------+
+1 row in set (0.00 sec)
+
++---------+
+| counter |
++---------+
+|       2 |
++---------+
+1 row in set (0.01 sec)
+
++---------+
+| counter |
++---------+
+|       3 |
++---------+
+1 row in set (0.01 sec)
+
++---------+
+| counter |
++---------+
+|       4 |
++---------+
+1 row in set (0.01 sec)
+-----------------------------------
+
+Parameter Modes of Stored Procedure ( This is Universal Used in all Databases)
+1.IN: User will give Value . Procedure will Change the Value
+2.OUT : Value gets Returned. Based  On Out Mode parameter  a "A Session Variable" gets created.
+3.INOUT
+
+OUT Mode Parameter :
+The Procedure will return or assign a value to the out mode parameter.
+Means procedure gives value to a Out mode paramter.
+
+Delimiter $$ 
+create procedure p4(In p_ename varchar(20),
+			OUt p_salary Integer)
+Begin 	
+	select sal into p_salary
+	from emp
+	where ename = p_ename;
+End $$
+Delimiter ;
+
+mysql> CALL p4('King', @sal);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> Select @sal;
++------+
+| @sal |
++------+
+| 5000 |
++------+
+-------------------------------------------------
+
+INOUT Parameter Mode :
+
+Delimiter $$
+create procedure p5(InOUt p_Salary Integer)
+Begin 
+	Set p_Salary = p_Salary + 4000;
+End $$
+delimiter ;
+mysql> set @p_salary = 2000;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call p5(@p_salary);
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select @p_salary;
++-----------+
+| @p_salary |
++-----------+
+|      6000 |
++-----------+
+----------------------------------------------
+
+Delimiter $$
+create procedure proc1 (p_a int)
+begin 
+	insert into tab values(p_a);
+	select 'One row inserted....';
+	select 'a';
+	select 'b';
+	select 'c';
+End $$
+delimiter ;
+
+Delimiter $$
+create procedure proc2(p_a int)
+begin
+	Declare Continue Handler For SQLEXCEPTION
+	BEGIN
+		Select 'An error occurred while inserting the value.' As ERROR Message;
+	END;
+	insert into tab Values(p_a);
+	select 'a';
+	select 'b';
+	select 'c';
+END $$
+delimit ;
+
+
+-------------------------------------------------------------------------------------------------
+BEGIN TRY  
+     --code to try 
+END TRY  
+BEGIN CATCH  
+     --code to run if an error occurs
+--is generated in try
+END CATCH
+
+Anything between the BEGIN TRY and END TRY is the code that we want to monitor for an error. So, if an error would have happened inside this TRY statement, the control would have immediately get transferred to the CATCH statement and then it would have started executing code line by line.
+
+Now, inside the CATCH statement, we can try to fix the error, report the error or even log the error, so we know when it happened, who did it by logging the username, all the useful stuff. We even have access to some special data only available inside the CATCH statement:
+
+    ERROR_NUMBER – Returns the internal number of the error
+    ERROR_STATE – Returns the information about the source
+    ERROR_SEVERITY – Returns the information about anything from informational errors to errors user of DBA can fix, etc.
+    ERROR_LINE – Returns the line number at which an error happened on
+    ERROR_PROCEDURE – Returns the name of the stored procedure or function
+    ERROR_MESSAGE – Returns the most essential information and that is the message text of the error
+.....................................................................................................................................................
+ 
+Triggers:
+
+Trigger is a piece of code that gets implicitly or automatically executed whenever
+Insert or Update or Delete statements gets fired.
+The problem is taht procedures can only be explicitly called or they can be scheduled.
+Many atimes we want the code execution to happen instantly when DML statements are fired.
+In such scenarios we cannot make procedures. Here we are compelled to create a trigger.
+A Trigger can neither be explicitly called nor be scheduled
+It will implicitly executed!!
+
+Triggers should be used in following scenarios:
+1) To copy the newly inserted rows from main transaction tables into an empty table for 
+getting speicific records of a day.
+2) To have a programmatic backup of deleted rows and old values after update.
+3) To control DML activites based on  Date/Day/Time/User/Business Condition
+4) To have a programmatic Audit to keep trace of DML activities, so that fraud
+detection becomes easy.
+*********************************************************************************
+
+Types of Triggers as per SQL Commands:
+1) DML events triggers
+2) DDL & DCL events triggers
+3) Logon triggers
+
+Triggers cannot be written on "Select" event.
+
+Types of Triggers as per execution timming:
+1) Before DML
+2) After DML
+
+1) Before DML are good for data validations.
+2) After DML are good for logging the information, or backups, or audits,or copying rows, etc.
+
+Types Of DML Triggers as per rows execution:
+1. Table level or Statement Level
+2. Row Level 
+
+---------------------------------------------------------------------------
+
+select * from employees;
+select * from log;
+
+DELIMITER //
+Create Trigger after_employee_insert
+After Insert on employees
+for Each row
+Begin 
+	Insert into log(employee_id,action)Values(New.id,'INSERT');
+End;
+//
+Delimiter ;
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

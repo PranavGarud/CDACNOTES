@@ -1,0 +1,108 @@
+With My_CTE
+as (
+	Select* from emp
+)
+Select * From My_CTE;
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-05-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-12-01 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+
+
+To display maximum salaries department number wise for the department numbers having max
+salary greater than the max salary of department number 20.
+
+select deptno,max(sal)
+from emp
+group by deptno
+having max(sal)>(select max(sal)
+		from emp
+		where deptno = 20);
++--------+----------+
+| deptno | max(sal) |
++--------+----------+
+|     10 |     5000 |
++--------+----------+
+
+FK in MySQL:
+
+create table parent_tab
+(a int primary key,
+ b int);
+
+create table child_tab
+( a int,
+  c int,
+  Foreign Key(a) References parent_tab(a)
+ );
+
+Insert into parent_tab Values(1,101);
+
+Insert into child_tab Values(5,890); --FK ERROR
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails 
+(`mydb0`.`child_tab`, CONSTRAINT `child_tab_ibfk_1` FOREIGN KEY (`a`) REFERENCES `parent_tab` (`a`))
+
+Insert into child_tab Values(1,890);
+mysql> select * from parent_tab;
++---+------+
+| a | b    |
++---+------+
+| 1 |  101 |
++---+------+
+1 row in set (0.00 sec)
+
+mysql> select * from child_tab;
++------+------+
+| a    | c    |
++------+------+
+|    1 |  890 |
++------+------+
+1 row in set (0.00 sec)
+
+
+Summary: In MySQL the foreign key needs to be created at table level only, otherwise it will not be
+active.
+
+Cursor :
+In SQL Database cursor is a user defined programmatic mechanism to fetch one row at a time, process it
+(business logic, i.e. coding) and then move to the next row till the last row is fetched & processed.
+This will be done inside Loops.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

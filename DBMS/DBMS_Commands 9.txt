@@ -1,0 +1,945 @@
+
+select ename, sal, sal*12
+from emp;
+
+select ename, job, sal from( select ename, sal, deptno from emp) dt; - error
+ERROR 1054 (42S22): Unknown column 'job' in 'field list'
+In above query the table is restricted to the fields ename, sal & deptno.
+
+select ename, job, sal from( select ename, job, sal, deptno from emp) dt;
++--------+-----------+------+
+| ename  | job       | sal  |
++--------+-----------+------+
+| SMITH  | CLERK     |  800 |
+| ALLEN  | SALESMAN  | 1600 |
+| WARD   | SALESMAN  | 1250 |
+| JONES  | MANAGER   | 2975 |
+| MARTIN | SALESMAN  | 1250 |
+| BLAKE  | MANAGER   | 2850 |
+| CLARK  | MANAGER   | 2450 |
+| SCOTT  | ANALYST   | 3000 |
+| KING   | PRESIDENT | 5000 |
+| TURNER | SALESMAN  | 1500 |
+| ADAMS  | CLERK     | 1100 |
+| JAMES  | CLERK     |  950 |
+| FORD   | ANALYST   | 35000 |
+| MILLER | CLERK     | 1300 |
++--------+-----------+------+
+
+select ifnull(comm,0) from emp;
++----------------+
+| ifnull(comm,0) |
++----------------+
+|              0 |
+|            300 |
+|            500 |
+|              0 |
+|           1400 |
+|              0 |
+|              0 |
+|              0 |
+|              0 |
+|              0 |
+|              0 |
+|              0 |
+|              0 |
+|              0 |
++----------------+
+
+Select ename, sal, comm, total,
+			 total*0.5 as "50% Less",
+			 total*0.4 as "40% Less",
+			 total*0.3 as "30% Less"
+from (Select  ename, sal, comm,
+	sal + IFNULL(comm, 0.30*Sal) as total from emp) e;
++--------+------+------+---------+----------+----------+----------+
+| ename  | sal  | comm | total   | 50% Less | 40% Less | 30% Less |
++--------+------+------+---------+----------+----------+----------+
+| SMITH  |  800 | NULL | 1040.00 |  520.000 |  416.000 |  312.000 |
+| ALLEN  | 1600 |  300 | 1900.00 |  950.000 |  760.000 |  570.000 |
+| WARD   | 1250 |  500 | 1750.00 |  875.000 |  700.000 |  525.000 |
+| JONES  | 2975 | NULL | 3867.50 | 1933.750 | 1547.000 | 1160.250 |
+| MARTIN | 1250 | 1400 | 2650.00 | 1325.000 | 1060.000 |  795.000 |
+| BLAKE  | 2850 | NULL | 3705.00 | 1852.500 | 1482.000 | 1111.500 |
+| CLARK  | 2450 | NULL | 3185.00 | 1592.500 | 1274.000 |  955.500 |
+| SCOTT  | 3000 | NULL | 3900.00 | 1950.000 | 1560.000 | 1170.000 |
+| KING   | 5000 | NULL | 6500.00 | 3250.000 | 2600.000 | 1950.000 |
+| TURNER | 1500 |    0 | 1500.00 |  750.000 |  600.000 |  450.000 |
+| ADAMS  | 1100 | NULL | 1430.00 |  715.000 |  572.000 |  429.000 |
+| JAMES  |  950 | NULL | 1235.00 |  617.500 |  494.000 |  370.500 |
+| FORD   | 3000 | NULL | 3900.00 | 1950.000 | 1560.000 | 1170.000 |
+| MILLER | 1300 | NULL | 1690.00 |  845.000 |  676.000 |  507.000 |
++--------+------+------+---------+----------+----------+----------+
+
+Derived Tables(DT) :-
+The Derived tables are effective in the following scenarios:
+
+1) Whenever the derived columns are getting repeated multiple times in the
+projection list then they can be derived only once in the DT.And then they can be
+used multiple times as a regular column in the projection list
+
+select emp.*,(sal + ifnull(comm, 200)* 0.70) - (sal*0.18) as "THS"
+from emp
+where "THS" > 1;
+Empty set, 1 warning (0.01 sec)
+
+Select ename, sal, comm, total,
+			 total*0.5 as "50% Less",
+			 total*0.4 as "40% Less",
+			 total*0.3 as "30% Less"
+from (Select  ename, sal, comm,
+	sal + IFNULL(comm, 0.30*Sal) as total from emp) e
+where total > 2500;
++--------+------+------+---------+----------+----------+----------+
+| ename  | sal  | comm | total   | 50% Less | 40% Less | 30% Less |
++--------+------+------+---------+----------+----------+----------+
+| JONES  | 2975 | NULL | 3867.50 | 1933.750 | 1547.000 | 1160.250 |
+| MARTIN | 1250 | 1400 | 2650.00 | 1325.000 | 1060.000 |  795.000 |
+| BLAKE  | 2850 | NULL | 3705.00 | 1852.500 | 1482.000 | 1111.500 |
+| CLARK  | 2450 | NULL | 3185.00 | 1592.500 | 1274.000 |  955.500 |
+| SCOTT  | 3000 | NULL | 3900.00 | 1950.000 | 1560.000 | 1170.000 |
+| KING   | 5000 | NULL | 6500.00 | 3250.000 | 2600.000 | 1950.000 |
+| FORD   | 3000 | NULL | 3900.00 | 1950.000 | 1560.000 | 1170.000 |
++--------+------+------+---------+----------+----------+----------+
+
+2) DT is beneficial when the column alias or a derived column needs to be used as
+a filter in where or having clause.
+
+select year(hiredate), sum(sal) "Year wise Total"
+from emp;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'mydb0.emp.HIREDATE'; this is incompatible with sql_mode=only_full_group_by
+
+select year(hiredate), sum(sal) "Year wise Total"
+from emp
+group by year(hiredate);
++----------------+-----------------+
+| year(hiredate) | Year wise Total |
++----------------+-----------------+
+|           1980 |             800 |
+|           1981 |           22825 |
+|           1982 |            4300 |
+|           1983 |            1100 |
++----------------+-----------------+
+
+Select Case 
+	When Year(HireDate) = 1980 then "In First Year"
+	When Year(HireDate) = 1981 then "In First Year"
+	When Year(HireDate) = 1982 then "In First Year"
+	Else
+	"Above third Year"
+End as "Year of Joining",
+Sum(Sal as Total 
+from emp
+Group by Case
+	When Year(HireDate) = 1980 then "In First Year"
+	When Year(HireDate) = 1981 then "In First Year"
+	When Year(HireDate) = 1982 then "In First Year"
+	Else
+	"Above third Year"
+End);
+
+Select YOJ, Sum(sal) as Total
+from ( Select Case
+		When Year(Hiredate) = 1980 then 'In First Year'
+		When Year(Hiredate) = 1981 then 'In Second Year'
+		When Year(Hiredate) = 1982 then 'In Third Year'
+		Else
+		"Above Third Year"
+		End as YOJ,
+	Sal
+	From Emp
+	)e
+Group by YOJ; --Do not enclose double cluase for column alias
++------------------+-------+
+| YOJ              | Total |
++------------------+-------+
+| In First Year    |   800 |
+| In Second Year   | 22825 |
+| In Third Year    |  4300 |
+| Above Third Year |  1100 |
++------------------+-------+
+
+3) When big expressions as non aggregate columns are there along with aggregate
+columns then instead repeating those big expressions in group by use them in DT. (Do not 
+enclose double quotes for MYSQL).
+
+To display names,salaries, job ,average salary and difference (raise) with average salary of those 
+employess who earns more than the average salary in their own jobs
+
+Select ename, sal, job, avg(sal), avg(sal) - sal as Raise
+from emp
+group by ename, sal, job;
++--------+------+-----------+-----------+--------+
+| ename  | sal  | job       | avg(sal)  | Raise  |
++--------+------+-----------+-----------+--------+
+| SMITH  |  800 | CLERK     |  800.0000 | 0.0000 |
+| ALLEN  | 1600 | SALESMAN  | 1600.0000 | 0.0000 |
+| WARD   | 1250 | SALESMAN  | 1250.0000 | 0.0000 |
+| JONES  | 2975 | MANAGER   | 2975.0000 | 0.0000 |
+| MARTIN | 1250 | SALESMAN  | 1250.0000 | 0.0000 |
+| BLAKE  | 2850 | MANAGER   | 2850.0000 | 0.0000 |
+| CLARK  | 2450 | MANAGER   | 2450.0000 | 0.0000 |
+| SCOTT  | 3000 | ANALYST   | 3000.0000 | 0.0000 |
+| KING   | 5000 | PRESIDENT | 5000.0000 | 0.0000 |
+| TURNER | 1500 | SALESMAN  | 1500.0000 | 0.0000 |
+| ADAMS  | 1100 | CLERK     | 1100.0000 | 0.0000 |
+| JAMES  |  950 | CLERK     |  950.0000 | 0.0000 |
+| FORD   | 3000 | ANALYST   | 3000.0000 | 0.0000 |
+| MILLER | 1300 | CLERK     | 1300.0000 | 0.0000 |
++--------+------+-----------+-----------+--------+
+ 
+
+Select E.Ename , E.Sal ,E.Job, DT.Average_Salary,(E.Sal - Average_Salary) as "Raise"
+From Emp E Join (Select Job , Avg(Sal) As Average_Salary
+     	  	From Emp
+		Group BY Job)DT
+On E.Job = DT.Job
+ Where E.Sal > DT.Average_Salary;
++--------+------+----------+----------------+----------+
+| Ename  | Sal  | Job      | Average_Salary | Raise    |
++--------+------+----------+----------------+----------+
+| ALLEN  | 1600 | SALESMAN |      1400.0000 | 200.0000 |
+| JONES  | 2975 | MANAGER  |      2758.3333 | 216.6667 |
+| BLAKE  | 2850 | MANAGER  |      2758.3333 |  91.6667 |
+| TURNER | 1500 | SALESMAN |      1400.0000 | 100.0000 |
+| ADAMS  | 1100 | CLERK    |      1037.5000 |  62.5000 |
+| MILLER | 1300 | CLERK    |      1037.5000 | 262.5000 |
++--------+------+----------+----------------+----------+
+
+4) We can use DT in joins along with regular tables, views and also with other DTs
+Generally a summary query output is created in DT and then that DT is joined with regular
+table to get summary values along with actual rows.
+That means to show groupable, non groupable, aggregate & expressions columns all together DT
+joining with regular table in useful!!!.
+
+Display The Name , Sal , Dept_no, Highest Sal of that Dept_no  And Difference of Employee Who 
+Are Earning Sal Less Than the highest of their own dept_no.
+
+Select E.eName, E.Sal, E.Deptno, DT.High, Dt.High - E.Sal as 'Diff'
+From Emp E join (Select Deptno , Max(Sal) as High 
+		From EMp
+		Group by Deptno)DT
+On E.Deptno = DT.Deptno
+Where Dt.High > E.Sal;
++--------+------+--------+------+------+
+| eName  | Sal  | Deptno | High | Diff |
++--------+------+--------+------+------+
+| SMITH  |  800 |     20 | 3000 | 2200 |
+| ALLEN  | 1600 |     30 | 2850 | 1250 |
+| WARD   | 1250 |     30 | 2850 | 1600 |
+| JONES  | 2975 |     20 | 3000 |   25 |
+| MARTIN | 1250 |     30 | 2850 | 1600 |
+| CLARK  | 2450 |     10 | 5000 | 2550 |
+| TURNER | 1500 |     30 | 2850 | 1350 |
+| ADAMS  | 1100 |     20 | 3000 | 1900 |
+| JAMES  |  950 |     30 | 2850 | 1900 |
+| MILLER | 1300 |     10 | 5000 | 3700 |
++--------+------+--------+------+------+
+
+
+Select E.eName, E.Sal, E.Deptno, DT.High, Dt.High - E.Sal as 'Diff'
+From Emp E join (Select Deptno , Max(Sal) as High 
+		From EMp
+		Group by Deptno)DT
+On E.Deptno = DT.Deptno
+Where Dt.High > E.Sal
+Order by Diff;
++--------+------+--------+------+------+
+| eName  | Sal  | Deptno | High | Diff |
++--------+------+--------+------+------+
+| JONES  | 2975 |     20 | 3000 |   25 |
+| ALLEN  | 1600 |     30 | 2850 | 1250 |
+| TURNER | 1500 |     30 | 2850 | 1350 |
+| WARD   | 1250 |     30 | 2850 | 1600 |
+| MARTIN | 1250 |     30 | 2850 | 1600 |
+| ADAMS  | 1100 |     20 | 3000 | 1900 |
+| JAMES  |  950 |     30 | 2850 | 1900 |
+| SMITH  |  800 |     20 | 3000 | 2200 |
+| CLARK  | 2450 |     10 | 5000 | 2550 |
+| MILLER | 1300 |     10 | 5000 | 3700 |
++--------+------+--------+------+------+
+
+
+To See Employees who earns salary less than the average salay of their own job.
+
+select e.*
+from emp e join (select job, avg(sal) as Average
+		from emp
+		group by job) dt
+on e.job = dt.job
+where e.sal< dt.Average
++-------+--------+----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-05-22 | 1250 |  500 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-20 | 1250 | 1400 |     30 |
+|  7782 | CLARK  | MANAGER  | 7839 | 1981-06-08 | 2450 | NULL |     10 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950 | NULL |     30 |
++-------+--------+----------+------+------------+------+------+--------+
+
+select e.ename, d.dname,e.sal
+from (select * from emp where sal > 2000) e 
+join
+(select * from dept where dname in ('ACCPUNTING','RESEARCH'))d
+on e.deptno = d.deptno;
++-------+----------+------+
+| ENAME | DNAME    | SAL  |
++-------+----------+------+
+| JONES | RESEARCH | 2975 |
+| SCOTT | RESEARCH | 3000 |
+| FORD  | RESEARCH | 3000 |
++-------+----------+------+
+
+5) DT can also be used effectively in doing the TOP N Analysis.
+
+To display 4th highest salary.
+
+Select distinct sal
+from emp
+order by sal desc 
+Limit 4;
++------+
+| sal  |
++------+
+| 5000 |
+| 3000 |
+| 2975 |
+| 2850 |
++------+
+
+Select min(Sal) as "Fourth Hightest Salary"
+From (Select Distinct Sal	
+	from emp
+	order by sal desc
+	Limit 4
+	)DT;
++------------------------+
+| Fourth Hightest Salary |
++------------------------+
+|                   2850 |
++------------------------+
+
+To Display Fourth Highest Salary ::
+
+Select Distinct Sal 
+from Emp 
+Order by Sal Desc
+Limit 4
+
+To Display Fourth Lowest Salary::
+
+Select Max(Sal) as "Fourth Lowest Salary"
+From (Select Distinct Sal	
+	from emp
+	order by sal 
+	Limit 4
+	)DT;
++----------------------+
+| Fourth Lowest Salary |
++----------------------+
+|                 1250 |
++----------------------+
+
+ Display the entire record(s) if the fourth highest salary earner(s).
+Select * 
+From Emp 
+Where sal =	(Select Min(Sal) 
+		From (Select Distinct Sal	
+			from emp
+			order by sal desc
+			Limit 4
+		     )DT
+		);
++-------+-------+---------+------+------------+------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+-------+---------+------+------------+------+------+--------+
+|  7698 | BLAKE | MANAGER | 7839 | 1981-05-01 | 2850 | NULL |     30 |
++-------+-------+---------+------+------------+------+------+--------+
+
+--OR
+
+Select e.*
+from emp e join (select min (Sl) as "Fourth Highest Salary"
+		From (Select distinct sal
+			From emp
+			order by sal desc
+			Limit 4
+		     )Dt
+		)DT1
+On e.sal = DT1.Sal;
+ERROR 1630 (42000): FUNCTION mydb0.min does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+
+Select e.*
+from emp e
+	join
+	(	Select Distinct sal
+		from emp
+		order by sal desc
+		Limit 4) dt
+on e.sal = dt.sal;
++-------+-------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+-------+-----------+------+------------+------+------+--------+
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7698 | BLAKE | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-03-06 | 3000 | NULL |     20 |
++-------+-------+-----------+------+------------+------+------+--------+
+
+
+6) DT are also handy when we want to improvise the output given by the set operators Union,
+Union All, etc.
+
+Select Pname,Sum(Amount) As Amount
+from (Select * from India
+	Union ALL
+	Select * from Australia
+	)Ind_AUS
+Group by Pname
+Order by Amount Desc;
++-----------------+--------+
+| Pname           | Amount |
++-----------------+--------+
+| LCD             | 414000 |
+| Washing Machine | 238000 |
+| Refrigerator    | 198000 |
+| Sofa            | 149000 |
+| Chairs          |  50000 |
+| Dinning Table   |  35000 |
++-----------------+--------+
+-----------------------------------------------------------------------------------------------------
+
+Window Functions ala SQL Analytical functions aka Window Analytical functions:
+
+Window Functions help us to get the outputs given by correlated sub queries , non correlated sub
+queries and derived table in a VERY EASY way.
+Performance wise VERY GOOD!!!
+Logic building is EASY.
+
+Select ename, job, deptno, sal , max(sal) Over()
+from emp;
++--------+-----------+--------+------+-----------------+
+| ename  | job       | deptno | sal  | max(sal) Over() |
++--------+-----------+--------+------+-----------------+
+| SMITH  | CLERK     |     20 |  800 |            5000 |
+| ALLEN  | SALESMAN  |     30 | 1600 |            5000 |
+| WARD   | SALESMAN  |     30 | 1250 |            5000 |
+| JONES  | MANAGER   |     20 | 2975 |            5000 |
+| MARTIN | SALESMAN  |     30 | 1250 |            5000 |
+| BLAKE  | MANAGER   |     30 | 2850 |            5000 |
+| CLARK  | MANAGER   |     10 | 2450 |            5000 |
+| SCOTT  | ANALYST   |     20 | 3000 |            5000 |
+| KING   | PRESIDENT |     10 | 5000 |            5000 |
+| TURNER | SALESMAN  |     30 | 1500 |            5000 |
+| ADAMS  | CLERK     |     20 | 1100 |            5000 |
+| JAMES  | CLERK     |     30 |  950 |            5000 |
+| FORD   | ANALYST   |     20 | 3000 |            5000 |
+| MILLER | CLERK     |     10 | 1300 |            5000 |
++--------+-----------+--------+------+-----------------+
+
+
+--------------------------------------------------------------------------------------------------
+OVER () Window Function :
+-->  Before the over() Function We are Supposed to mention an Aggregate Func Or Analytical Func.
+If an aggregate function is before Over() then the Aggregate Value  is returned to all the
+rows without the need of group  by clause of other columns. 
+Before the Over() Function we cannot have single Row Functions.
+***That means we want to return aggregate values for each row then Over() is a great function***
+
+Select Ename , Sal ,deptno,Max(Sal) Over(Partition by Deptno) As Deptno_highest
+from emp;
++--------+------+--------+----------------+
+| Ename  | Sal  | deptno | Deptno_highest |
++--------+------+--------+----------------+
+| CLARK  | 2450 |     10 |           5000 |
+| KING   | 5000 |     10 |           5000 |
+| MILLER | 1300 |     10 |           5000 |
+| SMITH  |  800 |     20 |           3000 |
+| JONES  | 2975 |     20 |           3000 |
+| SCOTT  | 3000 |     20 |           3000 |
+| ADAMS  | 1100 |     20 |           3000 |
+| FORD   | 3000 |     20 |           3000 |
+| ALLEN  | 1600 |     30 |           2850 |
+| WARD   | 1250 |     30 |           2850 |
+| MARTIN | 1250 |     30 |           2850 |
+| BLAKE  | 2850 |     30 |           2850 |
+| TURNER | 1500 |     30 |           2850 |
+| JAMES  |  950 |     30 |           2850 |
++--------+------+--------+----------------+
+	
+Partition By Parameter To Over() function.
+It will sort the rows as per the column(s) mentioned after Pratition BY clause.
+And most importantly, it will do aggregation of each distinct value of that column
+like Group By clause.
+
+Display transaction id, country, pname, sales and the total sales within that country.
+
+Select trans_id, country, pname, sales, 
+Sum(Sales) Over(Partition By Country, Pname) as Total_Prod_Country
+from products2;
++----------+---------+---------+-------+--------------------+
+| trans_id | country | pname   | sales | Total_Prod_Country |
++----------+---------+---------+-------+--------------------+
+|       44 | China   | Nokia   |   700 |              12630 |
+|       43 | China   | Nokia   |   680 |              12630 |
+|       40 | China   | Nokia   |   400 |              12630 |
+|       39 | China   | Nokia   |   650 |              12630 |
+|       36 | China   | Nokia   |   800 |              12630 |
+|       35 | China   | Nokia   |   900 |              12630 |
+|       48 | China   | Nokia   |  3500 |              12630 |
+|       47 | China   | Nokia   |  5000 |              12630 |
+|       46 | China   | Samsung |  1400 |               9600 |
+|       45 | China   | Samsung |  1000 |               9600 |
+|       42 | China   | Samsung |   500 |               9600 |
+|       41 | China   | Samsung |   200 |               9600 |
+|       38 | China   | Samsung |   400 |               9600 |
+|       37 | China   | Samsung |   600 |               9600 |
+|       50 | China   | Samsung |  3500 |               9600 |
+|       49 | China   | Samsung |  2000 |               9600 |
+|       52 | France  | Nokia   |   400 |              10300 |
+|       51 | France  | Nokia   |   800 |              10300 |
+|       55 | France  | Nokia   |  4000 |              10300 |
+|       56 | France  | Nokia   |  3000 |              10300 |
+|       59 | France  | Nokia   |   300 |              10300 |
+|       60 | France  | Nokia   |   400 |              10300 |
+|       63 | France  | Nokia   |   800 |              10300 |
+|       64 | France  | Nokia   |   600 |              10300 |
+|       58 | France  | Samsung |   550 |               4800 |
+|       54 | France  | Samsung |   600 |               4800 |
+|       53 | France  | Samsung |   300 |               4800 |
+|       57 | France  | Samsung |   450 |               4800 |
+|       61 | France  | Samsung |  1000 |               4800 |
+|       62 | France  | Samsung |   400 |               4800 |
+|       65 | France  | Samsung |   700 |               4800 |
+|       66 | France  | Samsung |   800 |               4800 |
+|       13 | India   | Nokia   |  3000 |              13600 |
+|        9 | India   | Nokia   |   100 |              13600 |
+|        1 | India   | Nokia   |   200 |              13600 |
+|        2 | India   | Nokia   |   100 |              13600 |
+|        3 | India   | Nokia   |   500 |              13600 |
+|        4 | India   | Nokia   |   800 |              13600 |
+|        5 | India   | Nokia   |  1200 |              13600 |
+|        6 | India   | Nokia   |  1500 |              13600 |
+|        7 | India   | Nokia   |  1400 |              13600 |
+|        8 | India   | Nokia   |  1300 |              13600 |
+|       10 | India   | Nokia   |   300 |              13600 |
+|       11 | India   | Nokia   |  1100 |              13600 |
+|       12 | India   | Nokia   |  2100 |              13600 |
+|       22 | India   | Samsung |   400 |               5020 |
+|       21 | India   | Samsung |   900 |               5020 |
+|       20 | India   | Samsung |    80 |               5020 |
+|       19 | India   | Samsung |    40 |               5020 |
+|       26 | India   | Samsung |   400 |               5020 |
+|       25 | India   | Samsung |   300 |               5020 |
+|       24 | India   | Samsung |  1500 |               5020 |
+|       23 | India   | Samsung |  1400 |               5020 |
+|       18 | UK      | Nokia   | 26000 |              92000 |
+|       17 | UK      | Nokia   | 26000 |              92000 |
+|       16 | UK      | Nokia   | 21000 |              92000 |
+|       15 | UK      | Nokia   | 10000 |              92000 |
+|       14 | UK      | Nokia   |  9000 |              92000 |
+|       33 | UK      | Samsung |  8000 |             236000 |
+|       32 | UK      | Samsung |  4000 |             236000 |
+|       31 | UK      | Samsung |  3000 |             236000 |
+|       30 | UK      | Samsung | 40000 |             236000 |
+|       29 | UK      | Samsung | 90000 |             236000 |
+|       28 | UK      | Samsung | 45000 |             236000 |
+|       27 | UK      | Samsung | 40000 |             236000 |
+|       34 | UK      | Samsung |  6000 |             236000 |
++----------+---------+---------+-------+--------------------+
+
+empno is PK
+Select empno, ename, sal, Max(sal) Over (Partition by empno)
+from emp;
++-------+--------+------+------------------------------------+
+| empno | ename  | sal  | Max(sal) Over (Partition by empno) |
++-------+--------+------+------------------------------------+
+|  7369 | SMITH  |  800 |                                800 |
+|  7499 | ALLEN  | 1600 |                               1600 |
+|  7521 | WARD   | 1250 |                               1250 |
+|  7566 | JONES  | 2975 |                               2975 |
+|  7654 | MARTIN | 1250 |                               1250 |
+|  7698 | BLAKE  | 2850 |                               2850 |
+|  7782 | CLARK  | 2450 |                               2450 |
+|  7788 | SCOTT  | 3000 |                               3000 |
+|  7839 | KING   | 5000 |                               5000 |
+|  7844 | TURNER | 1500 |                               1500 |
+|  7876 | ADAMS  | 1100 |                               1100 |
+|  7900 | JAMES  |  950 |                                950 |
+|  7902 | FORD   | 3000 |                               3000 |
+|  7934 | MILLER | 1300 |                               1300 |
++-------+--------+------+------------------------------------+
+Candidates like Primary key and Unique Key are not good for 
+Partition because we cannot make partition of unique values
+
+Ranking Functions:
+1) Rank()
+2) Dense_Rank()
+3) Row_Number()
+
+Rank and Dense Rank will rank the records as per some column's values. 
+***The values need to be sorted intrnally for ranking purpose***
+
+select ename, sal, Rank() Over()
+From Emp;--IN MySQL output is wrong !! All other SQL databases Throw error
++--------+------+---------------+
+| ename  | sal  | Rank() Over() |
++--------+------+---------------+
+| SMITH  |  800 |             1 |
+| ALLEN  | 1600 |             1 |
+| WARD   | 1250 |             1 |
+| JONES  | 2975 |             1 |
+| MARTIN | 1250 |             1 |
+| BLAKE  | 2850 |             1 |
+| CLARK  | 2450 |             1 |
+| SCOTT  | 3000 |             1 |
+| KING   | 5000 |             1 |
+| TURNER | 1500 |             1 |
+| ADAMS  | 1100 |             1 |
+| JAMES  |  950 |             1 |
+| FORD   | 3000 |             1 |
+| MILLER | 1300 |             1 |
++--------+------+---------------+
+
+Select ename, sal, Rank()Over(Order by Sal DESC)
+From Emp;
+
+Rank will give the same rank for tied values, but for the next value it will give the 
+physical row number instead of giving the logicla next rank number.
+
+2) Dense_Rank()
+Rank will give the same rank for tied values, but for the next value it will give the 
+the logical next rank Number!!!!
+
+select ename,sal, Dense_Rank() Over(Order by Sal Desc)
+from emp;
+
+Display Deptno wise salary ranks.
+
+Select Ename, Deptno, sal, Dense_Rank() Over(Partition By Deptno Order By sal Desc) 
+from emp
+Order by 4;
+
+Select Ename, Deptno, sal, Dense_Rank() Over(Partition By Deptno Order By sal Desc) as "Deptno Rank",
+Dense_Rank() Over(Order By Sal Desc) as "Overall Rank"
+from emp
+Order by Deptno;
++--------+--------+------+-------------+--------------+
+| Ename  | Deptno | sal  | Deptno Rank | Overall Rank |
++--------+--------+------+-------------+--------------+
+| KING   |     10 | 5000 |           1 |            1 |
+| CLARK  |     10 | 2450 |           2 |            5 |
+| MILLER |     10 | 1300 |           3 |            8 |
+| SCOTT  |     20 | 3000 |           1 |            2 |
+| FORD   |     20 | 3000 |           1 |            2 |
+| JONES  |     20 | 2975 |           2 |            3 |
+| ADAMS  |     20 | 1100 |           3 |           10 |
+| SMITH  |     20 |  800 |           4 |           12 |
+| BLAKE  |     30 | 2850 |           1 |            4 |
+| ALLEN  |     30 | 1600 |           2 |            6 |
+| TURNER |     30 | 1500 |           3 |            7 |
+| WARD   |     30 | 1250 |           4 |            9 |
+| MARTIN |     30 | 1250 |           4 |            9 |
+| JAMES  |     30 |  950 |           5 |           11 |
++--------+--------+------+-------------+--------------+
+
+3) Row_Number(): It is helpfulto get an auto serial number for each row given by the select 
+statement's output.
+Even if there is any tie still the tied values also will get next numbers.
+ALWAYS RETURNS PHYSICAL ROW NUMBER.
+
+It is always a good practice to show Row_Number() as first column of projection.
+
+Select Row_Number() Over(Order By Sal Desc) as "Record Number", 
+	Ename,
+	Sal,
+	Deptno
+From Emp;
++---------------+--------+------+--------+
+| Record Number | Ename  | Sal  | Deptno |
++---------------+--------+------+--------+
+|             1 | KING   | 5000 |     10 |
+|             2 | SCOTT  | 3000 |     20 |
+|             3 | FORD   | 3000 |     20 |
+|             4 | JONES  | 2975 |     20 |
+|             5 | BLAKE  | 2850 |     30 |
+|             6 | CLARK  | 2450 |     10 |
+|             7 | ALLEN  | 1600 |     30 |
+|             8 | TURNER | 1500 |     30 |
+|             9 | MILLER | 1300 |     10 |
+|            10 | WARD   | 1250 |     30 |
+|            11 | MARTIN | 1250 |     30 |
+|            12 | ADAMS  | 1100 |     20 |
+|            13 | JAMES  |  950 |     30 |
+|            14 | SMITH  |  800 |     20 |
++---------------+--------+------+--------+
+
+Select Row_Number() Over() as "Record Number", 
+	Ename,
+	Sal,
+	Deptno
+From Emp;--In MySQL even if the Order By is NOT mentioned inside Over(), still it works
+perfectly!!!
+--Caution : Other SQL Databases throw error.
++---------------+--------+------+--------+
+| Record Number | Ename  | Sal  | Deptno |
++---------------+--------+------+--------+
+|             1 | SMITH  |  800 |     20 |
+|             2 | ALLEN  | 1600 |     30 |
+|             3 | WARD   | 1250 |     30 |
+|             4 | JONES  | 2975 |     20 |
+|             5 | MARTIN | 1250 |     30 |
+|             6 | BLAKE  | 2850 |     30 |
+|             7 | CLARK  | 2450 |     10 |
+|             8 | SCOTT  | 3000 |     20 |
+|             9 | KING   | 5000 |     10 |
+|            10 | TURNER | 1500 |     30 |
+|            11 | ADAMS  | 1100 |     20 |
+|            12 | JAMES  |  950 |     30 |
+|            13 | FORD   | 3000 |     20 |
+|            14 | MILLER | 1300 |     10 |
++---------------+--------+------+--------+ 	
+
+
+select ename, sal,
+Dense_Rank() Over(Order by Sal desc) as Salary_Rank
+from emp
+where Dense_Rank() Over(Order by Sal desc) <= 3;
+ERROR 3593 (HY000): You cannot use the window function 'dense_rank' in this context.'
+
+Top - N Analysis becomes very easy using the Windowing & Ranking  fuctions.
+
+select *
+From(select ename, sal,
+	Dense_Rank() Over(Order by Sal desc) as Salary_Rank
+	from emp) Emp_Rank
+Where Salary_Rank <= 3;
++-------+------+-------------+
+| ename | sal  | Salary_Rank |
++-------+------+-------------+
+| KING  | 5000 |           1 |
+| SCOTT | 3000 |           2 |
+| FORD  | 3000 |           2 |
+| JONES | 2975 |           3 |
++-------+------+-------------+
+
+7) Whenever the Output is to be filtered as per the window Analytical/ Ranking functions then that 
+entire output can be inside a DT.And ooutside the DT we can use where clause & filter!!!!
+
+Display the second highest earner records in each deptno.
+
+Select Ename, Sal, Deptno, Salary_Rank
+From(Select ename, Sal, Deptno,
+	Dense_Rank() Over(Partition by Deptno Order By Sal Desc) as Salary_Rank
+	From emp) Emp_Rank
+Where Salary_Rank = 2;
++-------+------+--------+-------------+
+| Ename | Sal  | Deptno | Salary_Rank |
++-------+------+--------+-------------+
+| CLARK | 2450 |     10 |           2 |
+| JONES | 2975 |     20 |           2 |
+| ALLEN | 1600 |     30 |           2 |
++-------+------+--------+-------------+
+
+Select DT.* 
+From (Select Emp.*,Dense_Rank() Over(Partition BY Deptno Order By Sal Desc) as Sal_Rank
+	from emp)DT
+where Sal_Rank = 2;
++-------+-------+----------+------+------------+------+------+--------+----------+
+| EMPNO | ENAME | JOB      | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | Sal_Rank |
++-------+-------+----------+------+------------+------+------+--------+----------+
+|  7782 | CLARK | MANAGER  | 7839 | 1981-06-08 | 2450 | NULL |     10 |        2 |
+|  7566 | JONES | MANAGER  | 7839 | 1981-04-02 | 2975 | NULL |     20 |        2 |
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-05-20 | 1600 |  300 |     30 |        2 |
++-------+-------+----------+------+------------+------+------+--------+----------+
+
+select * from emp
+
+Select * from(....................
+		......)DT
+	
+Select Empno, Ename, Sal,
+Sum(Sal) over (order by Empno rows between unbounded
+preceding and current row) as "Running Total"
+from emp;
++-------+--------+------+---------------+
+| Empno | Ename  | Sal  | Running Total |
++-------+--------+------+---------------+
+|  7369 | SMITH  |  800 |           800 |
+|  7499 | ALLEN  | 1600 |          2400 |
+|  7521 | WARD   | 1250 |          3650 |
+|  7566 | JONES  | 2975 |          6625 |
+|  7654 | MARTIN | 1250 |          7875 |
+|  7698 | BLAKE  | 2850 |         10725 |
+|  7782 | CLARK  | 2450 |         13175 |
+|  7788 | SCOTT  | 3000 |         16175 |
+|  7839 | KING   | 5000 |         21175 |
+|  7844 | TURNER | 1500 |         22675 |
+|  7876 | ADAMS  | 1100 |         23775 |
+|  7900 | JAMES  |  950 |         24725 |
+|  7902 | FORD   | 3000 |         27725 |
+|  7934 | MILLER | 1300 |         29025 |
++-------+--------+------+---------------+
+
+	
+Select Empno, Ename, Sal,
+Sum(Sal) over (rows between unbounded
+preceding and current row) as "Running Total"
+from emp;
++-------+--------+------+---------------+
+| Empno | Ename  | Sal  | Running Total |
++-------+--------+------+---------------+
+|  7369 | SMITH  |  800 |           800 |
+|  7499 | ALLEN  | 1600 |          2400 |
+|  7521 | WARD   | 1250 |          3650 |
+|  7566 | JONES  | 2975 |          6625 |
+|  7654 | MARTIN | 1250 |          7875 |
+|  7698 | BLAKE  | 2850 |         10725 |
+|  7782 | CLARK  | 2450 |         13175 |
+|  7788 | SCOTT  | 3000 |         16175 |
+|  7839 | KING   | 5000 |         21175 |
+|  7844 | TURNER | 1500 |         22675 |
+|  7876 | ADAMS  | 1100 |         23775 |
+|  7900 | JAMES  |  950 |         24725 |
+|  7902 | FORD   | 3000 |         27725 |
+|  7934 | MILLER | 1300 |         29025 |
++-------+--------+------+---------------+
+
+Running totals as per specific rows preceding instead of unbounded:
+
+Select Empno, Ename, Sal,
+Sum(Sal) over (rows between 2 preceding and current row) as "Running Total"
+From emp;
++-------+--------+------+---------------+
+| Empno | Ename  | Sal  | Running Total |
++-------+--------+------+---------------+
+|  7369 | SMITH  |  800 |           800 |
+|  7499 | ALLEN  | 1600 |          2400 |
+|  7521 | WARD   | 1250 |          3650 |
+|  7566 | JONES  | 2975 |          5825 |
+|  7654 | MARTIN | 1250 |          5475 |
+|  7698 | BLAKE  | 2850 |          7075 |
+|  7782 | CLARK  | 2450 |          6550 |
+|  7788 | SCOTT  | 3000 |          8300 |
+|  7839 | KING   | 5000 |         10450 |
+|  7844 | TURNER | 1500 |          9500 |
+|  7876 | ADAMS  | 1100 |          7600 |
+|  7900 | JAMES  |  950 |          3550 |
+|  7902 | FORD   | 3000 |          5050 |
+|  7934 | MILLER | 1300 |          5250 |
++-------+--------+------+---------------+
+
+Lead Log Over()
+Select empno, ename, job, deptno, sal,
+Lead(empno,1) Over(Order by empno) as "Next Employee ID"
+From Emp;
++-------+--------+-----------+--------+------+------------------+
+| empno | ename  | job       | deptno | sal  | Next Employee ID |
++-------+--------+-----------+--------+------+------------------+
+|  7369 | SMITH  | CLERK     |     20 |  800 |             7499 |
+|  7499 | ALLEN  | SALESMAN  |     30 | 1600 |             7521 |
+|  7521 | WARD   | SALESMAN  |     30 | 1250 |             7566 |
+|  7566 | JONES  | MANAGER   |     20 | 2975 |             7654 |
+|  7654 | MARTIN | SALESMAN  |     30 | 1250 |             7698 |
+|  7698 | BLAKE  | MANAGER   |     30 | 2850 |             7782 |
+|  7782 | CLARK  | MANAGER   |     10 | 2450 |             7788 |
+|  7788 | SCOTT  | ANALYST   |     20 | 3000 |             7839 |
+|  7839 | KING   | PRESIDENT |     10 | 5000 |             7844 |
+|  7844 | TURNER | SALESMAN  |     30 | 1500 |             7876 |
+|  7876 | ADAMS  | CLERK     |     20 | 1100 |             7900 |
+|  7900 | JAMES  | CLERK     |     30 |  950 |             7902 |
+|  7902 | FORD   | ANALYST   |     20 | 3000 |             7934 |
+|  7934 | MILLER | CLERK     |     10 | 1300 |             NULL |
++-------+--------+-----------+--------+------+------------------+
+
+Select empno, ename, job, deptno, sal,
+Lead(ename,2) Over(Order by empno) as "Next Employee Name"
+From Emp;
++-------+--------+-----------+--------+------+--------------------+
+| empno | ename  | job       | deptno | sal  | Next Employee Name |
++-------+--------+-----------+--------+------+--------------------+
+|  7369 | SMITH  | CLERK     |     20 |  800 | WARD               |
+|  7499 | ALLEN  | SALESMAN  |     30 | 1600 | JONES              |
+|  7521 | WARD   | SALESMAN  |     30 | 1250 | MARTIN             |
+|  7566 | JONES  | MANAGER   |     20 | 2975 | BLAKE              |
+|  7654 | MARTIN | SALESMAN  |     30 | 1250 | CLARK              |
+|  7698 | BLAKE  | MANAGER   |     30 | 2850 | SCOTT              |
+|  7782 | CLARK  | MANAGER   |     10 | 2450 | KING               |
+|  7788 | SCOTT  | ANALYST   |     20 | 3000 | TURNER             |
+|  7839 | KING   | PRESIDENT |     10 | 5000 | ADAMS              |
+|  7844 | TURNER | SALESMAN  |     30 | 1500 | JAMES              |
+|  7876 | ADAMS  | CLERK     |     20 | 1100 | FORD               |
+|  7900 | JAMES  | CLERK     |     30 |  950 | MILLER             |
+|  7902 | FORD   | ANALYST   |     20 | 3000 | NULL               |
+|  7934 | MILLER | CLERK     |     10 | 1300 | NULL               |
++-------+--------+-----------+--------+------+--------------------+
+
+Select empno, ename, job, deptno, sal,
+Lead(ename,2) Over() as "Next Employee Name"
+From Emp;
++-------+--------+-----------+--------+------+--------------------+
+| empno | ename  | job       | deptno | sal  | Next Employee Name |
++-------+--------+-----------+--------+------+--------------------+
+|  7369 | SMITH  | CLERK     |     20 |  800 | WARD               |
+|  7499 | ALLEN  | SALESMAN  |     30 | 1600 | JONES              |
+|  7521 | WARD   | SALESMAN  |     30 | 1250 | MARTIN             |
+|  7566 | JONES  | MANAGER   |     20 | 2975 | BLAKE              |
+|  7654 | MARTIN | SALESMAN  |     30 | 1250 | CLARK              |
+|  7698 | BLAKE  | MANAGER   |     30 | 2850 | SCOTT              |
+|  7782 | CLARK  | MANAGER   |     10 | 2450 | KING               |
+|  7788 | SCOTT  | ANALYST   |     20 | 3000 | TURNER             |
+|  7839 | KING   | PRESIDENT |     10 | 5000 | ADAMS              |
+|  7844 | TURNER | SALESMAN  |     30 | 1500 | JAMES              |
+|  7876 | ADAMS  | CLERK     |     20 | 1100 | FORD               |
+|  7900 | JAMES  | CLERK     |     30 |  950 | MILLER             |
+|  7902 | FORD   | ANALYST   |     20 | 3000 | NULL               |
+|  7934 | MILLER | CLERK     |     10 | 1300 | NULL               |
++-------+--------+-----------+--------+------+--------------------+
+***********************************************************************
+Lag :
+Select empno, ename, job, deptno, sal,
+Lag(ename,1) Over() as "Previous Employee Name"
+From Emp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

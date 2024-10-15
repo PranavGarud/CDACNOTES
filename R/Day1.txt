@@ -1,0 +1,122 @@
+R :-
+Vector 
+
+
+> g
+Error: object 'g' not found
+> g <- 4
+> g
+[1] 4
+> 6 -> y
+> y
+[1] 6
+> h <- "Stats"
+> h
+[1] "Stats"
+> typeof[g]
+Error in typeof[g] : object of type 'closure' is not subsettable
+> typeof(g)
+[1] "double"
+> class(g)
+[1] "numeric"
+> class(h)
+[1] "character"
+> e <- 56
+> p <- c(3,6,7,2,3)
+> p
+[1] 3 6 7 2 3
+> q <- (4,8,6,7)
+Error: unexpected ',' in "q <- (4,"
+> q
+function (save = "default", status = 0, runLast = TRUE) 
+.Internal(quit(save, status, runLast))
+<bytecode: 0x0000018c27f5a108>
+<environment: namespace:base>
+> p
+[1] 3 6 7 2 3
+> h <- c(34, "s", 45, 0)
+> h
+[1] "34" "s"  "45" "0" 
+>q()
+
+First load the data then
+
+> ls()
+[1] "e" "g" "h" "p" "y"
+> rm(list = ls())
+> ls()
+character(0)
+
+
+[Previously saved workspace restored]
+
+> ls()
+character(0)
+> e <- 56
+> ls()
+[1] "e"
+> p 
+Error: object 'p' not found
+> p <- c(45,85,62,48,55)
+> ls()
+[1] "e" "p"
+> g <- c(34, "s", 45, 0)
+> ls()
+[1] "e" "g" "p"
+> ? ls
+starting httpd help server ... done
+> y <- 10000
+> n <- 3
+> r <- 9
+> si <- y*n*r/100
+> si
+[1] 2700
+> print(si)
+[1] 2700
+
+Script :
+p <- 10000
+n <- 3
+r <- 9
+si <- p*n*r/100
+print(si)
+si
+
+To execute Ctrl+R from 1st line because it executes line by line.
+
+first.Second.Third : Camel Case(Java)
+first.second.third : Leopard Case(R)
+first_second_third : Snake Case(Python)
+
+
+Consider the dataset diamonds in the folder datasets. Subset the dataset with criteria as cut=Premium and 
+color=J
+
+Script Execution :
+> p <- 10000
+> n <- 3
+> r <- 9
+> si <- p*n*r/100
+> print(si)
+[1] 2700
+> print(si)
+[1] 2700
+> print(si)
+[1] 2700
+> print(si)
+[1] 2700
+> print(si)
+[1] 2700
+> r <- 9
+> si <- p*n*r/100
+> print(si)
+[1] 2700
+> si
+[1] 2700
+> si
+[1] 2700
+> si
+[1] 2700
+> si
+[1] 2700
+>

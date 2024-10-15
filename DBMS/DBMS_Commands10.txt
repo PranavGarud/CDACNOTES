@@ -1,0 +1,44 @@
+Data Warehouse : 
+
+ETL
+Extract Transform Load
+
+ETL is always done using GUI tools
+
+GUI Tools of ETL are of two types:
+1)IDE Integrated Development Environment(Everything happens in one software)
+2)RAD Rapid Application Development (Drag & Drop features, they will generate code for you)
+
+ETL Tools:
+1) Infomatica PowerCenter
+2) Ab Initio
+3) SQL Server Integration Services (SSIS)
+4) Oracle Data Integrator (ODI)
+5) Alteryx
+6) Data Stage (Infosphere)
+7) Azure Data Factory(Microsoft) - No.1
+
+
+There are 2 Types of ETL Loads:
+1) Full Load
+2) Incremental Load
+
+1) Full Load : First time done when the target D/W is empty.
+So, therefore it is one time activity.
+
+2) Incremental Load : Done after the full load.
+Required to get the data from each source on daily basis to accomodate the new records which are
+NOT there in the target D/W.
+Incremental Load is done regularly.
+Generally it is scheduled.
+Incremental Load is first done in the "Staging Area".
+Then from "Staging Area" it is loaded in the target D/W.
+Staging Tables are used in the "Staging Area" to get the incremental load.
+From Staging tables data finally goes in the Target D/W.
+
+ETL Demo:
+Source is SQL Server
+Transformation is Aggregation
+Target or Destination is Flat File.
+Destination Flat File Path is C:\SSIS_Demos_CDAC
+The file name should be Emp_Summary.txt

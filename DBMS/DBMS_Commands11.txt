@@ -1,0 +1,295 @@
+NO-SQL:Not Only SQL
+
+-Born 2000
+-Non tabular database
+- Store Data Differently than relational Tables.
+- Provides Flexible Schema(Not Well Structured).
+- Scale easily with large amount of data and high user loads
+
+Why NO SQL:
+-Fast paced Agile  Developement.
+- Storage of Structured ,Unstructured OR Semi-Structured Data.
+-Huge Volume Of Data.
+- Requirement for Scale-out Architecture.
+- Modern Application paradigms like Real time Streaming.
+
+To Create or Switch : use 'DataBaseName'
+e.g:
+test> use mgd0
+switched to db mgd0
+
+CRUDE Operations:
+1) show dbs : List of commands
+e.g:
+show dbs 
+admin   40.00 KiB
+config  60.00 KiB
+local   72.00 KiB
+
+MongoDB Collections : (Tables)
+e.g:
+db.createCollection("employees")
+{ ok: 1 }
+mgd0> db.createcollection("employees")
+TypeError: db.createcollection is not a function --This is Case Sensetive
+db.createCollection("departments")
+db.createCollection("addresses")
+
+show collections
+employees
+
+Insertion :
+db.employees.insert({empno:1,ename:"Smith",salary:6000});
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('6708de4ad72889e2c586b01d') }
+}
+
+To Show data:
+db.employees.find({})
+[
+  {
+    _id: ObjectId('6708de4ad72889e2c586b01d'),
+    empno: 1,
+    ename: 'Smith',
+    salary: 6000
+  }
+]
+		OR
+db.employees.find()
+[
+  {
+    _id: ObjectId('6708de4ad72889e2c586b01d'),
+    empno: 1,
+    ename: 'Smith',
+    salary: 6000
+  }
+]
+
+--------------------------------------------------------
+db.employees.insert({ surname:"Sharma",incentive: 500})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('6708dfe9752bd7c3bb86b01d') }
+}
+
+db.employees.find()
+[
+  {
+    _id: ObjectId('6708de4ad72889e2c586b01d'),
+    empno: 1,
+    ename: 'Smith',
+    salary: 6000
+  },
+  {
+    _id: ObjectId('6708dfe9752bd7c3bb86b01d'),
+    surname: 'Sharma',
+    incentive: 500
+  }
+]
+
+
+db.employees2.insert({deskid:1, extensionid:1234, empid:101})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('6708e196752bd7c3bb86b01e') }
+}
+
+db.employees2.find()
+[
+  {
+    _id: ObjectId('6708e196752bd7c3bb86b01e'),
+    deskid: 1,
+    extensionid: 1234,
+    empid: 101
+  }
+]
+
+Projection:
+Display single field but all doucuments:
+
+db.employees2.
+
+db.Emp5.insert({"empno" :1, "ename":"Smith", sal:6000});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('6708e294752bd7c3bb86b01f') }
+}
+db.Emp5.insert({"empno" :2, "ename":"Martin", sal:7000});
+db.Emp5.insert({"empno" :3, "ename":"James", sal:5000});
+db.Emp5.insert({"empno" :4, "ename":"King", sal:4000});
+
+db.Emp5.find()
+
+db.Emp5.find({},{ename:1});
+[
+  { _id: ObjectId('6708e3cbe0ad97832a86b01d'), ename: 'Smith' },
+  { _id: ObjectId('6708e3dae0ad97832a86b01e'), ename: 'Martin' },
+  { _id: ObjectId('6708e3e3e0ad97832a86b01f'), ename: 'James' },
+  { _id: ObjectId('6708e3eae0ad97832a86b020'), ename: 'King' }
+]
+
+db.Emp5.find({},{ENAME:1});
+[
+  { _id: ObjectId('6708e3cbe0ad97832a86b01d') },
+  { _id: ObjectId('6708e3dae0ad97832a86b01e') },
+  { _id: ObjectId('6708e3e3e0ad97832a86b01f') },
+  { _id: ObjectId('6708e3eae0ad97832a86b020') }
+]
+
+db.Emp5.find({},{ABCD:1});
+[
+  { _id: ObjectId('6708e3cbe0ad97832a86b01d') },
+  { _id: ObjectId('6708e3dae0ad97832a86b01e') },
+  { _id: ObjectId('6708e3e3e0ad97832a86b01f') },
+  { _id: ObjectId('6708e3eae0ad97832a86b020') }
+]
+
+db.Emp5.find({},{ename:0});
+[
+  { _id: ObjectId('6708e3cbe0ad97832a86b01d'), empno: 1, sal: 6000 },
+  { _id: ObjectId('6708e3dae0ad97832a86b01e'), empno: 2, sal: 7000 },
+  { _id: ObjectId('6708e3e3e0ad97832a86b01f'), empno: 3, sal: 5000 },
+  { _id: ObjectId('6708e3eae0ad97832a86b020'), empno: 4, sal: 4000 }
+]
+
+db.Emp5.find({},{ename:1,_id:0})
+[
+  { ename: 'Smith' },
+  { ename: 'Martin' },
+  { ename: 'James' },
+  { ename: 'King' }
+]
+
+db.Emp5.find({},{ename:1,sal:2,_id:0})
+[
+  { ename: 'Smith', sal: 6000 },
+  { ename: 'Martin', sal: 7000 },
+  { ename: 'James', sal: 5000 },
+  { ename: 'King', sal: 4000 }
+]
+
+------------------------------------------------------------------
+Filtering Rows & Columns
+$gt  - Greater Than
+$lt  - Less Than
+$eq  - Equal to
+$ne  - Not Equal to
+$min -
+$max - 
+$and - and operator
+$or  - or operator
+
+
+db.Emp5.find({"sal":{$gt:5000}})
+[
+  {
+    _id: ObjectId('6708e3cbe0ad97832a86b01d'),
+    empno: 1,
+    ename: 'Smith',
+    sal: 6000
+  },
+  {
+    _id: ObjectId('6708e3dae0ad97832a86b01e'),
+    empno: 2,
+    ename: 'Martin',
+    sal: 7000
+  }
+]
+
+db.Emp5.find({"sal":{$lt:5000}})
+[
+  {
+    _id: ObjectId('6708e3eae0ad97832a86b020'),
+    empno: 4,
+    ename: 'King',
+    sal: 4000
+  }
+]
+
+db.Emp5.find({"sal":{$lt:5000}},{ename:1,sal:2,_id:0});
+[ { ename: 'King', sal: 4000 } ]
+
+db.Emp5.find({"ename":{$eq:"Martin"}});
+[
+  {
+    _id: ObjectId('6708e3dae0ad97832a86b01e'),
+    empno: 2,
+    ename: 'Martin',
+    sal: 7000
+  }
+]
+
+db.Emp5.find({'ename':{$eq:'Martin'}});
+[
+  {
+    _id: ObjectId('6708e3dae0ad97832a86b01e'),
+    empno: 2,
+    ename: 'Martin',
+    sal: 7000
+  }
+]
+
+
+db.Emp5.find({"ename":"SMITH".toUpperCase()});
+no output. There should be value present in uppercase.
+db.Emp5.find({"ename":"smith".toLowerCase()});
+
+db.Emp5.find({ename : {$in: ["James", "Martin"]}});
+[
+  {
+    _id: ObjectId('6708e3dae0ad97832a86b01e'),
+    empno: 2,
+    ename: 'Martin',
+    sal: 7000
+  },
+  {
+    _id: ObjectId('6708e3e3e0ad97832a86b01f'),
+    empno: 3,
+    ename: 'James',
+    sal: 5000
+  }
+]
+
+db.Emp5.find({ $and: [ {JOB:"Cleark"},{SAL:{$lt:1300}}]})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,156 @@
+Cassandra :
+Feature :
+1. Decentralized Architecture 
+2. Data Model
+3. Replication
+4. Query Language : CQL(Cassandra Query Language) Does not support ANSI but
+some of the functions are suppported.
+5. High Write and Read Throughput 
+
+Cluster
+1 A cluster in Cassandra is a collection of nodes, essentially servers,that 
+work together to store and manage large amount of data.
+
+
+Compund Key :
+CREATE TABLE learn_cassandra.users_by_country(
+	country text,
+	user_email text,
+	first_name text,
+	last_name text,
+	age smallint,
+	PRIMARY KEY((country),user_email)
+			|	  |	
+	       Partition Key  Clustering Column
+
+In Cassendra, the Primary Key needs to be 
+it s termed as Compund Key
+
+CQLSH - Cassendra Shell
+
+Key Space - It is a entry point. It is similar to a database in traditional relational database systems.
+
+Replication Strategy : This determines the nodes on which replicas are placed.
+a.Simple Strategy 
+b.Network Topology Strategy
+
+Replication Factor : This defines the number of copies of data to store on different  nodes.
+
+Cassandra Lab Demos:
+
+use default_keyspace;
+
+create table t1(a int, b int, c int);--PK error(but i don't get)
+
+create table t1(a int Primary Key, b int, c int);
+
+Insert into t1 Values(1,100,200);
+SyntaxException: line 1:15 no viable alternative at input 'Values' (Insert into [t1] Values...)
+
+It is mandatory to mention columns
+Insert into t1(a,b,c) Values(1,100,200);--Works dfine now!!
+
+select * from t1; --Normal output like SQL!!!
+ a | b   | c
+---+-----+-----
+ 1 | 100 | 200
+
+Insert into t1(a,b,c) Values(1,500,700); --It Works!! It Over Rides data from that table
+
+ select * from t1;
+
+ a | b   | c
+---+-----+-----
+ 1 | 500 | 700
+
+
+create table transactions
+(trid int,
+ country text,
+ emailid text,
+ amount int,
+ Primary Key(country, emailid)
+ ); --The above Pk is Known as Compound Key
+    --Country is partition key and emailid is cluster column.
+
+Insert into transactions(trid, country, emailid, amount) Values(1, 'India', 'a@abc.com', 3000);	
+Insert into transactions(trid, country, emailid, amount) Values(2, 'India', 'b@abc.com', 4000);
+Insert into transactions(trid, country, emailid, amount) Values(3, 'Australia', 'c@abc.com', 493000);
+Insert into transactions(trid, country, emailid, amount) Values(3, 'Australia', 'd@abc.com', 10000);
+
+select * from transactions;
+
+ country   | emailid   | amount | trid
+-----------+-----------+--------+------
+     India | a@abc.com |   3000 |    1
+     India | b@abc.com |   4000 |    2
+ Australia | c@abc.com | 493000 |    3
+ Australia | d@abc.com |  10000 |    3
+
+select * 
+from transactions 
+where amount > 4000;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="Cannot execute this query as it might involve data filtering and thus 
+may have unpredictable performance. If you want to execute this query despite the performance unpredictability, use ALLOW FILTERING"
+
+select * 
+from transactions 
+where amount > 4000 Allow Filtering; 
+ country   | emailid   | amount | trid
+-----------+-----------+--------+------
+ Australia | c@abc.com | 493000 |    3
+ Australia | d@abc.com |  10000 |    3
+
+select * from emp where ename = 'smith' allow filtering;
+
+Delete form transactions
+where country = 'India' and emailid = 'a@abc.com'; --Works fine now!!
+
+select * from transactions; --Cross check
+
+TTL : Time To Leave
+Insert into txt1(Id,Name,Descr)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2 Each node in a cluster holds data and participates in the cluster's
+operations, ensuring both high availability and fault tolerance.
+
+Node
+1 In cassandra a node is an individual machine in the cluster.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

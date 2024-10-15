@@ -1,0 +1,59 @@
+1)Produce the following output 
+
+SELECT  ENAME,
+	JOB,
+	SAL,
+	MAX(SAL) OVER(PARTITION BY JOB) "MAXIMUM",
+	MIN(SAL) OVER(PARTITION BY JOB) "MINIMUM",
+	ROUND(AVG(SAL) OVER(PARTITION BY JOB),2) "AVERAGE"
+FROM EMP;
+
+
+2)Produce the following output 
+
+SELECT  ENAME,
+	DEPTNO,
+	SAL AS "Existing Salary",
+	MAX(SAL) OVER(PARTITION BY DEPTNO) "MAXIMUM SALARY OF DEPT",
+	MAX(SAL) OVER(PARTITION BY DEPTNO) - SAL AS "Difference"
+FROM EMP;
+	
+3)Display only the second highest salary employee (s) record (s) in each job type 
+
+SELECT *
+FROM (SELECT 	*,
+		DENSE_RANK() OVER(PARTITION BY JOB ORDER BY SAL DESC) AS SALARY_RANK
+	FROM EMP) EMPLOYEE_RANKING
+WHERE SALARY_RANK = 2;
+
+4)Display the record (s) of employee (s) having the oldest hiring date in their respective job type 
+
+SELECT *
+FROM (SELECT 	*,
+		MIN(HIREDATE) OVER(PARTITION BY JOB) AS DATE
+	FROM EMP) HIREDATEE
+WHERE HIREDATE = DATE;
+
+5)Display the highest earner (s) records in each deptno 
+SELECT *
+FROM  (SELECT 	*,
+		MAX(SAL) OVER(PARTITION BY DEPTNO) AS MAXIMUM
+		FROM EMP) SALARY
+WHERE SAL = MAXIMUM;
+
+
+
+select max(sal) over(partition by )
+
+
+
+
+
+
+
+
+
+
+
+
+
