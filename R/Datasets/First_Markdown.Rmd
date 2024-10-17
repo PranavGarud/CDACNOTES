@@ -1,0 +1,27 @@
+---
+title: "First"
+author: "Niks"
+date: "2024-10-16"
+output: html_document
+---
+
+# Statistical Analysis
+
+## Loading the data
+```{r}
+data(mtcars)
+str(mtcars)
+```
+
+## Scatter Plot
+```{r}
+library(ggplot2)
+mtcars$gear <- factor(mtcars$gear)
+ggplot(data = mtcars, aes(x=disp, y=mpg,colour = gear))+
+  geom_point()+
+  labs(x="Displacement",y="Miles Per Gallon",
+       colour = "Gear")
+```
+
+data(mtcars)
+str(mtcars)
