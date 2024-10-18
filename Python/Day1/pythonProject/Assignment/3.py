@@ -1,4 +1,5 @@
-#Addition
+#Try out Arithmetic and Assignment operators
+
 print("Result: ",2+5)
 
 #Substraction

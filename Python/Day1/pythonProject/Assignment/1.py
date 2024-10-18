@@ -1,4 +1,4 @@
-# Integer
+#  Declare variables of integer, float, boolean and String type and print their values
 val = 11
 print(val , type(val))
 # floating Point
